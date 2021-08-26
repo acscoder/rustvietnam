@@ -1,1 +1,0 @@
-<link theme media="all" href="http://localhost/rustvietnam/caching/files/theme/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="http://localhost/rustvietnam/caching/files/theme/media_style.js" type="text/javascript"></script>
