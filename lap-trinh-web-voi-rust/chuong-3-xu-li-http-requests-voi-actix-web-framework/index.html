@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+<html amp>
+<head>
+    <title>Xử lí HTTP Requests với Actix Web framework - RustVietnam</title>
+    <meta charset="UTF-8">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v17.0 - https://yoast.com/wordpress/plugins/seo/ -->
+	<meta name="description" content="Tìm hiểu cơ bản về xử lí HTTP cũng như lập trình bất đồng bộ (asynchronous programming) với Actix Web framework" />
+	<link rel="canonical" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Xử lí HTTP Requests với Actix Web framework - RustVietnam" />
+	<meta property="og:description" content="Tìm hiểu cơ bản về xử lí HTTP cũng như lập trình bất đồng bộ (asynchronous programming) với Actix Web framework" />
+	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/" />
+	<meta property="og:site_name" content="RustVietnam" />
+	<meta property="article:published_time" content="2021-08-26T11:43:32+00:00" />
+	<meta property="article:modified_time" content="2021-09-05T10:46:04+00:00" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="admin" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="15 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "https://localhost/rustvietnam/#website",
+	            "url": "https://localhost/rustvietnam/",
+	            "name": "RustVietnam",
+	            "description": "Trang Web d\u00e0nh cho nh\u1eefng ng\u01b0\u1eddi b\u1ea1n y\u00eau th\u00edch l\u1eadp tr\u00ecnh ng\u00f4n ng\u1eef Rust",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "https://localhost/rustvietnam/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "en-US"
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/#webpage",
+	            "url": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/",
+	            "name": "X\u1eed l\u00ed HTTP Requests v\u1edbi Actix Web framework - RustVietnam",
+	            "isPartOf": {
+	                "@id": "https://localhost/rustvietnam/#website"
+	            },
+	            "datePublished": "2021-08-26T11:43:32+00:00",
+	            "dateModified": "2021-09-05T10:46:04+00:00",
+	            "author": {
+	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
+	            },
+	            "description": "T\u00ecm hi\u1ec3u c\u01a1 b\u1ea3n v\u1ec1 x\u1eed l\u00ed HTTP c\u0169ng nh\u01b0 l\u1eadp tr\u00ecnh b\u1ea5t \u0111\u1ed3ng b\u1ed9 (asynchronous programming) v\u1edbi Actix Web framework",
+	            "breadcrumb": {
+	                "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/#breadcrumb"
+	            },
+	            "inLanguage": "en-US",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "Home",
+	                    "item": "https://localhost/rustvietnam/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "X\u1eed l\u00ed HTTP Requests v\u1edbi Actix Web framework"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655",
+	            "name": "admin",
+	            "image": {
+	                "@type": "ImageObject",
+	                "@id": "https://localhost/rustvietnam/#personlogo",
+	                "inLanguage": "en-US",
+	                "url": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "contentUrl": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "caption": "admin"
+	            },
+	            "sameAs": [
+	                "https://rustvietnam.com"
+	            ],
+	            "url": "https://rustvietnam.com/author/admin/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Xử lí HTTP Requests với Actix Web framework Comments Feed" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/feed/" />
+<link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/19" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8" />
+<link rel='shortlink' href='https://rustvietnam.com/?p=19' />
+<link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-3-xu-li-http-requests-voi-actix-web-framework%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-3-xu-li-http-requests-voi-actix-web-framework%2F&#038;format=xml" />
+<link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>
+</head>
+
+<body data-amp-auto-lightbox-disable>
+<!-- Navbar -->
+<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
+    <div class="container">
+        <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com">
+            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
+            <span>RustVietnam</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar_global">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a href="https://rustvietnam.com">
+                            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
+                        </a>
+                    </div>
+                    <div class="col-6 collapse-close">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        <span class="nav-link-inner--text">Nền tảng</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-xl">
+                        <div class="dropdown-menu-inner">
+                            <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                                    <i class="ni ni-spaceship"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h6 class="heading text-primary mb-md-1">Bắt đầu</h6>
+                                    <p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p>
+                                </div>
+                            </a>
+                            <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+                                    <i class="ni ni-palette"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6>
+                                    <p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p>
+                                </div>
+                            </a>
+                            <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
+                                    <i class="ni ni-ui-04"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5>
+                                    <p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Nâng cao</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a>
+                        <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a>
+                        <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a>
+                        <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Network</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a>
+                        <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a>
+                    </div>
+                </li>
+                <li> <a target="_blank" rel="nofollow" href="https://docs.rust-embedded.org/book/#:~:text=Embedded%20Rust%20is%20for%20everyone%20who%20wants%20to,language%20provides.%20%28See%20also%20Who%20Rust%20Is%20For%29" class="nav-link" >
+                        Lập trình nhúng
+                    </a></li>
+                <li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" >
+                        BlockChain
+                    </a></li>
+            </ul>
+
+            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+
+                <li class="nav-item d-none d-lg-block">
+                    <a href="mailto:hocrust@gmail.com" target="_blank" rel="nofollow" class="btn btn-primary btn-icon">
+                        <span class="nav-link-inner--text">Liên hệ</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+    <div class="section section-hero section-shaped">
+        <div class="shape shape-style-1 shape-primary">
+            <span class="span-150"></span>
+            <span class="span-50"></span>
+            <span class="span-50"></span>
+            <span class="span-75"></span>
+            <span class="span-100"></span>
+            <span class="span-75"></span>
+            <span class="span-50"></span>
+            <span class="span-100"></span>
+            <span class="span-50"></span>
+            <span class="span-100"></span>
+        </div>
+        <div class="page-header">
+            <div class="container shape-container d-flex align-items-center py-lg">
+                <div class="col px-0">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-8 text-center text-white">
+                            <h1 class="display-2 text-white">Xử lí HTTP Requests với Actix Web framework</h1>
+                            <p class="lead">
+                                <p>Tìm hiểu cơ bản về xử lí HTTP cũng như lập trình bất đồng bộ (asynchronous programming) với Actix Web framework</p>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator separator-bottom separator-skew zindex-100">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </div>
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center flex-row-reverse">
+            <div class="col-lg-4 single-sidebar">
+
+                <h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/">Lập trình Web với Rust</a></h2> <ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/">Hướng dẫn cơ bản về lập trình với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/">Chương 2 - Thiết kế một Web App với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/">Xử lí HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/">Xử lí Dữ liệu HTTP Requests với Actix Web framework</a></li></ul>
+            </div>
+
+            <div class="col-lg-8 single-content">
+            <h2>Section 2: Xử lí dữ liệu và quản lí hiển thị</h2>
+<p>Rust là 1 ngôn ngữ lập trình mới so với python,java,php ... tuy nhiên các công cụ để để xây dựng các hệ thống web của Rust rất đầy đủ và mạnh mẽ<br />
+Section này sẽ cover phần xử lí http của framework Actix Web<br />
+Chúng ta sẽ sử dụng crate serde để xử lí json ( truyền/nhận dữ liệu cho API ) sau đó hiển thị dưới dạng HTML/css/js.</p>
+<h2>Chương 3: HTTP Requests</h2>
+<p>Với 1 dự án nhỏ ta có thể tự cấu trúc và code từ đâu nhưng làm 1 dự án lớn thì ta cần 1 framework xịn Actix Web và Rocket là 2 framework ngon nhất của rust để xây dựng web, trong chương này chúng ta sẽ tìm hiểu cơ bản về lập trình bất đồng bộ (asynchronous programming) với  Actix Web framework.<br />
+Chúng ta sẽ cover các vấn đề sau:</p>
+<ul>
+<li>Làm 1 web server cơ bản với framework Actix Web </li>
+<li>Khám phá để hiểu và tinh chỉnh web serve</li>
+<li>Tìm hiểu cơ bản về bất đồng bộ với async và await trong Actix Web</li>
+<li>Viết module, hàm trong web</li>
+<li>Cài đặt server với các module</li>
+</ul>
+<h2>Giới thiệu về framework Actix Web</h2>
+<p>Trong thời điểm hiện tại Actix Web là framework phổ biến nhất trong thế giới của Rust, có một cộng đồng đông đảo, hỗ trợ tốt ,đăt biệt tốc độ benchmark là đỉnh.<br />
+framework Rocket thì chưa phổ biến lắm với nó chạy trên phiên bản Rust nightly , chưa thực sự ổn định trong thời điểm hiện tại.Đa số code của chung ta sẽ làm với Actix Web nhưng dĩ nhiên sẽ cũng có 1 chương dành cho Rocket.</p>
+<h2>Launch một Actix Web server nào!!</h2>
+<p>Tạo 1 app mới, trong cargo.toml ta thêm gói actix web vào </p>
+<blockquote>
+<p>[dependencies]<br />
+actix-web = &quot;3&quot;<br />
+actix-rt = &quot;2.2&quot;</p>
+</blockquote>
+<p>actix-web chính là cái framework của mình, còn actix-rt là crate xử lí bất đồng bộ trong luồng đơn hiện tại (single-threaded)<br />
+Đoạn code dưới chạy 1 webserver nhỏ tại <a href="http://localhost:8000/">http://localhost:8000/</a></p>
+<blockquote>
+<p>use actix_web::{web, App, HttpRequest, HttpServer, Responder};<br />
+async fn greet(req: HttpRequest) -&gt; impl Responder {<br />
+    let name = req.match_info().get(&quot;name&quot;).unwrap_or(&quot;World&quot;);<br />
+    format!(&quot;Hello {}!&quot;, name)<br />
+}<br />
+#[actix_web::main]<br />
+async fn main() -&gt; std::io::Result&lt;()&gt; {<br />
+    HttpServer::new(|| {<br />
+        App::new()<br />
+            .route(&quot;/&quot;, web::get().to(greet))<br />
+            .route(&quot;/{name}&quot;, web::get().to(greet))<br />
+    })<br />
+        .bind(&quot;127.0.0.1:8000&quot;)?<br />
+        .run()<br />
+        .await<br />
+}</p>
+</blockquote>
+<p>thử <a href="http://localhost:8000/">http://localhost:8000/</a> và <a href="http://localhost:8000/ten%20cua%20ban">http://localhost:8000/ten%20cua%20ban</a> ....<br />
+Ở đây chúng ta dùng Actix Web structs đọc data từ http request </p>
+<h2>Tìm hiểu veed Closures</h2>
+<p>Closures về cơ bản nó là 1 hàm, dĩ nhiên có hơi khan khác 1 chút ở cách thể hiện.Ví dụ :</p>
+<blockquote>
+<p>let test_function: fn(String) = |string_input: &amp;str| {<br />
+println!(&quot;{}&quot;, string_input);<br />
+};<br />
+test_function(&quot;test&quot;);</p>
+</blockquote>
+<p>So sánh với function : </p>
+<blockquote>
+<p>test_function(string_input: &amp;str) -&gt; String{<br />
+println!(&quot;{}&quot;, string_input);<br />
+}</p>
+</blockquote>
+<p>Ủa vây Closures có gì hay??<br />
+Ở closures function sẽ được đăng kí vào 1 biến , khi hết khu vực hoạt động biến sẽ được giải phóng bộ nhớ , ví dụ </p>
+<blockquote>
+<p>{<br />
+    let test_function: fn(String) = |string_input: &amp;str| {<br />
+        println!(&quot;{}&quot;, string_input);<br />
+    };<br />
+}<br />
+test_function(&quot;test&quot;);<br />
+Hàm này sẽ báo function not found in this scope  </p>
+</blockquote>
+<p>Là 1 biến thì closures nó tương tác với biến khác cùng cấp , function thì ko</p>
+<blockquote>
+<p>let test = String::from(&quot;test&quot;);<br />
+let test_function = || {<br />
+println!(&quot;{}&quot;, test);<br />
+};<br />
+test_function();</p>
+</blockquote>
+<p>closures test_function() ở trên vẫn nhận biến test , nhưng nếu là hàm thì sẽ báo lỗi ngay.<br />
+closures là biến đặc biệt nhưng vẫn tuân thủ qui tắc sở hữu nhé </p>
+<blockquote>
+<p>let test = String::from(&quot;test&quot;);<br />
+let test_function = || {<br />
+    println!(&quot;{}&quot;, test);<br />
+    return test + &amp;String::from(&quot; case&quot;)<br />
+};<br />
+let outcome: String = test_function();</p>
+</blockquote>
+<p>Tiếp theo, chúng ta sẽ tìm hiểu về luồng (Thread)<br />
+Các bạn thử đoạn code sau</p>
+<blockquote>
+<p>use std::{thread, time};<br />
+fn do_something(number: i8) -&gt; i8 {<br />
+println!(&quot;number {} is running&quot;, number);<br />
+let two_seconds = time::Duration::new(2, 0);<br />
+thread::sleep(two_seconds);<br />
+return 2<br />
+}<br />
+fn main() {<br />
+let now = time::Instant::now();<br />
+let one: i8 = do_something(1);<br />
+let two: i8 = do_something(2);<br />
+let three: i8 = do_something(3);<br />
+println!(&quot;time elapsed {:?}&quot;, now.elapsed());<br />
+println!(&quot;result {}&quot;, one + two + three);<br />
+}</p>
+</blockquote>
+<p>Code thực hiện tuần tự từ trên xuống dưới,mỗi lần hàm do_something gọi hệ thống sẽ bị dừng 2s vậy 3 lần gọi --&gt; 6s</p>
+<blockquote>
+<p>number 1 is running<br />
+number 2 is running<br />
+number 3 is running<br />
+time elapsed 6.001135168s<br />
+result 6</p>
+</blockquote>
+<p>Dĩ nhiên đó là thông thường, đây là code phân luồng để thực hiện đồng thời 3 hàm do_something</p>
+<blockquote>
+<p>use std::{thread, time};<br />
+use std::thread::JoinHandle;<br />
+fn do_something(number: i8) -&gt; i8 {<br />
+    println!(&quot;number {} is running&quot;, number);<br />
+    let two_seconds = time::Duration::new(2, 0);<br />
+    thread::sleep(two_seconds);<br />
+    return 2<br />
+}<br />
+fn main() {<br />
+    let now = time::Instant::now();<br />
+    let thread_one: JoinHandle<i8> = thread::spawn(        || do_something(1));<br />
+    let thread_two: JoinHandle<i8> = thread::spawn(        || do_something(2));<br />
+    let thread_three: JoinHandle<i8> = thread::spawn(        || do_something(3));<br />
+    let result_one = thread_one.join();<br />
+    let result_two = thread_two.join();<br />
+    let result_three = thread_three.join();<br />
+    println!(&quot;time elapsed {:?}&quot;, now.elapsed());<br />
+    println!(&quot;result {}&quot;, result_one.unwrap() +                           result_two.unwrap() +                           result_three.unwrap());<br />
+}</p>
+</blockquote>
+<p>kết quả </p>
+<blockquote>
+<p>number 3 is running<br />
+number 2 is running<br />
+number 1 is running<br />
+time elapsed 2.000847276s<br />
+result 6</p>
+</blockquote>
+<p>chạy 3 hàm nhưng thời gian chỉ 2s chứ ko phải là 6 như thông thường, mỗi luồng thực hiện do_something độc lập nhau.<br />
+các bạn lưu ý code chỗ khai báo luồng :</p>
+<blockquote>
+<p>let thread_one: JoinHandle<i8> = thread::spawn( || do_something(1));</p>
+</blockquote>
+<p>giá trị đưa vào là 1 closure : || do_something(1)  , chứ ko phải là hàm do_something(1) , nếu sửa code trên thành  do_something(1) để đưa hàm vào thì bạn sẽ gặp lỗi định dạng ngay, thử xem.<br />
+Đoạn code trên dùng Spawning threads để mình dễ hiểu về phân luồng, còn với web thì mình dùng async , await nhé ( cái này y chang ở python và nodejs )</p>
+<h2>Hiểu về async và await</h2>
+<p>async, await là cơ chế bất đồng bộ trong cùng 1 luồng hoạt động giống như thread bên trên , nhưng async, await dùng hiệu quả với dữ liệu vào/ra<br />
+Trong Cargo.toml ta thêm vào 1 gói futures</p>
+<blockquote>
+<p>[dependencies]<br />
+futures = &quot;0.3.5&quot;</p>
+</blockquote>
+<p>Trong lập trình thì futures có nghĩa là 1 đoạn code đã tồn tại trong hệ thống nhưng chưa được xử lí, khi nào call hay wait thì hệ thống sẽ chạy và trả kết quả, Futures còn được dùng như là 1 promise, delay hay deferred.</p>
+<blockquote>
+<p>async fn do_something(number: i8) -&gt; i8 {<br />
+    println!(&quot;number {} is running&quot;, number);<br />
+    let two_seconds = time::Duration::new(2, 0);<br />
+    thread::sleep(two_seconds);<br />
+    return 2<br />
+}</p>
+</blockquote>
+<p>hàm do_something được khai báo với async  -&gt; nó là 1 future<br />
+quay lai với thread  lúc nãy </p>
+<blockquote>
+<p>use futures::executor::block_on;<br />
+use std::{thread, time};<br />
+fn main() {<br />
+    let now = time::Instant::now();<br />
+    let future_one = do_something(1);<br />
+    let outcome = block_on(future_one);<br />
+    println!(&quot;time elapsed {:?}&quot;, now.elapsed());<br />
+    println!(&quot;Here is the outcome: {}&quot;, outcome);<br />
+}</p>
+</blockquote>
+<p>Hàm block_on chạy future_one chờ đợi tại đó trong 2s để nhận kết quả trả về,dĩ nhiên là nó hoạt động giống như code theard lúc đầu mình làm </p>
+<blockquote>
+<p>number 1 is running<br />
+time elapsed 2.000179301s<br />
+Here is the outcome: 2</p>
+</blockquote>
+<p>Kết quả trả về từ 1 async có thể lấy từ gọi await</p>
+<blockquote>
+<p>let future_two = async {<br />
+return do_something(2).await<br />
+};<br />
+let future_two = block_on(future_two);<br />
+println!(&quot;Here is the outcome: {:?}&quot;, future_two);</p>
+<p>number 2 is running<br />
+Here is the outcome: 2</p>
+</blockquote>
+<p>Các bạn lưu ý điểm khác biệt giữa hàm block_on và await là await gọi bên trong hàm/closure async </p>
+<blockquote>
+<p>let future_two = async {<br />
+let outcome_two = do_something(2).await;<br />
+let outcome_three = do_something(3).await;<br />
+[outcome_two, outcome_three]<br />
+};<br />
+let future_two = block_on(future_two);<br />
+println!(&quot;Here is the outcome: {:?}&quot;, future_two);</p>
+</blockquote>
+<p>Dĩ nhiên là những code trên để mô tả cách hoạt động của async,await chứ chưa nói lên hiệu quả khác biệt gì hết , kết quả vẫn mất 4s chờ.<br />
+Chúng ta lại dùng hàm join để gọi cả 2 outcome_two,outcome_three cùng chạy 1 lúc để giảm thời gian chờ từ 4s -&gt; 2s</p>
+<blockquote>
+<p>let future_two = async {<br />
+let outcome_two = do_something(2);<br />
+let outcome_three = do_something(3);<br />
+join!(outcome_two, outcome_three)<br />
+};<br />
+let now = time::Instant::now();<br />
+let future_two = block_on(future_two);<br />
+println!(&quot;time elapsed {:?}&quot;, now.elapsed());<br />
+println!(&quot;Here is the outcome: {:?}&quot;, future_two);</p>
+</blockquote>
+<p>kết quả là </p>
+<blockquote>
+<p>number 2 is running<br />
+number 3 is running<br />
+time elapsed 4.000327517s<br />
+here is the result: (2, 2)</p>
+</blockquote>
+<p>vâng , vẫn là 4s ko phải 2s như đã nói, tôi đã fail.Futures vẫn chạy hàm tuần tự chứ ko đồng thời.<br />
+Chúng ta thêm crate async_std </p>
+<blockquote>
+<p>async-std = &quot;1.6.3&quot;</p>
+</blockquote>
+<p>Với crate này chúng ta khai báo futures :</p>
+<blockquote>
+<p>use std::vec::Vec;<br />
+use async_std;<br />
+use futures::future::join_all<br />
+let third_outcome = async {<br />
+let mut futures_vec = Vec::new();<br />
+let future_four = do_something(4);<br />
+let future_five = do_something(5);<br />
+futures_vec.push(future_four);<br />
+futures_vec.push(future_five);<br />
+let handles = futures_vec.into_iter().map(async<em>std::task::spawn).collect::&lt;Vec&lt;</em>&gt;&gt;();<br />
+let results = join_all(handles).await;<br />
+return results<br />
+};<br />
+let now = time::Instant::now();<br />
+let result = block_on(third_outcome);<br />
+println!(&quot;time elapsed for join vec {:?}&quot;, now.elapsed());<br />
+println!(&quot;Here is the result: {:?}&quot;, result);</p>
+</blockquote>
+<p>Hơi dài dòng hơn 1 chút nhưng kết quả ngon rồi đã có 2s </p>
+<blockquote>
+<p>number 4 is running<br />
+number 5 is running<br />
+time elapsed for join vec 2.004575514s<br />
+Here is the result: [2, 2]</p>
+</blockquote>
+<p>Code trên chúng ta đưa 2 future future_four,future_five vào trong vector sau đó map với hàm async_std::task::spawn  từ crate async_std , chúng ta đã có xử lý bất đồng bộ đồng thời 2 task trên cùng 1 luồng.<br />
+Tới đây chúng ta đã làm được cả threads và async , bây giờ còn 1 chuyện hơi trắc trở nữa là truyền biến vào luồng.Như đã biết cái cơ chế sỡ hữu biến giúp rust an toàn nhưng nó làm mọi sự rắc rối hơn 1 chút ,chúng ta sẽ thảo luận cách chia sẽ dữ liệu giữa các luồng</p>
+<ul>
+<li>std::sync::Arc: dạng dữ liệu này có thể tham chiếu vào bên trong luồng<br />
+<blockquote>
+<p>use std::sync::Arc;<br />
+use std::thread;<br />
+let names = Arc::new(vec![&quot;dave&quot;, &quot;chloe&quot;, &quot;simon&quot;]);<br />
+let reference_data = Arc::clone(&amp;names);<br />
+    <br />
+let new_thread = thread::spawn(move || {<br />
+    println!(&quot;{}&quot;, reference_data[1]);<br />
+});<br />
+reference_data đã được clone từ names để sử dụng trong luồng new_thread</p>
+</blockquote>
+</li>
+<li>std::sync::Mutex: dạng dữ liệu có thể sử dụng và thay đổi bên trong luồng<br />
+<blockquote>
+<p>use std::sync::Mutex;<br />
+use std::thread;<br />
+let count = Mutex::new(0);<br />
+let new_thread = thread::spawn(move || {<br />
+    *count.lock().unwrap() += 1;<br />
+});</p>
+</blockquote>
+</li>
+</ul>
+<p>bên trong luồng new_thread Mutex count được lock (khóa) sau đó unwrap rồi + thêm 1<br />
+Nhìn lại đoạn code webserver đầu chương chúng ta đã nắm rõ hết các concept cần thiết. Tất cả cá khái niệm chính để làm việc với bất đồng bộ đã được trình bày , dĩ nhiên ko phải là tất cả, nếu các bạn có thấy khó hiểu thì nó cũng là lẽ thường, đừng lo.<br />
+Thông tin thêm về Actix crate  <a href="https://actix.rs/book/actix/sec-0-quick-start.html">https://actix.rs/book/actix/sec-0-quick-start.html</a> dùng để viết các app sử dụng kĩ thuật bất đồng bộ (concurrent)<br />
+Actix crate dựa trên mô hình chính là Actor, ở đây 1 Actor là 1 nhóm code độc lập có khả năng tính toán và tương tác với những Actor khác thông qua truyền/nhận message.<br />
+Cái document trên viết rất tốt rồi, nói thêm đâm ra rối các bạn có thể tham khảo .</p>
+<h2>Quản lí các views trong Actix Web framework</h2>
+<p>Ở phần đầu, chúng ta đã in ra format!(&quot;Hello {}!&quot;, name) ở main.rs , dĩ nhiên chúng ra ko thể code tất cả trong file đó, chúng ta sẽ tạo 1 cấu trúc thư mục để quản lí các views của mình, vd như sau: </p>
+<blockquote>
+<p>├── main.rs<br />
+└── views<br />
+    ├── auth<br />
+    │   ├── login.rs<br />
+    │   ├── logout.rs<br />
+    │   └── mod.rs<br />
+    ├── mod.rs<br />
+    └── path.rs</p>
+</blockquote>
+<p>main.rs là nơi khai báo chính cho server, chúng ta khai báo các URL trong path.rs, các view đăng nhập, đăng xuất login.rs logout.rs ở trong thư mục auth.<br />
+Rõ ràng rồi hén, bắt đầu là main.rs :</p>
+<blockquote>
+<p>use actix_web::{App, HttpServer};<br />
+mod views;<br />
+#[actix_rt::main]<br />
+async fn main() -&gt; std::io::Result&lt;()&gt; {<br />
+HttpServer::new(|| {<br />
+let app = App::new();<br />
+return app<br />
+}).bind(&quot;127.0.0.1:8000&quot;)?<br />
+.run()<br />
+.await<br />
+}</p>
+</blockquote>
+<p>Khai báo của chúng ta là 1 app trống chưa có config gì hết nhé .Tiếp theo trong views/path.rs  ta khai báo struct Path cho các uri /abc-xyz </p>
+<blockquote>
+<p>pub struct Path {<br />
+    pub prefix: String<br />
+}<br />
+impl Path {<br />
+    pub fn define(&amp;self, following_path: String) -&gt; String {<br />
+        return self.prefix.to_owned() + &amp;following_path<br />
+    }<br />
+}</p>
+</blockquote>
+<p>struct Path được impl hàm define trả lại string của Path::prefix cộng với following_path . Trong views/auth/login.rs chúng ta làm đơn giản như sau </p>
+<blockquote>
+<p>pub async fn login() -&gt; String {<br />
+    format!(&quot;Login view&quot;)<br />
+}</p>
+</blockquote>
+<p>Và views/auth/logout.rs cũng như vậy</p>
+<blockquote>
+<p>pub async fn logout() -&gt; String {<br />
+format!(&quot;Logout view&quot;)<br />
+}</p>
+</blockquote>
+<p>File views/auth/mod.rs chúng ta làm 1 factory để trả lại view login, logout</p>
+<blockquote>
+<p>use actix_web::web;<br />
+mod login;<br />
+mod logout;<br />
+use super::path::Path;<br />
+pub fn auth_factory(app: &amp;mut web::ServiceConfig) {<br />
+    let base_path: Path = Path{prefix: String::from(&quot;/auth&quot;)};<br />
+    app.route(&amp;base_path.define(String::from(&quot;/login&quot;)),<br />
+              web::get().to(login::login))<br />
+       .route(&amp;base_path.define(String::from(&quot;/logout&quot;)),<br />
+              web::get().to(logout::logout));<br />
+}</p>
+</blockquote>
+<p>Trong  views/mod.rs ta kahai báo view factory </p>
+<blockquote>
+<p>use actix_web::web;<br />
+mod path;<br />
+mod auth;<br />
+pub fn views_factory(app: &amp;mut web::ServiceConfig) {<br />
+    auth::auth_factory(app);<br />
+};</p>
+</blockquote>
+<p>Sau đó ta quay lại main.rs để khai báo view cho App</p>
+<blockquote>
+<p>use actix_web::{App, HttpServer};<br />
+mod views;<br />
+#[actix_rt::main]<br />
+async fn main() -&gt; std::io::Result&lt;()&gt; {<br />
+HttpServer::new(|| {<br />
+let app = App::new().configure(views::views_factory);<br />
+return app<br />
+}).bind(&quot;127.0.0.1:8000&quot;)?<br />
+.run()<br />
+.await<br />
+}</p>
+</blockquote>
+<p>OK , cargo run thôi nào<br />
+Mở trình duyệt web <a href="http://localhost:8000/auth/login,http://localhost:8000/auth/logout">http://localhost:8000/auth/login,http://localhost:8000/auth/logout</a> để thử xem nhé !!! </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer has-cards">
+    <div class="container">
+
+        <hr>
+        <div class="row align-items-center justify-content-md-between">
+            <div class="col-md-6">
+                <div class="copyright">
+                    © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<style>
+    .single-content blockquote{
+        padding-left: 20px;
+        border-left: 5px solid;
+        font-size: 87.5%;
+        color: #f3a4b5;
+        word-break: break-word;
+        font-family: system-ui;
+    }
+</style>
+</body>
+</html>

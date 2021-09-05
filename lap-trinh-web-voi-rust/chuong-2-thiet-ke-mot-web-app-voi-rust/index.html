@@ -1,0 +1,859 @@
+
+<!DOCTYPE html>
+<html amp>
+<head>
+    <title>Chương 2 - Thiết kế một Web App với Rust - RustVietnam</title>
+    <meta charset="UTF-8">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v17.0 - https://yoast.com/wordpress/plugins/seo/ -->
+	<meta name="description" content="Làm 1 web app đơn giản quản lí các task to do list với Rust" />
+	<link rel="canonical" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Chương 2 - Thiết kế một Web App với Rust - RustVietnam" />
+	<meta property="og:description" content="Làm 1 web app đơn giản quản lí các task to do list với Rust" />
+	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/" />
+	<meta property="og:site_name" content="RustVietnam" />
+	<meta property="article:published_time" content="2021-08-26T11:41:46+00:00" />
+	<meta property="article:modified_time" content="2021-08-26T11:47:01+00:00" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="admin" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="18 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "https://localhost/rustvietnam/#website",
+	            "url": "https://localhost/rustvietnam/",
+	            "name": "RustVietnam",
+	            "description": "Trang Web d\u00e0nh cho nh\u1eefng ng\u01b0\u1eddi b\u1ea1n y\u00eau th\u00edch l\u1eadp tr\u00ecnh ng\u00f4n ng\u1eef Rust",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "https://localhost/rustvietnam/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "en-US"
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/#webpage",
+	            "url": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/",
+	            "name": "Ch\u01b0\u01a1ng 2 - Thi\u1ebft k\u1ebf m\u1ed9t Web App v\u1edbi Rust - RustVietnam",
+	            "isPartOf": {
+	                "@id": "https://localhost/rustvietnam/#website"
+	            },
+	            "datePublished": "2021-08-26T11:41:46+00:00",
+	            "dateModified": "2021-08-26T11:47:01+00:00",
+	            "author": {
+	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
+	            },
+	            "description": "L\u00e0m 1 web app \u0111\u01a1n gi\u1ea3n qu\u1ea3n l\u00ed c\u00e1c task to do list v\u1edbi Rust",
+	            "breadcrumb": {
+	                "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/#breadcrumb"
+	            },
+	            "inLanguage": "en-US",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "Home",
+	                    "item": "https://localhost/rustvietnam/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Ch\u01b0\u01a1ng 2 &#8211; Thi\u1ebft k\u1ebf m\u1ed9t Web App v\u1edbi Rust"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655",
+	            "name": "admin",
+	            "image": {
+	                "@type": "ImageObject",
+	                "@id": "https://localhost/rustvietnam/#personlogo",
+	                "inLanguage": "en-US",
+	                "url": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "contentUrl": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "caption": "admin"
+	            },
+	            "sameAs": [
+	                "https://rustvietnam.com"
+	            ],
+	            "url": "https://rustvietnam.com/author/admin/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Chương 2 &#8211; Thiết kế một Web App với Rust Comments Feed" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/feed/" />
+<link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/17" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8" />
+<link rel='shortlink' href='https://rustvietnam.com/?p=17' />
+<link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-2-thiet-ke-mot-web-app-voi-rust%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-2-thiet-ke-mot-web-app-voi-rust%2F&#038;format=xml" />
+<link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>
+</head>
+
+<body data-amp-auto-lightbox-disable>
+<!-- Navbar -->
+<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
+    <div class="container">
+        <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com">
+            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
+            <span>RustVietnam</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar_global">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a href="https://rustvietnam.com">
+                            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
+                        </a>
+                    </div>
+                    <div class="col-6 collapse-close">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        <span class="nav-link-inner--text">Nền tảng</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-xl">
+                        <div class="dropdown-menu-inner">
+                            <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                                    <i class="ni ni-spaceship"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h6 class="heading text-primary mb-md-1">Bắt đầu</h6>
+                                    <p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p>
+                                </div>
+                            </a>
+                            <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+                                    <i class="ni ni-palette"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6>
+                                    <p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p>
+                                </div>
+                            </a>
+                            <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
+                                    <i class="ni ni-ui-04"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5>
+                                    <p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Nâng cao</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a>
+                        <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a>
+                        <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a>
+                        <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Network</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a>
+                        <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a>
+                    </div>
+                </li>
+                <li> <a target="_blank" rel="nofollow" href="https://docs.rust-embedded.org/book/#:~:text=Embedded%20Rust%20is%20for%20everyone%20who%20wants%20to,language%20provides.%20%28See%20also%20Who%20Rust%20Is%20For%29" class="nav-link" >
+                        Lập trình nhúng
+                    </a></li>
+                <li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" >
+                        BlockChain
+                    </a></li>
+            </ul>
+
+            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+
+                <li class="nav-item d-none d-lg-block">
+                    <a href="mailto:hocrust@gmail.com" target="_blank" rel="nofollow" class="btn btn-primary btn-icon">
+                        <span class="nav-link-inner--text">Liên hệ</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+    <div class="section section-hero section-shaped">
+        <div class="shape shape-style-1 shape-primary">
+            <span class="span-150"></span>
+            <span class="span-50"></span>
+            <span class="span-50"></span>
+            <span class="span-75"></span>
+            <span class="span-100"></span>
+            <span class="span-75"></span>
+            <span class="span-50"></span>
+            <span class="span-100"></span>
+            <span class="span-50"></span>
+            <span class="span-100"></span>
+        </div>
+        <div class="page-header">
+            <div class="container shape-container d-flex align-items-center py-lg">
+                <div class="col px-0">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-8 text-center text-white">
+                            <h1 class="display-2 text-white">Chương 2 &#8211; Thiết kế một Web App với Rust</h1>
+                            <p class="lead">
+                                <p>Làm 1 web app đơn giản quản lí các task to do list với Rust</p>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator separator-bottom separator-skew zindex-100">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </div>
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center flex-row-reverse">
+            <div class="col-lg-4 single-sidebar">
+
+                <h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/">Lập trình Web với Rust</a></h2> <ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/">Hướng dẫn cơ bản về lập trình với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/">Chương 2 - Thiết kế một Web App với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/">Xử lí HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/">Xử lí Dữ liệu HTTP Requests với Actix Web framework</a></li></ul>
+            </div>
+
+            <div class="col-lg-8 single-content">
+            <p>Trong chương này chúng ta code 1 app quản lí những thứ cần làm (to list)<br />
+chúng ta sẽ quản lí code trong 1 gói ( crate ) bằng công cụ Cargo , y chang dùng npm quản lí package trong nodejs , hay composer trong PHP</p>
+<p>Trong chương này chúng ta sẽ cover 1 số thứ như sau :</p>
+<ul>
+<li>Xây dựng và quản lí 1 project bằng Cargo và crates</li>
+<li>Documenting code với Cargo's auto-documentation   </li>
+<li>xây dựng structs có tính kế thừa và mở rộng từ struct khác<br />
+-xây dựng module và các factory</li>
+<li>xử lí file JSON</li>
+</ul>
+<h2>yêu cầu</h2>
+<p>chương này mình ko code với Rust playground được , mình phải cài Rust và Cargo<br />
+Hướng dẫn tại đây</p>
+<h2>Cơ bản với cargo</h2>
+<p>Mở commanline, tạo 1 app với lệnh </p>
+<blockquote>
+<p>cargo new web_app</p>
+</blockquote>
+<p>Chúng ta sẽ có 1 thư mục web_app với cấu trúc sau:</p>
+<p>Thư mục src là nơi chứa code của chúng ta , trong đó file main.rs là file chạy chương trình , bên trong file main.rs là hàm chạy chương trình main<br />
+file Cargo.toml là file config chứa thông tin về app , các gói , module tải kèm theo<br />
+thử chạy xem nào :</p>
+<blockquote>
+<p>cd web_app<br />
+cargo run</p>
+</blockquote>
+<p>code sẽ được biên dich vào thư mục ./target/debug/</p>
+<p>nếu chúng ta hoàn thành sản phẩm đưa ra sử dụng thì build bằng lệnh </p>
+<blockquote>
+<p>cargo run --release</p>
+</blockquote>
+<p>code sẽ được biên dich tối ưu vào thư mục  ./target/release/</p>
+<h2>Tải các gói ( crates ) kèm theo chương trình</h2>
+<p>Ví dụ chúng ta cần 1 gói tạo số ngẫu nhiên<br />
+mở file Cargo.toml<br />
+bên dưới [dependencies]  ta thêm vào </p>
+<blockquote>
+<p>rand = &quot;0.8.0&quot;</p>
+</blockquote>
+<p>trong file main.rs</p>
+<blockquote>
+<p>use rand::prelude::<em>;<br />
+fn generate_float(generator: &amp;mut ThreadRng) -&gt; f64 {<br />
+    let placeholder: f64 = generator.gen();<br />
+    return placeholder </em> 10.0<br />
+}<br />
+fn main() {<br />
+    let mut rng: ThreadRng = rand::thread_rng();<br />
+    let random_number = generate_float(&amp;mut rng);<br />
+    println!(&quot;{}&quot;, random_number);<br />
+}</p>
+</blockquote>
+<p>ThreadRng tạo ra 1 số ngẫu nhiên trong khoảng 0--&gt;1<br />
+--&gt; hàm generate_float tạo ra 1 số ngẫu nhiên trong khoảng 0--&gt;10</p>
+<h2>Documenting</h2>
+<p>Tốc độ và an toàn , rust ko chỉ có vậy thôi đâu. Tạo document là 1 phần quan trọng trong phát triển dự án, nhất là những dự án lớn<br />
+document trong rust được viết theo định dạng markdown (<a href="https://www.markdownguide.org/getting-started/">https://www.markdownguide.org/getting-started/</a> )</p>
+<p>thử tạo 1 document cho hàm ngẫu nhiên ở trên</p>
+<blockquote>
+<p>/// This function generates a float number using a number<br />
+/// generator passed into the function.<br />
+///<br />
+/// # Arguments<br />
+/// * generator (&amp;mut ThreadRng): the random number<br />
+/// generator to generate the random number<br />
+///<br />
+/// # Returns<br />
+/// (f64): random number between 0 -&gt; 10 </p>
+</blockquote>
+<p>Lưu ý ,chúng ta dùng 3 dấu ///<br />
+Để mở document </p>
+<blockquote>
+<p>cargo doc --open</p>
+</blockquote>
+<h3>Tương tác với cargo</h3>
+<p>Trong trường hợp khi build code chúng ta cần đưa tham số vào , chúng ta sử dúng std (standard library)</p>
+<p>ví dụ sau chúng ta in ra tất cả những biến được đưa vào khi compile</p>
+<blockquote>
+<p>use std::env;<br />
+let args: Vec<String> = env::args().collect();<br />
+println!(&quot;{:?}&quot;, args);</p>
+</blockquote>
+<p>Chạy lệnh </p>
+<blockquote>
+<p>cargo run some_variable another_variable</p>
+</blockquote>
+<p>kết quả : </p>
+<blockquote>
+<p>[&quot;target/debug/web_app&quot;, &quot;some_variable&quot;, &quot;another_variable&quot;]</p>
+</blockquote>
+<p>Chúng ta có thể load file config , media trong lúc chạy chương trình , vd: </p>
+<blockquote>
+<p>cargo run ./path/to/config.toml </p>
+</blockquote>
+<h2>project</h2>
+<p>Chúng ta sẽ làm 1 project nhỏ quản lí to list<br />
+Tạo project : cargo new todo_app<br />
+Vào thư mục todo_app/src<br />
+Tạo thư mục to_do , file mod.rs<br />
+Vậy là chúng ta đã có 1 module đầu tiên tên là to_do , file chạy module là mod.rs , lúc sau chúng ta sẽ thêm file vào.<br />
+Trong to do list của mình chúng ta sẽ có loại 2 task , 1 đã xong ( done ) , 2 là chưa làm ( pending )<br />
+cả 2 được kế thừa từ task cơ bản là base<br />
+trong to_do chúng ta thêm mục structs , trong structs ta thêm file mod.rs là default cho module và các file khác như hình</p>
+<p>mục structs là nơi chứa code để khai báo cấu trúc dữ liệu cho project của mình</p>
+<p>cấu trúc dữ liệu cơ bản base cho task ở base.rs  :</p>
+<blockquote>
+<p>pub struct Base {<br />
+    pub title: String,<br />
+    pub status: String<br />
+}<br />
+impl Base {<br />
+    pub fn new(input_title: &amp;str, input_status: &amp;str) -&gt; Self {<br />
+        return Self {title: input_title.to_string(),status: input_status.to_string()}<br />
+    }<br />
+}</p>
+</blockquote>
+<p>Trong file  to_do/structs/mod.rs<br />
+ta khai báo base </p>
+<blockquote>
+<p>mod base;</p>
+</blockquote>
+<p>file done.rs</p>
+<blockquote>
+<p>use super::base::Base;<br />
+pub struct Done {<br />
+    pub super_struct: Base<br />
+}<br />
+impl Done {<br />
+    pub fn new(input_title: &amp;str) -&gt; Done {<br />
+        let base: Base = Base::new(input_title,<br />
+                                   &quot;done&quot;);<br />
+        return Done{super_struct: base}<br />
+    }<br />
+}</p>
+</blockquote>
+<p>các bạn lưu ý , trong rust thì struct không có kế thừa như các ngôn ngữ khác , chúng ta chỉ có thể lồng struct base bên trong struct done</p>
+<p>tương tự với  Pending  </p>
+<blockquote>
+<p>use super::base::Base;<br />
+pub struct Pending {<br />
+    pub super_struct: Base<br />
+}<br />
+impl Pending {<br />
+    pub fn new(input_title: &amp;str) -&gt; Pending {<br />
+        let base: Base = Base::new(input_title,<br />
+                                   &quot;pending&quot;);<br />
+        return Pending{super_struct: base}<br />
+    }<br />
+}</p>
+</blockquote>
+<p>Hàm new là hàm khởi tạo<br />
+chúng ta cập nhập file mod.rs</p>
+<blockquote>
+<p>mod base;<br />
+pub mod done;<br />
+pub mod pending;</p>
+</blockquote>
+<p>trong main.rs , chúng ta thử gọi hàm các module vừa khai báo</p>
+<blockquote>
+<p>mod to_do;<br />
+use to_do::structs::done::Done;<br />
+use to_do::structs::pending::Pending;<br />
+fn main() {<br />
+    let done: Done = Done::new(&quot;shopping&quot;);<br />
+    println!(&quot;{}&quot;, done.super_struct.title);<br />
+    println!(&quot;{}&quot;, done.super_struct.status);<br />
+    let pending: Pending = Pending::new(&quot;laundry&quot;);<br />
+    println!(&quot;{}&quot;, pending.super_struct.title);<br />
+    println!(&quot;{}&quot;, pending.super_struct.status);<br />
+}</p>
+</blockquote>
+<p>chúng ta tái cấu trúc code của mình bằng  factory pattern ( xem thêm về factory pattern <a href="https://viblo.asia/p/design-pattern-factory-pattern-part-1-XqaGEmxZGWK">https://viblo.asia/p/design-pattern-factory-pattern-part-1-XqaGEmxZGWK</a>)</p>
+<p>Trong to_do/mod.rs</p>
+<blockquote>
+<p>pub mod structs;<br />
+use structs::done::Done;<br />
+use structs::pending::Pending;<br />
+pub enum ItemTypes {<br />
+    Pending(Pending),<br />
+    Done(Done)<br />
+}<br />
+pub fn to_do_factory(item_type: &amp;str, item_title: &amp;str) -&gt;        Result&lt;ItemTypes, &amp;'static str&gt; {<br />
+    if item_type == &quot;pending&quot; {<br />
+        let pending_item = Pending::new(item_title);<br />
+        Ok(ItemTypes::Pending(pending_item))<br />
+    }<br />
+    else if item_type == &quot;done&quot; {<br />
+        let done_item = Done::new(item_title);<br />
+        Ok(ItemTypes::Done(done_item))<br />
+    }<br />
+    else {<br />
+        Err(&quot;this is not accepted&quot;)<br />
+    }<br />
+}</p>
+</blockquote>
+<p>Hàm to_do_factory sẽ trả về 1 task Pending hoặc Done hoặc lỗi dựa trên cấu trúc rẽ nhánh if else. Dĩ nhiên code trên có vẻ hơi rườm rà nhưng khi chương trình phức tạp hơn quản lí theo kiểu factory này nó sẽ tốt hơn nhiều.</p>
+<p>Hiện tại mấy cái to-do vẫn đang trống , chưa có tính năng gì , vậy ta thêm cho nó tính năng CRUD (create,retrive,update,delete) cơ bản với traits</p>
+<h3>Khai báo hàm với Traits</h3>
+<p>Để đảm bảo tính dễ chỉnh sửa và phát triển chúng ta sẽ giữ cho các trait đơn giản  và độc lập nhất có thể.<br />
+Trong thư mục structs ta tạo thư mục trails , tạo file  mod.rs khai báo 4 mod của CRUD</p>
+<blockquote>
+<p>pub mod create;<br />
+pub mod delete;<br />
+pub mod edit;<br />
+pub mod get;</p>
+</blockquote>
+<p>Tương ứng 4 mod ta tạo 4 files create.rs, delete.rs, edit.rs, get.rs</p>
+<blockquote>
+<p>pub trait Create {<br />
+    fn create(&amp;self, title: &amp;str) {<br />
+        println!(&quot;{} is being created&quot;, title);<br />
+    }<br />
+}</p>
+</blockquote>
+<p>trait Create có 1 hàm là create, tương tự ta có các trail khác </p>
+<p>pub trait Delete {<br />
+    fn delete(&amp;self, title: &amp;str) {<br />
+        println!(&quot;{} is being deleted&quot;, title);<br />
+    }<br />
+}</p>
+<p>pub trait Get {<br />
+    fn get(&amp;self, title: &amp;str) {<br />
+        println!(&quot;{} is being fetched&quot;, title);<br />
+    }<br />
+}</p>
+<p>pub trait Edit {<br />
+    fn set_to_done(&amp;self, title: &amp;str) {<br />
+        println!(&quot;{} is being set to done&quot;, title);<br />
+    }<br />
+    fn set_to_pending(&amp;self, title: &amp;str) {<br />
+        println!(&quot;{} is being set to pending&quot;, title);<br />
+    }<br />
+}</p>
+<p>trait Edit có 2 hàm là set_to_done , set_to_pending</p>
+<p>Ok , bây giờ ta sẽ implement các trait này vào task của mình , mở file done.rs</p>
+<blockquote>
+<p>use super::base::Base;<br />
+use super::traits::get::Get;<br />
+use super::traits::delete::Delete;<br />
+use super::traits::edit::Edit;<br />
+pub struct Done {<br />
+    pub super_struct: Base<br />
+}<br />
+impl Done {<br />
+    pub fn new(input_title: &amp;str) -&gt; Done {<br />
+        let input_status: String = String::from(&quot;done&quot;);<br />
+        let base: Base = Base::new(input_title, &quot;done&quot;);<br />
+        return Done{super_struct: base}<br />
+    }<br />
+}<br />
+impl Get for Done {}<br />
+impl Delete for Done {}<br />
+impl Edit for Done {}</p>
+</blockquote>
+<p>tương tự với pending.rs</p>
+<blockquote>
+<p>use super::base::Base;<br />
+use super::traits::create::Create;<br />
+use super::traits::edit::Edit;<br />
+use super::traits::get::Get;<br />
+use super::traits::delete::Delete;<br />
+pub struct Pending {<br />
+    pub super_struct: Base<br />
+}<br />
+impl Pending {<br />
+    pub fn new(input_title: &amp;str) -&gt; Pending {<br />
+        let base: Base = Base::new(input_title, &quot;pending&quot;);<br />
+        return Pending{super_struct: base}<br />
+    }<br />
+}<br />
+impl Create for Pending {}<br />
+impl Edit for Pending {}<br />
+impl Get for Pending {}<br />
+impl Delete for Pending {}</p>
+</blockquote>
+<p>Vậy là các structs của chúng ta đã được nâng cấp sức mạnh , Done thêm vào Get,Delete,Edit còn Pending thêm vào Create,Get,Delete,Edit</p>
+<p>Rồi, bây giờ ta sử dụng chúng trong main.rs</p>
+<blockquote>
+<p>mod to_do;<br />
+use to_do::ItemTypes;<br />
+use to_do::to_do_factory;<br />
+use to_do::structs::traits::create::Create;<br />
+fn main() {<br />
+    let to_do_item: Result&lt;ItemTypes, &amp;'static str&gt; =        to_do_factory(<br />
+            pending&quot;, &quot;washing&quot;);<br />
+    match to_do_item.unwrap() {<br />
+        ItemTypes::Pending(item) =&gt; item.create(<br />
+        &amp;item.super_struct.title),<br />
+        ItemTypes::Done(item) =&gt; println!(<br />
+        &quot;it's a done item with the title: {}&quot;,<br />
+        item.super_struct.title)<br />
+    }<br />
+}</p>
+</blockquote>
+<p>bạn lưu ý có 1 chút bất tiện ở đây </p>
+<blockquote>
+<p>use to_do::structs::traits::create::Create;</p>
+</blockquote>
+<p>Mặc dù mình đã implement cái Create trong Pending rồi nhưng mình phải gọi nó ở trong main.rs nữa, nếu ko gọi nó lại ko hiểu.Thôi thì tạm thời vậy đã</p>
+<h4>Tương tác với môi trường</h4>
+<p>Chúng ta có 2 việc cần làm, 1 là load,save,edit trạng thái của to-do , 2 là nhận dữ liệu từ người dùng để thay đổi nội dung cho cái task to-do đó.Quá trình chi tiết như sau :</p>
+<ul>
+<li>nhận dự liệu đầu vào</li>
+<li>khai báo hàm (get, edit, delete, create) và loại to-do từ dữ liệu đầu vào đó</li>
+<li>Tải file JSON để xử lí dữ liệu </li>
+<li>chạy các hàm  get, edit, delete, hay create theo yêu cầu từ user , sau đó lưu trạng thái trong file JSON</li>
+</ul>
+<p>Để xử lí file JSON ta dùng gói (crate) serde </p>
+<h4>Đọc, ghi file JSON</h4>
+<p>Trong cargo.tom ta khai báo crate serde </p>
+<blockquote>
+<p>[dependencies]<br />
+serde_json = {version = &quot;1.0&quot;,  default-features = false,  features = [&quot;alloc&quot;]}</p>
+</blockquote>
+<p>Để cho gọn ,các hàm đọc và ghi JSON ta để chung trong 1 file src/state.rs</p>
+<blockquote>
+<p>use std::fs::File;<br />
+use std::fs;<br />
+use std::io::Read;<br />
+use serde_json::Map;<br />
+use serde_json::value::Value;<br />
+use serde_json::json;<br />
+pub fn read_file(file_name: &amp;str) -&gt; Map&lt;String, Value&gt; {<br />
+    let mut file = File::open(file_name.to_string()).unwrap();<br />
+    /// chúng ta khai báo 1 String object<br />
+    let mut data = String::new();<br />
+    /// đưa nội dung file vào tham chiếu data<br />
+    file.read_to_string(&amp;mut data).unwrap();<br />
+    /// lấy text từ tham chiếu data để tạo json value<br />
+    let json: Value = serde_json::from_str(&amp;data).unwrap();<br />
+    /// clone biến rồi trả lại kết quả ,nếu không clone nó sẽ trả về tham chiếu<br />
+    let state: Map&lt;String, Value&gt; = json.as_object().unwrap().clone();<br />
+    return state<br />
+}<br />
+pub fn write_to_file(file_name: &amp;str, state: &amp;mut Map&lt;String, Value&gt;) {<br />
+    let new_data = json!(state);<br />
+    fs::write(file_name.to_string(), new_data.to_string()).expect(&quot;Unable to write file&quot;);<br />
+}</p>
+</blockquote>
+<p>Hàm read_file chúng ta đọc text từ file bằng hàm của thư viện chuẩn std , serde_json sẽ chuyển text đó từ String sang Json map</p>
+<p>Hàm write_to_file thì ngược lại, chuyển Json map sang String và lưu file</p>
+<p>chúng ta tạo 1 file state.json với nội dung rỗng như vầy {} hoặc có dữ liệu tùy bạn , mình sẽ đọc file json và in ra màn hình trên main.rs </p>
+<blockquote>
+<p>mod state;<br />
+use std::env;<br />
+use state::{write_to_file, read_file};<br />
+use serde_json::value::Value;<br />
+use serde_json::{Map, json};<br />
+fn main() {<br />
+let mut state: Map&lt;String, Value&gt; = read_file(&quot;./state.json&quot;);<br />
+println!(&quot;{:?}&quot;, state);<br />
+}</p>
+</blockquote>
+<p>File state.json để trong thư mục todo_app nhé.<br />
+Tiếp theo là ghi file </p>
+<blockquote>
+<p>mod state;<br />
+use std::env;<br />
+use state::{write_to_file, read_file};<br />
+use serde_json::value::Value;<br />
+use serde_json::{Map, json};<br />
+fn main() {<br />
+let args: Vec<String> = env::args().collect();<br />
+let status: &amp;String = &amp;args[1];<br />
+let title: &amp;String = &amp;args[2];<br />
+let mut state: Map&lt;String, Value&gt; = read_file(&quot;./state.json&quot;);<br />
+state.insert(title.to_string(), json!(status));<br />
+write_to_file(&quot;./state.json&quot;, &amp;mut state);<br />
+}</p>
+</blockquote>
+<p>chạy lệnh để build , nhớ là mình lấy vô 2 biến status và title , ví dụ mình thêm vô task &quot;coding&quot;:&quot;pending&quot;</p>
+<blockquote>
+<p>cargo run &quot;pending&quot; &quot;coding&quot;</p>
+</blockquote>
+<p>Sau đó mở file json lại để kiểm tra nhé </p>
+<h3>Quay lại với traits</h3>
+<p>Bây giờ chúng ta thêm tính năng cho các trails đã tạo lúc trước<br />
+Chúng ta update hàm Get</p>
+<blockquote>
+<p>use serde_json::Map;<br />
+use serde_json::value::Value;<br />
+pub trait Get {<br />
+    fn get(&amp;self, title: &amp;String, state: &amp;Map&lt;String, Value&gt;) {<br />
+        let item: Option&lt;&amp;Value&gt; = state.get(title);<br />
+        match item {<br />
+            Some(result) =&gt; {<br />
+                println!(&quot;\n\nItem: {}&quot;, title);<br />
+                println!(&quot;Status: {}\n\n&quot;, result);<br />
+            },<br />
+            None =&gt; println!(&quot;item: {} was not found&quot;, title)<br />
+        }<br />
+    }<br />
+}<br />
+Hàm get gọi từ serde_json::Map để lấy kết quả , sau đó chúng ta sử dụng match kiểm tra , in ra kết quả hoặc in ra báo lỗi nếu item không tồn tại.</p>
+</blockquote>
+<p>Tiếp theo là trail Create , ta ghi &quot;title&quot;:&quot;status&quot; vào file state.json</p>
+<blockquote>
+<p>use serde_json::Map;<br />
+use serde_json::value::Value;<br />
+use serde_json::json;<br />
+use crate::state::write_to_file;<br />
+pub trait Create {<br />
+    fn create(&amp;self, title: &amp;String, status: &amp;String,            state: &amp;mut Map&lt;String, Value&gt;) {<br />
+        state.insert(title.to_string(), json!(status));<br />
+        write_to_file(&quot;./state.json&quot;, state);<br />
+        println!(&quot;\n\n{} is being created\n\n&quot;, title);<br />
+    }<br />
+}</p>
+</blockquote>
+<p>Trail Delete , chúng ta xóa 1 item bên trong file state.json và save trạng thái mới.</p>
+<blockquote>
+<p>use serde_json::Map;<br />
+use serde_json::value::Value;<br />
+use crate::state::write_to_file;<br />
+pub trait Delete {<br />
+    fn delete(&amp;self, title: &amp;String,               state: &amp;mut Map&lt;String, Value&gt;) {<br />
+        state.remove(title);<br />
+        write_to_file(&quot;./state.json&quot;, state);<br />
+        println!(&quot;\n\n{} is being deleted\n\n&quot;, title);<br />
+    }<br />
+}</p>
+</blockquote>
+<p>Trail Edit chúng ta có 2 hàm, dành cho pending và done</p>
+<blockquote>
+<p>use serde_json::Map;<br />
+use serde_json::value::Value;<br />
+use serde_json::json;<br />
+use crate::state::write_to_file;<br />
+pub trait Edit {<br />
+    fn set_to_done(&amp;self, title: &amp;String,                    state: &amp;mut Map&lt;String, Value&gt;) {<br />
+        state.insert(title.to_string(),                      json!(String::from(&quot;done&quot;)));<br />
+        write_to_file(&quot;./state.json&quot;, state);<br />
+        println!(&quot;\n\n{} is being set to done\n\n&quot;, title);<br />
+    }<br />
+    fn set_to_pending(&amp;self, title: &amp;String,<br />
+                      state: &amp;mut Map&lt;String, Value&gt;) {<br />
+        state.insert(title.to_string(),<br />
+                     json!(String::from(&quot;pending&quot;)));<br />
+        write_to_file(&quot;./state.json&quot;, state);<br />
+        println!(&quot;\n\n{} is being set to pending\n\n&quot;, title);<br />
+    }<br />
+}</p>
+</blockquote>
+<p>Rồi xong , vậy là 4 trails của mình đã tương tác với file state.json , dĩ nhiên chúng ta có thể dùng trực tiếp trong main.rs nhưng với 1 ứng dụng rắc rối hơn thì mọi thứ sẽ khó quản lí, ta tách riêng các trail này ra quản lí trong 1 file  src/processes.rs</p>
+<blockquote>
+<p>use serde_json::Map;<br />
+use serde_json::value::Value;<br />
+use super::to_do::ItemTypes;<br />
+use super::to_do::structs::done::Done;<br />
+use super::to_do::structs::pending::Pending;<br />
+use super::to_do::structs::traits::get::Get;<br />
+use super::to_do::structs::traits::create::Create;<br />
+use super::to_do::structs::traits::delete::Delete;<br />
+use super::to_do::structs::traits::edit::Edit;</p>
+</blockquote>
+<p>Sau đó chúng ta khai báo 2 hàm xử lí Done và Pending</p>
+<blockquote>
+<p>fn process_pending(item: Pending,                command: String, state: &amp;Map&lt;String, Value&gt;) {<br />
+    let mut state = state.clone();<br />
+    match command.as_str() {<br />
+        &quot;get&quot; =&gt; item.get(&amp;item.super_struct.title, &amp;state),<br />
+        &quot;create&quot; =&gt; item.create(&amp;item.super_struct.title,                     &amp;item.super_struct.status, &amp;mut state),<br />
+        &quot;delete&quot; =&gt; item.delete(&amp;item.super_struct.title,                                 &amp;mut state),<br />
+        &quot;edit&quot; =&gt; item.set_to_done(&amp;item.super<em>struct.title,                                    &amp;mut state),<br />
+        </em> =&gt; println!(&quot;command: {} not supported&quot;, command)<br />
+    }<br />
+}<br />
+fn process_done(item: Done,<br />
+                command: String, state: &amp;Map&lt;String, Value&gt;) {<br />
+    let mut state = state.clone();<br />
+    match command.as_str() {<br />
+        &quot;get&quot; =&gt; item.get(&amp;item.super_struct.title, &amp;state),<br />
+        &quot;delete&quot; =&gt; item.delete(&amp;item.super_struct.title,                                 &amp;mut state),<br />
+        &quot;edit&quot; =&gt; item.set_to_pending(&amp;item.super<em>struct.title,                                       &amp;mut state),<br />
+        </em> =&gt; println!(&quot;command: {} not supported&quot;, command)<br />
+    }<br />
+}</p>
+</blockquote>
+<p>Tiếp theo là 1 hàm publish để nó có thể sử dụng trong main</p>
+<blockquote>
+<p>pub fn process_input(item: ItemTypes, command: String,                     state: &amp;Map&lt;String, Value&gt;) {<br />
+    match item {<br />
+        ItemTypes::Pending(item) =&gt; process_pending(item,            command, state),<br />
+        ItemTypes::Done(item) =&gt; process_done(item,            command, state)<br />
+    }<br />
+}</p>
+</blockquote>
+<p>Vậy là trong main.rs , code chúng ta sẽ gọn gàn hơn như sau :</p>
+<blockquote>
+<p>mod state;<br />
+mod to_do;<br />
+mod processes;<br />
+use std::env;<br />
+use state::read_file;<br />
+use serde_json::value::Value;<br />
+use serde_json::Map;<br />
+use to_do::to_do_factory;<br />
+use processes::process_input;<br />
+fn main() {<br />
+    let args: Vec<String> = env::args().collect();<br />
+    let command: &amp;String = &amp;args[1];<br />
+    let title: &amp;String = &amp;args[2];<br />
+    let state: Map&lt;String, Value&gt; =<br />
+        read_file(&quot;./state.json&quot;);<br />
+    let status: String;<br />
+    match &amp;state.get(*&amp;title) {<br />
+        Some(result) =&gt; {<br />
+            status = result.to_string().replace('\&quot;', &quot;&quot;);<br />
+        }<br />
+        None=&gt; {<br />
+            status = &quot;pending&quot;;<br />
+        }<br />
+    }<br />
+    let item = to_do_factory(&amp;status,<br />
+                             title).expect(&amp;status);<br />
+    process_input(item, command.to_string(), &amp;state);<br />
+}</p>
+</blockquote>
+<p>OK , bây giờ các bạn chạy cargo run với 2 biến 1 là command , 2 là title của task, mình ví dụ </p>
+<blockquote>
+<p>cargo run create washing</p>
+</blockquote>
+<p>mình tạo 1 task washing , thử chạy lệnh get để kiểm tra kết quả nhé</p>
+<blockquote>
+<p>cargo run get washing</p>
+</blockquote>
+<p>Task nay mặc định sẽ là pending, mình chạy lệnh edit chuyển status pending thành done nhé </p>
+<blockquote>
+<p>cargo run edit washing</p>
+</blockquote>
+<h5>Wow, tuyệt vời app đã hoàn tất!!</h5>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer has-cards">
+    <div class="container">
+
+        <hr>
+        <div class="row align-items-center justify-content-md-between">
+            <div class="col-md-6">
+                <div class="copyright">
+                    © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<style>
+    .single-content blockquote{
+        padding-left: 20px;
+        border-left: 5px solid;
+        font-size: 87.5%;
+        color: #f3a4b5;
+        word-break: break-word;
+        font-family: system-ui;
+    }
+</style>
+</body>
+</html>

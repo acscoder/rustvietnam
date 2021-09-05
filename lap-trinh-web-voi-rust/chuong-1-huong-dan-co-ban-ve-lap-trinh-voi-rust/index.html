@@ -1,0 +1,850 @@
+
+<!DOCTYPE html>
+<html amp>
+<head>
+    <title>Hướng dẫn cơ bản về lập trình với Rust - RustVietnam</title>
+    <meta charset="UTF-8">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v17.0 - https://yoast.com/wordpress/plugins/seo/ -->
+	<meta name="description" content="Các kiến thức cơ bản của lập trình Rust nhưng chỉ chú trọng vào những vấn đề nền tảng, như kiểu dữ liệu, sở hữu biến, borrowing, structs" />
+	<link rel="canonical" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Hướng dẫn cơ bản về lập trình với Rust - RustVietnam" />
+	<meta property="og:description" content="Các kiến thức cơ bản của lập trình Rust nhưng chỉ chú trọng vào những vấn đề nền tảng, như kiểu dữ liệu, sở hữu biến, borrowing, structs" />
+	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/" />
+	<meta property="og:site_name" content="RustVietnam" />
+	<meta property="article:published_time" content="2021-08-24T14:24:58+00:00" />
+	<meta property="article:modified_time" content="2021-09-05T10:46:46+00:00" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="admin" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="20 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "https://localhost/rustvietnam/#website",
+	            "url": "https://localhost/rustvietnam/",
+	            "name": "RustVietnam",
+	            "description": "Trang Web d\u00e0nh cho nh\u1eefng ng\u01b0\u1eddi b\u1ea1n y\u00eau th\u00edch l\u1eadp tr\u00ecnh ng\u00f4n ng\u1eef Rust",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "https://localhost/rustvietnam/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "en-US"
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/#webpage",
+	            "url": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/",
+	            "name": "H\u01b0\u1edbng d\u1eabn c\u01a1 b\u1ea3n v\u1ec1 l\u1eadp tr\u00ecnh v\u1edbi Rust - RustVietnam",
+	            "isPartOf": {
+	                "@id": "https://localhost/rustvietnam/#website"
+	            },
+	            "datePublished": "2021-08-24T14:24:58+00:00",
+	            "dateModified": "2021-09-05T10:46:46+00:00",
+	            "author": {
+	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
+	            },
+	            "description": "C\u00e1c ki\u1ebfn th\u1ee9c c\u01a1 b\u1ea3n c\u1ee7a l\u1eadp tr\u00ecnh Rust nh\u01b0ng ch\u1ec9 ch\u00fa tr\u1ecdng v\u00e0o nh\u1eefng v\u1ea5n \u0111\u1ec1 n\u1ec1n t\u1ea3ng, nh\u01b0 ki\u1ec3u d\u1eef li\u1ec7u, s\u1edf h\u1eefu bi\u1ebfn, borrowing, structs",
+	            "breadcrumb": {
+	                "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/#breadcrumb"
+	            },
+	            "inLanguage": "en-US",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "Home",
+	                    "item": "https://localhost/rustvietnam/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "H\u01b0\u1edbng d\u1eabn c\u01a1 b\u1ea3n v\u1ec1 l\u1eadp tr\u00ecnh v\u1edbi Rust"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655",
+	            "name": "admin",
+	            "image": {
+	                "@type": "ImageObject",
+	                "@id": "https://localhost/rustvietnam/#personlogo",
+	                "inLanguage": "en-US",
+	                "url": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "contentUrl": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "caption": "admin"
+	            },
+	            "sameAs": [
+	                "https://rustvietnam.com"
+	            ],
+	            "url": "https://rustvietnam.com/author/admin/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Hướng dẫn cơ bản về lập trình với Rust Comments Feed" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/feed/" />
+<link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/1" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8" />
+<link rel='shortlink' href='https://rustvietnam.com/?p=1' />
+<link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust%2F&#038;format=xml" />
+<link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>
+</head>
+
+<body data-amp-auto-lightbox-disable>
+<!-- Navbar -->
+<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
+    <div class="container">
+        <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com">
+            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
+            <span>RustVietnam</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar_global">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a href="https://rustvietnam.com">
+                            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
+                        </a>
+                    </div>
+                    <div class="col-6 collapse-close">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        <span class="nav-link-inner--text">Nền tảng</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-xl">
+                        <div class="dropdown-menu-inner">
+                            <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                                    <i class="ni ni-spaceship"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h6 class="heading text-primary mb-md-1">Bắt đầu</h6>
+                                    <p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p>
+                                </div>
+                            </a>
+                            <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+                                    <i class="ni ni-palette"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6>
+                                    <p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p>
+                                </div>
+                            </a>
+                            <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
+                                    <i class="ni ni-ui-04"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5>
+                                    <p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Nâng cao</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a>
+                        <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a>
+                        <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a>
+                        <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Network</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a>
+                        <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a>
+                    </div>
+                </li>
+                <li> <a target="_blank" rel="nofollow" href="https://docs.rust-embedded.org/book/#:~:text=Embedded%20Rust%20is%20for%20everyone%20who%20wants%20to,language%20provides.%20%28See%20also%20Who%20Rust%20Is%20For%29" class="nav-link" >
+                        Lập trình nhúng
+                    </a></li>
+                <li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" >
+                        BlockChain
+                    </a></li>
+            </ul>
+
+            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+
+                <li class="nav-item d-none d-lg-block">
+                    <a href="mailto:hocrust@gmail.com" target="_blank" rel="nofollow" class="btn btn-primary btn-icon">
+                        <span class="nav-link-inner--text">Liên hệ</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+    <div class="section section-hero section-shaped">
+        <div class="shape shape-style-1 shape-primary">
+            <span class="span-150"></span>
+            <span class="span-50"></span>
+            <span class="span-50"></span>
+            <span class="span-75"></span>
+            <span class="span-100"></span>
+            <span class="span-75"></span>
+            <span class="span-50"></span>
+            <span class="span-100"></span>
+            <span class="span-50"></span>
+            <span class="span-100"></span>
+        </div>
+        <div class="page-header">
+            <div class="container shape-container d-flex align-items-center py-lg">
+                <div class="col px-0">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-8 text-center text-white">
+                            <h1 class="display-2 text-white">Hướng dẫn cơ bản về lập trình với Rust</h1>
+                            <p class="lead">
+                                <p>Các kiến thức cơ bản của lập trình Rust nhưng chỉ chú trọng vào những vấn đề nền tảng, như kiểu dữ liệu, sở hữu biến, borrowing, structs</p>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator separator-bottom separator-skew zindex-100">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </div>
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center flex-row-reverse">
+            <div class="col-lg-4 single-sidebar">
+
+                <h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/">Lập trình Web với Rust</a></h2> <ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/">Hướng dẫn cơ bản về lập trình với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/">Chương 2 - Thiết kế một Web App với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/">Xử lí HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/">Xử lí Dữ liệu HTTP Requests với Actix Web framework</a></li></ul>
+            </div>
+
+            <div class="col-lg-8 single-content">
+            <p>Rust là 1 ngôn ngữ lập trình an toàn bộ nhớ (memory safe), tuy nhiên mới tiếp xúc thì cảm giác sẽ chẳn an toàn chút nào.Rust được mô tả là ngôn ngữ lập trình hệ thống nhưng đừng hiểu lầm, nó cực kì hiệu quả cho lập trình web , network</p>
+<p>Nếu các bạn có chút kinh nghiệm về lập trình web hoặc lập trình ngôn ngữ bậc cao (python,nodejs,java...) thì chỉ cần hiểu về cách quản lí bộ nhớ của Rust thì sẽ xài được Rust vào dự án thực tế luôn ,<br />
+cộng thêm một ít kiến thức về quản lí module,package (Rust gọi là crates) thì thời tới cản ko kịp</p>
+<p>Phần này , chúng ta đi nhanh vào căn bản của Rust đủ để xây dựng cấu trúc 1 web app<br />
+Chương 1 - Giới thiệu nhanh<br />
+Rust đang ngày cản trở nên phổ biến, nhưng mọi người nên biết nó tương đối khó học. Tuy nhiên nếu nắm vững các nguyên tắc cơ bản của nó thì chúng ta sẽ lập trình Rust thỏa mái y chang như lập trình với ngôn ngữ bậc cao<br />
+Chương này chúng ta sẽ cover các khác biệt chính của Rust và các ngôn ngữ bậc cao khác (như python,nodejs,java...)</p>
+<p>Tổng cộng chúng ta sẽ đi qua 4 vấn đề chính :</p>
+<ul>
+<li>Tìm hiểu về biến(variables) và kiểu dữ liệu (data types) </li>
+<li>Quản lí sở hữu bộ nhớ cho biến (variable ownership)</li>
+<li>xây dựng kiểu cấu trúc (structs)</li>
+<li>hỗ trợ lập trình với macro ( Metaprogramming )</li>
+</ul>
+<p>Bắt đầu thôi!!</p>
+<h3>Yêu cầu</h3>
+<p>Nếu bạn chưa cài biên dịch Rust thì xem hướng dẫn ở đây.<br />
+Để cho nhanh thì dùng cái play ground này <a href="https://play.rust-lang.org/">https://play.rust-lang.org/</a><br />
+Code mẫu cho chương 1 tại đây nếu bạn muốn tham khảo</p>
+<h3>Tìm hiểu về biến(variables) và kiểu dữ liệu (data types)</h3>
+<p>Nếu các bạn đã có kinh nghiệm lập trình , khi học Rust bạn sẽ thấy nó khá kì quặc , thực sự thì mấy cái thứ kì quặc đó đã tạo nên sự đặc biệt và hiệu quả cho Rust<br />
+Như các bạn đã biết ( có thể là không ) , trong thế giới của lập trình chúng ta có 2 lựa chọn cơ bản đó là tốc độ và sự dễ dàng</p>
+<p>tốc độ -- Với ngôn ngữ lập trình bậc thấp như C/C++ các bạn tương tác sâu vào hệ thống,code thực thi cực nhanh và nhẹ, nghe thì sướng nhưng cái giá ko hề nhỏ , lập trình rất cực, tốn thời gian để viết code và debug , nhất là các vấn đề quản lí bộ nhớ<br />
+sự dễ dàng -- Ngôn ngữ bậc cao như PHP , Nodejs , Java ... mọi việc dễ dàng hơn , dự án được code nhanh hơn , bộ nhớ thì ko lo đã có garbage collection tự động dọn dẹp , dĩ nhiên cái giá là tốc độ thực thi chương trình chậm , có nhiều thứ dư thừa</p>
+<p>Với Rust, phần tự động dọn dẹp bộ nhớ garbage collection bị loại bỏ thay vào đó là cơ chế borrow checker giúp biên dịch biến, quản lí bộ nhớ an toàn<br />
+đảm bảo chương trình có tốc độ của C++ và quản lí bộ nhớ dễ dàng như PHP , Nodejs , Java</p>
+<p>Quảng cáo nhiều rồi , code đầu tiên đây , như truyền thống anh em say Hello World nào </p>
+<blockquote>
+<p>fn main() {<br />
+println!(Hello, world!);<br />
+}</p>
+</blockquote>
+<p>Hàm main là hàm bắt đầu chương trình , mọi thứ luôn bắt đầu từ main</p>
+<h4>Kiểu dữ liệu strings</h4>
+<p>Cũng như các ngôn ngữ khác , rust cũng có strings, integers, floats, arrays, and hash maps , tuy nhiêu do cách quản lí bộ nhớ nên sẽ có vài thứ hơi là lạ<br />
+Để bắt đầu tìm hiểu string , chúng ta thử 1 hàm đơn giản sau</p>
+<blockquote>
+<p>fn in_chuoi_ra_man_hinh(input_string: String) {<br />
+println!({}, input_string);<br />
+}<br />
+fn main() {<br />
+let test_string = String::from(Hello, World!);<br />
+in_chuoi_ra_man_hinh(test_string);<br />
+}</p>
+</blockquote>
+<p>Kết quả vẫn là Hello, World! , ko có gì khác<br />
+hàm in_chuoi_ra_man_hinh cần 1 đầu vào là 1 String<br />
+hàm in ra màn hình println là hàm in ra có sẵn của Rust , dấu ! biểu thị nó chấp nhận nhiều biến<br />
+string được lấy từ object String</p>
+<blockquote>
+<p>let test_string = String::from(Hello, World!);</p>
+</blockquote>
+<p>có vẻ rườm rà , thử cách khác xem</p>
+<blockquote>
+<p>fn in_chuoi_ra_man_hinh(input_string: str) {<br />
+println!({}, input_string);<br />
+}<br />
+fn main() {<br />
+let test_string = Hello, World!;<br />
+in_chuoi_ra_man_hinh(test_string);<br />
+}</p>
+</blockquote>
+<p>đoạn này mình dùng str thay vì String như khúc trước<br />
+và kết quả là 1 error</p>
+<blockquote>
+<p>error[E0277]: the size for values of type <code>str</code> cannot be known at compilation time</p>
+</blockquote>
+<p>để hiểu về cái lỗi này chúng ta nói về bộ nhớ ngăn xếp(stack memory) và cây dữ liệu (heap memory )<br />
+Stack memory : nhanh, cấp bộ nhớ khi biên dịch<br />
+Heap memory : chậm hơn , cấp bộ nhớ trong lúc thực thi</p>
+<p>Với biến ở dạng chư như này </p>
+<blockquote>
+<p>let test_string = Hello, World!;</p>
+</blockquote>
+<p>bộ nhớ sẽ không biết kích thước vì nó có thể thay đổi tùy quá trình sử dụng nên nó là kiểu Heap memory<br />
+khi ta đưa biến này vào hàm sẽ có báo lỗi không biết trước kích thước  như trên<br />
+Còn biến </p>
+<blockquote>
+<p>let test_string = String::from(Hello, World!);</p>
+</blockquote>
+<p>Là 1 object đã được cố định kích thước nêu dữ liệu là Stack memory</p>
+<p>Để chuyển string từ Heap sang Stack mình dùng hàm to_string:</p>
+<blockquote>
+<p>fn in_chuoi_ra_man_hinh(input_string: String) {<br />
+println!({}, input_string);<br />
+}<br />
+fn main() {<br />
+let test_string = Hello, World!;<br />
+in_chuoi_ra_man_hinh(test_string.to_string());<br />
+}</p>
+</blockquote>
+<p>Cách khác chúng ta sẽ không chuyển bằng hàm to_string , vẫn sữ dụng đinh dạng str như cũ nhưng tham chiếu str bằng borrowing </p>
+<blockquote>
+<p>fn in_chuoi_ra_man_hinh(input_string: &amp;str) {<br />
+println!({}, input_string);<br />
+}<br />
+fn main() {<br />
+let test_string = &amp;Hello, World!;<br />
+in_chuoi_ra_man_hinh(test_string);<br />
+}</p>
+</blockquote>
+<p>thêm kí hiệu &amp;<br />
+chúng ta sẽ nói kĩ về Borrowing sau nhưng đại loại chúng ta sẽ cho biến test_string tham chiếu tới đoạn chữ Hello, World! , cái đưa và hàm ko phải là string mà là 1 đoạn tham chiếu (reference )</p>
+<h4>integers và floats</h4>
+<h5>integers : số nguyên</h5>
+<p>có 2 loại là signed integers , kí hiệu i (có số âm như -100 và dương ) và unsigned integers, kí hiệu u ( chỉ có số dương ,từ 0 trở lên)<br />
+gồm các kích thước 8, 16, 32, 64, and 128 bits<br />
+ví dụ : i8<br />
+là số signed integers có kích thước 8bit , khoảng giá trị từ -128 đến 127 ( 2^8 số )<br />
+thử chạy nào này</p>
+<blockquote>
+<p>fn main() {<br />
+let number: i8 = 255;<br />
+}</p>
+</blockquote>
+<p>Ta sẽ có lỗi </p>
+<blockquote>
+<p>note: the literal <code>255</code> does not fit into the type <code>i8</code> whose range is <code>-128..=127</code></p>
+</blockquote>
+<p>nhưng nếu đổi i8 thành u8 thì sẽ ổn , u8 có giá trị từ 0 đến 255 </p>
+<blockquote>
+<p>fn main() {<br />
+let number: u8 = 255;<br />
+}</p>
+</blockquote>
+<h5>floats : số thực</h5>
+<p>Số thực thì chỉ có 2 loại hay dùng là f32 and f64 , cả 2 đều có giá trị âm, dương được ko phân biệt như integers</p>
+<p>có cách khác để khai báo kiểu dữ liệu cho số :</p>
+<blockquote>
+<p>let x = 1u8;<br />
+hoặc let x = 1_u8;</p>
+</blockquote>
+<p>Số 1 này kiểu dự liệu unsigned integers 8 bits<br />
+nhưng nếu </p>
+<blockquote>
+<p>let x = 1f32;<br />
+hoặc let x = 1_f32;</p>
+</blockquote>
+<p>Số 1 này kiểu dự liệu float 32 bits</p>
+<p>Thử 1 ví dụ đơn giản sau </p>
+<blockquote>
+<p>fn main() {<br />
+let number = 1 + 30.2;<br />
+println!({}, number);<br />
+}</p>
+</blockquote>
+<p>kết quả là </p>
+<blockquote>
+<p>error[E0277]: cannot add a float to an integer</p>
+</blockquote>
+<p>Không thể cộng integer và float với nhau , vì đó là 2 kiểu dự liệu khác nhau<br />
+thật chán khi 1 phép + đơn giản vậy cũng làm khó.<br />
+Chúng ta phải lựa chọn kiểu dữ liệu </p>
+<blockquote>
+<p>fn main() {<br />
+let number = 1_f32 + 30.2;<br />
+println!({}, number);<br />
+}</p>
+</blockquote>
+<p>hàm trên mình chọn số 1 này kiểu dự liệu float 32 bits , dẫn đến kết quả là 31.2</p>
+<h3>Dữ liệu vector và mảng ( array )</h3>
+<p>Ở Rust , array là kích thước cố định , sau khi khai báo xong ko thêm ko bớt gì được nữa<br />
+dữ liệu chấp nhận trong Array cũng là 1 loại cố định , ví dụ :</p>
+<blockquote>
+<p>fn main() {<br />
+let int_array: [i32; 3] = [1, 2, 3];<br />
+for i in int_array.iter() {<br />
+println!({}, i);<br />
+}<br />
+}</p>
+</blockquote>
+<p>int_array có kích thước là 3 phần tử , kiểu dự liệu là i32</p>
+<blockquote>
+<p>let int_array: [i32; 3] = [1, 2, ba];<br />
+hay let int_array: [i32; 3] = [1, 2, 3, 4];</p>
+</blockquote>
+<p>Là không hợp lệ</p>
+<p>Ủa vậy còn vector , vector chính là mảng có thể thay đổi kích thước , thêm , bớt được</p>
+<blockquote>
+<p>fn main() {<br />
+let str_vector: Vec&lt;&amp;str&gt; = vec![one, two, three];<br />
+for i in str_vector.iter() {<br />
+println!({}, i);<br />
+}<br />
+}</p>
+</blockquote>
+<p>Thử thêm 1 phần tử trong vector xem</p>
+<blockquote>
+<p>fn main() {<br />
+let str_vector: Vec&lt;&amp;str&gt; = vec![one, two, three];<br />
+str_vector.push(four);<br />
+for i in str_vector.iter() {<br />
+println!({}, i);<br />
+}<br />
+}</p>
+<p>lỗi : error[E0596]: cannot borrow <code>str_vector</code> as mutable, as it is not declared as mutable</p>
+</blockquote>
+<p>trong Rust , tất cả biến là cố định , khi mình muốn nó là dạng thay đổi được phải khai báo thêm mut cho biến đó , chương trình phải như vầy</p>
+<blockquote>
+<p>fn main() {<br />
+let mut str_vector: Vec&lt;&amp;str&gt; = vec![one, two, three];<br />
+str_vector.push(four);<br />
+for i in str_vector.iter() {<br />
+println!({}, i);<br />
+}<br />
+}</p>
+</blockquote>
+<p>--&gt; Work !!!</p>
+<h3>Kiểu dữ liệu hash maps</h3>
+<p>Cái này trong Python gọi là dictionary hay PHP gọi là Associative Arrays<br />
+ví dụ bên dưới mình sẽ khai báo 1 Hash maps giống như Associative Arrays trong PHP, $age = array(Peter=&gt;35, Ben=&gt;37, Joe=&gt;43);</p>
+<blockquote>
+<p>use std::collections::HashMap;<br />
+fn main() {<br />
+let mut age: HashMap&lt;&amp;str, i8&gt; = HashMap::new();<br />
+age.insert(Peter, 35);<br />
+age.insert(Ben, 37);<br />
+age.insert(Joe, 43);<br />
+println!(Đây là hashmap {:?}, age );<br />
+}</p>
+</blockquote>
+<p>Chi tiết về cái HashMap ở đây <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashMap.html">https://doc.rust-lang.org/beta/std/collections/struct.HashMap.html</a><br />
+Chúng ta sẽ làm nhiều hơn với HashMap ở chương sau</p>
+<h3>Kiểm tra kết quả và bắt lỗi</h3>
+<p>Lỗi là 1 thứ phiền toái , bất ki lỗi nào cũng khiến rust dừng biên dịch , chúng ta phải bắt lỗi trước khi chuyện đó xảy ra<br />
+ví dụ như bạn kiểm tra 1 biến có tồn tại hay không chẳng hạn<br />
+trong Rust ko có try and except như các ngôn ngữ khác , nó chơi cách khác Option và Result</p>
+<blockquote>
+<p>fn error_check(check: bool) -&gt; Result&lt;i8, &amp;\'static str&gt; {<br />
+if check == true {<br />
+Err(this is an error)<br />
+} else {<br />
+Ok(1)<br />
+}<br />
+}<br />
+fn main() {<br />
+let result: i8 = error_check(false).unwrap();<br />
+println!({}, result);<br />
+}</p>
+</blockquote>
+<p>Code ví dụ trên , hàm error_check sẽ trả về 1 Result , Result này sẽ là 1 trong 2 kết quả , hoặc là Err (lỗi) hoăc là Ok ( ốn )<br />
+chạy code check là false --&gt; hàm OK --&gt; 1<br />
+bạn thử với error_check(true) xem</p>
+<p>Một hàm hay dùng nhất trong Rust là hàm match , dùng để kiểm tra,so sánh kết quả<br />
+chúng ta sửa code trên lại dùng match để kiểm tra kết quả result là ok hay err</p>
+<blockquote>
+<p>fn error_check(check: bool) -&gt; Result&lt;i8, &amp;\'static str&gt; {<br />
+if check == true {<br />
+Err(this is an error)<br />
+} else {<br />
+Ok(1)<br />
+}<br />
+}<br />
+fn main() {<br />
+let result: Result&lt;i8, &amp;\'static str&gt; = error_check(true);<br />
+match result {<br />
+Ok(x) =&gt; println!(it\'s a result of: {}, x),<br />
+Err(x) =&gt; println!(báo lỗi : {}, x)<br />
+}<br />
+}</p>
+</blockquote>
+<p>1 cách khác ngắn gọn hơn là dùng expect</p>
+<blockquote>
+<p>fn error_check(check: bool) -&gt; Result&lt;i8, 'static str&gt; {<br />
+if check == true {<br />
+Err(this is an error)<br />
+} else {<br />
+Ok(1)<br />
+}<br />
+}<br />
+fn main() {<br />
+let result: i8 = error_check(true).expect(Báo lỗi : );<br />
+}</p>
+</blockquote>
+<p>hoặc check err bằng if với hàm is_err()</p>
+<blockquote>
+<p>fn error_check(check: bool) -&gt; Result&lt;i8, &amp;\'static str&gt; {<br />
+if check == true {<br />
+Err(this is an error)<br />
+} else {<br />
+Ok(1)<br />
+}<br />
+}<br />
+fn main() {<br />
+let result: Result&lt;i8, &amp;\'static str&gt; = error_check(true);<br />
+if result.is_err() {<br />
+println!(Báo lỗi);<br />
+}<br />
+}</p>
+</blockquote>
+<h3>Làm việc với quyền sơ hữu biến ( variable ownership )</h3>
+<p>Như đã nói Rust nó ko dọn bộ nhớ với garbage collector như người ta mà nó đặt ra quy định quyền sở hữu biến (sau sẽ gọi là variable ownership nhé) để quản lí bộ nhớ<br />
+cái trò variable ownership này mới đầu thì sẽ thấy nó kì quặc và khó chịu nhưng nó đem lại hiệu quả cho chương trình code bằng Rust , mình hiểu nó thì mọi việc sẽ trở nên suông sẽ<br />
+Với bộ nhớ , chúng ta sẽ có 1 số vấn đề rắc rối dưới đấy( để tiếng Anh )</p>
+<p>Use after frees: được sử dụng sau khi đã giải phóng, nó có thể gây lỗi chương trình hoặc hacker có thể thực thi code thông qua vùng nhớ<br />
+Dangling pointers : Con trỏ ko chỉ đến vùng nhớ nào hết<br />
+Double frees: 1 vùng nhớ được giải phóng hơn 1 lần , nó dễ gây lỗi chương trình , làm lộ dữ liệu , hacker có thể khai thác để chạy mã tùy ý<br />
+Segmentation faults: chương trình cố gắng truy cập vùng nhớ mà nó không được phép<br />
+Buffer overrun: lỗi tràn bộ nhớ đệm, lỗi này làm dừng chương trình đang chạy</p>
+<p>Tất cả phiền toái trên sẽ được giải quyết với các nguyên tắc của variable ownership dưới đây<br />
+dữ liệu được sở hữu với 1 biết mà nó được gán<br />
+ngay khi 1 biến ra khỏi vùng hoạt động , nó sẽ bị gỡ đi</p>
+<p>Dữ liệu của biến này sẽ được biến khác sử dụng bằng các cách sau đây :</p>
+<ul>
+<li>Copy: copy dữ liệu</li>
+<li>Move: chuyển quyền</li>
+<li>borrow: cho mượn</li>
+</ul>
+<p>Dĩ nhiên nếu dừng lại ở đây thì giải thích về variable ownership trên sẽ vô cùng khó hiểu , chúng ta sẽ tiếp tục làm rõ chi tiết<br />
+Xem xét ví dụ sau : </p>
+<blockquote>
+<p>fn main() {<br />
+let one: String = String::from(one);<br />
+{<br />
+println!({}, one);<br />
+let two: String = String::from(two);<br />
+}<br />
+println!({}, one);<br />
+println!({}, two);<br />
+}</p>
+<p>lỗi : error[E0425]: cannot find value <code>two</code> in this scope</p>
+</blockquote>
+<p>Biến two được khai báo bên trong ngoặc {} , nó chỉ có hiệu lực bên trong { } ra khỏi thì nó đã ko tồn tại</p>
+<p>Ví dụ tiếp theo chúng ta chỉ đơn giản in ra hello world 2 lần , quá dễ !!</p>
+<blockquote>
+<p>fn in_chuoi_ra_man_hinh(input_string: String) {<br />
+println!({}, input_string);<br />
+}<br />
+fn main() {<br />
+let test_string = String::from(Hello, World!);<br />
+in_chuoi_ra_man_hinh(test_string);<br />
+in_chuoi_ra_man_hinh(test_string);<br />
+}</p>
+</blockquote>
+<p>Không thể tin nổi , Hello, World! 1 lần thì được , 2 lần thì fail ngay , Why!!!</p>
+<blockquote>
+<p>Lỗi : error[E0382]: use of moved value: <code>test_string</code></p>
+</blockquote>
+<p>Nó bảo biến test_string đã được chuyển đi chỗ khác rồi<br />
+vậy là lần đâu hàm in_chuoi_ra_man_hinh(test_string) thực thi , biến test_string đã chuyển vô đó rồi, lần 2 gọi thì ko thấy nó đâu.<br />
+Thêm 1 ví dụ khác về  chuyển đi chỗ khác  nhé</p>
+<blockquote>
+<p>fn in_chuoi_ra_man_hinh(input_string: String) {<br />
+println!({}, input_string);<br />
+}<br />
+fn main() {<br />
+let test_string = String::from(Hello, World!);</p>
+</blockquote>
+<p>let test_string_2 = test_string ;</p>
+<p>in_chuoi_ra_man_hinh(test_string);<br />
+}</p>
+<p>Chúng ta chỉ gọi 1 lần in_chuoi_ra_man_hinh(test_string) nhưng trước đo chúng ta chuyển biến test_string vô test_string_2 rồi nên khi ta goi nó thì ko thấy đâu</p>
+<blockquote>
+<p>let test_string_2 = test_string ;</p>
+</blockquote>
+<p>Kết quả cũng y như trên</p>
+<p>Đó, tới đây bạn đã thấy về quyền sỡ hửu của biến , sau khi đem sử dụng hoặc gán vào biến khác thì nó ko còn nữa<br />
+Vậy như ví dụ trên để gán let test_string_2 = test_string mà ko mất test_string đi ta phải làm sao<br />
+Clone:</p>
+<blockquote>
+<p>let test_string_2 = test_string.clone() ;</p>
+</blockquote>
+<p>Borrow: cho mượn</p>
+<blockquote>
+<p>let test_string_2 = &amp;test_string ;</p>
+</blockquote>
+<h3>Lifetime</h3>
+<blockquote>
+<p>fn main() {<br />
+let one;<br />
+{<br />
+let two: i8 = 2;<br />
+one = &two;<br />
+} // -----------------------&gt; biến two đã kết thúc tại đây<br />
+println!(r: {}, one);<br />
+}<br />
+error[E0597]: <code>two</code> does not live long enough</p>
+</blockquote>
+<p>Biến two đã kết thúc nên biến one tham chiếu vô đó cũng tạch theo. </p>
+<h3>Xây dựng kiểu cấu trúc (structs)</h3>
+<p>Không giống như các ngôn ngữ khác , Rust ko có class , thay vào đó mình dùng struct<br />
+mình tạo 1 struct giống như class trong PHP :</p>
+<blockquote>
+<p>&lt;?php<br />
+class Fruit {<br />
+// Properties<br />
+public $name;<br />
+public $color;<br />
+// Methods<br />
+function __construct($name,$color) {<br />
+$this-&gt;name = $name;<br />
+$this-&gt;color = $color;<br />
+}<br />
+function get_name() {<br />
+return $this-&gt;name;<br />
+}<br />
+function get_color() {<br />
+return $this-&gt;color;<br />
+}<br />
+}<br />
+?&gt;</p>
+</blockquote>
+<p>Ví dụ là 1 class trái cây Fruit , có 2 thuộc tính là name và color , 2 hàm get_name,get_color , 1 hàm khởi tạo</p>
+<blockquote>
+<p>#[derive(Debug)]<br />
+struct Fruit {<br />
+name: String,<br />
+color: String<br />
+}<br />
+impl Fruit {<br />
+fn new(input_name: &amp;str, input_color: &amp;str) -&gt; Self {<br />
+Self {<br />
+name: input_name.to_string(),<br />
+color: input_color.to_string(),<br />
+}<br />
+}<br />
+fn get_name(&amp;self) -&gt; &amp;str {<br />
+&amp;self.name<br />
+}<br />
+fn get_color(&amp;self) -&gt; &amp;str {<br />
+&amp;self.color<br />
+}<br />
+}<br />
+fn main() {<br />
+let fruit_1 = Fruit::new(Apple,red);<br />
+println!(Fruit Name {}, fruit_1.get_name() );<br />
+println!(Fruit Color {}, fruit_1.get_color() );<br />
+}</p>
+</blockquote>
+<h3>Kiểu dữ liệu enum</h3>
+<p>Như ví dụ trên , chúng ta muốn kiểu dữ liệu của màu là rgb(255,124,34) chẳng hạng , ta dùng enum để định nghĩa kiểu dữ liệu mà mình cần</p>
+<blockquote>
+<p>#[derive(Debug)]<br />
+enum ColorCode {<br />
+RGB(u8,u8,u8),<br />
+RGBA(u8,u8,u8,f32),<br />
+HEX(String)<br />
+}<br />
+struct Fruit {<br />
+name: String,<br />
+color: ColorCode<br />
+}<br />
+impl Fruit {<br />
+fn new(input_name: &amp;str, input_color: ColorCode) -&gt; Self {<br />
+Self {<br />
+name: input_name.to_string(),<br />
+color: input_color,<br />
+}<br />
+}<br />
+fn get_name(&amp;self) -&gt; &amp;str {<br />
+&amp;self.name<br />
+}<br />
+fn get_color(&amp;self) -&gt; &amp;ColorCode {<br />
+&amp;self.color<br />
+}<br />
+}<br />
+fn main() {<br />
+let fruit_1 = Fruit::new(Apple,ColorCode::RGB(255,124,34));<br />
+println!(Fruit Name {}, fruit_1.get_name() );<br />
+println!(Fruit Color {:?}, fruit_1.get_color() );<br />
+}</p>
+</blockquote>
+<h3>Traits</h3>
+<p>Rust gọi là traits còn ngôn ngữ khác gọi là interface<br />
+Đây là khai báo tập hợp các hàm có thể dùng cho struct</p>
+<blockquote>
+<p>trait CanEdit {<br />
+fn edit(&amp;self) {<br />
+println!(user is editing);<br />
+}<br />
+}<br />
+trait CanCreate {<br />
+fn create(&amp;self) {<br />
+println!(user is creating);<br />
+}<br />
+}<br />
+trait CanDelete {<br />
+fn delete(&amp;self) {<br />
+println!(user is deleting);<br />
+}<br />
+}<br />
+struct AdminUser {<br />
+name: String,<br />
+password: String,<br />
+}<br />
+impl CanDelete for AdminUser {}<br />
+impl CanCreate for AdminUser {}<br />
+impl CanEdit for AdminUser {}<br />
+struct EditorUser {<br />
+name: String,<br />
+password: String,<br />
+}<br />
+impl CanEdit for AdminUser {}</p>
+</blockquote>
+<p>trong ví dụ AdminUser được sử dụng 3 trail CanDelete,CanCreate,CanEdit<br />
+EditorUser được sử dụng 1 trail CanEdit</p>
+<h3>Metaprogramming</h3>
+<p>Thử 1 đoạn code cực dễ </p>
+<blockquote>
+<p>struct Coordinate <T> {<br />
+x: T,<br />
+y: T<br />
+}<br />
+fn main() {<br />
+let test = Coordinate{x: 1, y:2};<br />
+println!({:?}, test)<br />
+}</p>
+<p>Lỗi error[E0277]: <code>Coordinate&lt;{integer}&gt;</code> doesn\'t implement <code>Debug</code></p>
+</blockquote>
+<p>Nó ko muốn in ra trừ khi được hỗ trợ chạy ở chế độ Debug , chúng ta thêm Metaprogramming và đầu struct , và mọi thứ ổn</p>
+<blockquote>
+<p>#[derive(Debug)]<br />
+struct Coordinate <T> {<br />
+x: T,<br />
+y: T<br />
+}<br />
+fn main() {<br />
+let test = Coordinate{x: 1, y:2};<br />
+println!({:?}, test)<br />
+}</p>
+</blockquote>
+<p>Metaprogramming là vô cũng phổ biến và hữu dụng trong Rust , chúng ta sẽ gặp nó thường xuyên và hiểu nhiều hơn trong những chương kế tiếp !!!!</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="footer has-cards">
+    <div class="container">
+
+        <hr>
+        <div class="row align-items-center justify-content-md-between">
+            <div class="col-md-6">
+                <div class="copyright">
+                    © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</footer>
+<style>
+    .single-content blockquote{
+        padding-left: 20px;
+        border-left: 5px solid;
+        font-size: 87.5%;
+        color: #f3a4b5;
+        word-break: break-word;
+        font-family: system-ui;
+    }
+</style>
+</body>
+</html>
