@@ -31,12 +31,12 @@
 	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/" />
 	<meta property="og:site_name" content="RustVietnam" />
 	<meta property="article:published_time" content="2021-08-27T09:32:30+00:00" />
-	<meta property="article:modified_time" content="2021-09-05T10:45:54+00:00" />
+	<meta property="article:modified_time" content="2021-09-07T11:03:02+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="Written by" />
 	<meta name="twitter:data1" content="admin" />
 	<meta name="twitter:label2" content="Est. reading time" />
-	<meta name="twitter:data2" content="10 minutes" />
+	<meta name="twitter:data2" content="13 minutes" />
 	<script type="application/ld+json" class="yoast-schema-graph">{
 	    "@context": "https://schema.org",
 	    "@graph": [
@@ -67,7 +67,7 @@
 	                "@id": "https://localhost/rustvietnam/#website"
 	            },
 	            "datePublished": "2021-08-27T09:32:30+00:00",
-	            "dateModified": "2021-09-05T10:45:54+00:00",
+	            "dateModified": "2021-09-07T11:03:02+00:00",
 	            "author": {
 	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
 	            },
@@ -287,7 +287,7 @@
         <div class="row justify-content-center flex-row-reverse">
             <div class="col-lg-4 single-sidebar">
 
-                <h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/">Lập trình Web với Rust</a></h2> <ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/">Hướng dẫn cơ bản về lập trình với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/">Chương 2 - Thiết kế một Web App với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/">Xử lí HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/">Xử lí Dữ liệu HTTP Requests với Actix Web framework</a></li></ul>
+                <h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/">Lập trình Web với Rust</a></h2> <ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/">Chương 1 - Hướng dẫn cơ bản về lập trình với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/">Chương 2 - Thiết kế một Web App với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/">Chương 3 - Xử lí HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/">Chương 4  - Xử lí Dữ liệu HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/hien-thi-trang-web-tren-trinh-duyet/">Chương 5 - Hiển thị trang Web trên trình duyệt</a></li></ul>
             </div>
 
             <div class="col-lg-8 single-content">
@@ -598,7 +598,86 @@ format!(&quot;{} not in state&quot;, title_reference))<br />
 }<br />
 }</p>
 </blockquote>
-<p>đoạn code kiểm tra status bằng match</p>
+<p>Nhớ là hàm get trả về một <strong>Option</strong> nên ta kiểm tra bằng match.<br />
+Bây giờ mình có pass cái JSON structs vào hàm json và nó sẽ serialized , trả về response.</p>
+<blockquote>
+<p>match to_do_factory(&amp;status, title) {<br />
+Err(_item) =&gt; return HttpResponse::BadRequest().json(<br />
+format!(&quot;{} not accepted&quot;, status)),<br />
+Ok(item) =&gt; process_input(item, String::from(&quot;edit&quot;),        &amp;state)<br />
+}<br />
+return HttpResponse::Ok().json(return_state())</p>
+</blockquote>
+<p>Tiếp theo chúng ta sẽ làm sơ sơ ở phần quản lí user , trong file <strong>views/token.rs</strong>, chúng ta gọi crate ServiceRequest</p>
+<blockquote>
+<p>use actix_web::dev::ServiceRequest;</p>
+</blockquote>
+<p>Trong Cargo.toml ta thêm</p>
+<blockquote>
+<p>actix-service = &quot;1.0.6&quot;</p>
+</blockquote>
+<p>Bên dưới là 1 hàm đơn giản kiểm tra password </p>
+<blockquote>
+<p>fn check_password(password: String) -&gt; Result&lt;String, &amp;'static str&gt; {<br />
+if password == &quot;token&quot; {<br />
+return Ok(password)<br />
+}<br />
+return Err(&quot;token not authorised&quot;)<br />
+}</p>
+</blockquote>
+<p>Hàm này sẽ kiểm tra password của người dùng khi họ truy cập, chúng ta sẽ lấy data password này từ header của request </p>
+<blockquote>
+<p>fn extract_header_token(request: &amp;ServiceRequest) -&gt;        Result&lt;String, &amp;'static str&gt; {<br />
+match request.headers().get(&quot;user-token&quot;) {<br />
+Some(token) =&gt; {<br />
+match token.to_str() {<br />
+Ok(processed_password) =&gt; Ok(               String::from(processed_password)),<br />
+Err(_processed_password) =&gt; Err(                    &quot;there was an error processing token&quot;)<br />
+}<br />
+},<br />
+None =&gt; Err(&quot;there is no token&quot;)<br />
+}<br />
+}</p>
+</blockquote>
+<p>Mình lấy biến tại dòng code này <strong>request.headers().get(&quot;user-token&quot;)</strong><br />
+Bây giờ chúng ta dùng hàm <strong>extract_header_token</strong> và <strong>check_password</strong></p>
+<blockquote>
+<p>pub fn process_token(request: &amp;ServiceRequest) -&gt; Result&lt;        String, &amp;'static str&gt; {<br />
+match extract_header_token(request) {<br />
+Ok(token) =&gt; check_password(token),<br />
+Err(message) =&gt; Err(message)<br />
+}<br />
+}</p>
+</blockquote>
+<p>Trong file <strong>views/mod.rs</strong> ta nhớ thêm  <strong>pub mod token;</strong><br />
+Trong <strong>main.rs</strong> ta thêm hàm <strong>wrap_fn</strong> , chúng ta configures middle ware wrap_fn này bằng 1 closure:</p>
+<blockquote>
+<h1>[actix_rt::main]</h1>
+<p>async fn main() -&gt; std::io::Result&lt;()&gt; {<br />
+HttpServer::new(|| {<br />
+let app = App::new()<br />
+.wrap_fn(|req, srv| {<br />
+if *&amp;req.path().contains(&quot;/item/&quot;) {<br />
+match views::token::process_token(&amp;req) {<br />
+Ok(_token) =&gt; println!(                            &quot;the token is passable&quot;),Err(message) =&gt; println!(                            &quot;token error: {}&quot;, message)<br />
+}<br />
+}<br />
+let fut = srv.call(req);<br />
+async {<br />
+let result = fut.await?;<br />
+Ok(result)<br />
+}<br />
+}).configure(views::views_factory);<br />
+return app<br />
+}).bind(&quot;127.0.0.1:8000&quot;)?<br />
+.run()<br />
+.await<br />
+}</p>
+</blockquote>
+<p>Chúng ta kiểm tra path có /item/ thì mình kiểm tra <strong>process_token</strong>.Nếu không có biến <strong>user-token</strong> ở header thì sẽ in ra : <em>token error: there is no token</em> , nếu có mà giá trị không phải là &quot;token&quot; thì sẽ in ra: <em>token not authorised</em>. Nếu đúng thì thông báo : <em>the token is passable</em><br />
+Ok , tạm thời là vậy đi!!</p>
+             <hr/>
+                <div class="powr-comments" id="e67d472b_1630930267"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
             </div>
 
         </div>

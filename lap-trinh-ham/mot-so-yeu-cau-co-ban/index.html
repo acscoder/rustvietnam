@@ -27,12 +27,16 @@
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="Một số yêu cầu cơ bản - RustVietnam" />
+	<meta property="og:description" content="Lập trình Hàm( Functional programming ) và Lập trình hướng đối tượng( object-oriented programming ) là 2 kiểu lập trình chính, phổ biến nhất trong thế giới lập trình.Trong nhiều năm qua cả 2 không nhìn mặt nhau,một số như C,python,javascript theo lập trình Hàm ,còn một số thì trung thành tuyệt đối với hướng [&hellip;]" />
 	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-ham/mot-so-yeu-cau-co-ban/" />
 	<meta property="og:site_name" content="RustVietnam" />
 	<meta property="article:published_time" content="2021-09-05T12:41:23+00:00" />
+	<meta property="article:modified_time" content="2021-09-06T16:34:26+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="Written by" />
 	<meta name="twitter:data1" content="admin" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="4 minutes" />
 	<script type="application/ld+json" class="yoast-schema-graph">{
 	    "@context": "https://schema.org",
 	    "@graph": [
@@ -63,7 +67,7 @@
 	                "@id": "https://localhost/rustvietnam/#website"
 	            },
 	            "datePublished": "2021-09-05T12:41:23+00:00",
-	            "dateModified": "2021-09-05T12:41:23+00:00",
+	            "dateModified": "2021-09-06T16:34:26+00:00",
 	            "author": {
 	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
 	            },
@@ -263,7 +267,8 @@
                         <div class="col-lg-8 text-center text-white">
                             <h1 class="display-2 text-white">Một số yêu cầu cơ bản</h1>
                             <p class="lead">
-                                                            </p>
+                                <p>Lập trình Hàm( Functional programming ) và Lập trình hướng đối tượng( object-oriented programming ) là 2 kiểu lập trình chính, phổ biến nhất trong thế giới lập trình.Trong nhiều năm qua cả 2 không nhìn mặt nhau,một số như C,python,javascript theo lập trình Hàm ,còn một số thì trung thành tuyệt đối với hướng [&hellip;]</p>
+                            </p>
 
                         </div>
                     </div>
@@ -282,11 +287,105 @@
         <div class="row justify-content-center flex-row-reverse">
             <div class="col-lg-4 single-sidebar">
 
-                <h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/">Lập trình Hàm</a></h2> <ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-ham/mot-so-yeu-cau-co-ban/">Một số yêu cầu cơ bản</a></li></ul>
+                <h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/">Lập trình Hàm</a></h2> <ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-ham/mot-so-yeu-cau-co-ban/">Chương 1 - Một số yêu cầu cơ bản</a></li></ul>
             </div>
 
             <div class="col-lg-8 single-content">
-                        </div>
+            <p>Lập trình Hàm( Functional programming ) và Lập trình hướng đối tượng( object-oriented programming ) là 2 kiểu lập trình chính, phổ biến nhất trong thế giới lập trình.Trong nhiều năm qua cả 2 không nhìn mặt nhau,một số như C,python,javascript theo lập trình Hàm ,còn một số thì trung thành tuyệt đối với hướng đối tượng như C++,Java… Và rồi hôm nay, mọi chuyện thay đổi, rất nhiều ngôn ngữ lập trình coi trọng cả 2, Rust là 1 trong số đó.<br />
+Chương này chúng ta sẽ trình bày những nguyên tắc chung của lập trình hàm với 3 vấn đề sau:</p>
+<ul>
+<li>Dùng lập trình hàm để đơn giản hóa, giảm khối lượng code</li>
+<li>Viết code mạnh mẽ, an toàn với abstractions</li>
+<li>Sử dụng lập trình hàm cho những dự án phức tạp</li>
+</ul>
+<h2>Dùng lập trình hàm để đơn giản hóa, giảm khối lượng code</h2>
+<h3>Để generics càng generic hơn nữa</h3>
+<p>không biết phải dịch generic là gì nữa, các bạn xem lại cơ bản generic tại đây.<br />
+Nếu không có generic thì truct sẽ trở nên rườm ra (tốn nhiều code), ví dụ nhẹ sau :</p>
+<blockquote>
+<p>struct PointU32<br />
+{<br />
+x: u32,<br />
+y: u32<br />
+}<br />
+struct PointF32<br />
+{<br />
+x: f32,<br />
+y: f32<br />
+}<br />
+struct PointI32<br />
+{<br />
+x: i32,<br />
+y: i32<br />
+}</p>
+</blockquote>
+<p>Một struct tọa độ 2D có x,y trong đó có 3 kiểu dữ liệu khác nhau là u32,f32 và i32.<br />
+Thay cho sự rườm rà này ta dùng generic </p>
+<blockquote>
+<p>struct Point<T><br />
+{<br />
+x: T,<br />
+y: T<br />
+}</p>
+</blockquote>
+<p>Tiếp theo là hàm cũng vậy, có generic mọi thứ sẽ ngắn gọn hơn.<br />
+Code này là ko generic </p>
+<blockquote>
+<p>fn foo_u32(x: u32) -&gt; u32<br />
+{<br />
+x<em>x<br />
+}<br />
+fn foo_f32(x: f32) -&gt; f32<br />
+{<br />
+x</em>x<br />
+}<br />
+fn foo_i32(x: i32) -&gt; i32<br />
+{<br />
+x*x<br />
+}</p>
+</blockquote>
+<p>3 Hàm foo với 3 kiểu dữ liệu u32,f32,i32.<br />
+Chúng ta dùng generic </p>
+<blockquote>
+<p>fn foo<T>(x: T) -&gt; T<br />
+where T: std::ops::Mul<Output=T> + Copy<br />
+{<br />
+x*x<br />
+}</p>
+</blockquote>
+<p>Tham số đầu vào cho hàm có thể là 1 hàm số khác</p>
+<blockquote>
+<p>fn bar&lt;F,T&gt;(f: F, x: T) -&gt; T<br />
+where F: Fn(T) -&gt; T<br />
+{<br />
+f(x)<br />
+}</p>
+</blockquote>
+<h3>Hàm số như là giá trị ( functions as values )</h3>
+<p>Đại loại chúng ta đối xử với hàm như là 1 biến, đây là chìa khóa của tính đa hình(paradigm).Chúng ta sẽ nói về closure, 1 dạng của hàm implementing fn, Fn, FnMut, or FnOnce.   </p>
+<blockquote>
+<p>|Biến đầu vào| {<br />
+// code bên trong<br />
+}<br />
+Hoặc nếu ngắn gọn thì |Biến đầu vào| thực thi 1 dòng code<br />
+vd : |x| x*x</p>
+</blockquote>
+<p>Nói chung khái y như như 1 hàm bình thường, ủa rồi cần closure làm gì,closure là hàm khai báo và dùng xong rồi thôi,kiểu 1 hàm không tên, mình thường dùng như là 1 biến đầu vào cho các hàm khác, ví dụ:</p>
+<blockquote>
+<p>(0..10).map(|x| {<br />
+fn f(y: u32) -&gt; u32 {<br />
+y<em>y<br />
+}<br />
+let z = f(x+1) </em> f(x+2);<br />
+z*z<br />
+}<br />
+// Biến đầu vào hàm map là 1 closure</p>
+</blockquote>
+<h3>Iterators ( Con chạy)</h3>
+<p>Mặc dù Iterators là 1 phần của lập trình hướng đối tượng nhưng Rust cũng đưa Iterators vào phong cách lập trình hàm của mình. Một số các hàm cho Iterators.</p>
+             <hr/>
+                <div class="powr-comments" id="e67d472b_1630930267"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
+            </div>
 
         </div>
     </div>
