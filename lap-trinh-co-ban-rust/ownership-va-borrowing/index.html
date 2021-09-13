@@ -31,12 +31,12 @@
 	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/" />
 	<meta property="og:site_name" content="RustVietnam" />
 	<meta property="article:published_time" content="2021-09-11T04:37:49+00:00" />
-	<meta property="article:modified_time" content="2021-09-12T15:22:59+00:00" />
+	<meta property="article:modified_time" content="2021-09-13T15:35:25+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="Written by" />
 	<meta name="twitter:data1" content="admin" />
 	<meta name="twitter:label2" content="Est. reading time" />
-	<meta name="twitter:data2" content="2 minutes" />
+	<meta name="twitter:data2" content="7 minutes" />
 	<script type="application/ld+json" class="yoast-schema-graph">{
 	    "@context": "https://schema.org",
 	    "@graph": [
@@ -67,7 +67,7 @@
 	                "@id": "https://localhost/rustvietnam/#website"
 	            },
 	            "datePublished": "2021-09-11T04:37:49+00:00",
-	            "dateModified": "2021-09-12T15:22:59+00:00",
+	            "dateModified": "2021-09-13T15:35:25+00:00",
 	            "author": {
 	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
 	            },
@@ -334,11 +334,109 @@ Ok , vậy thử code hơi giống như code trên</p>
 <blockquote>
 <p>fn main() {<br />
 let v = &quot;hello&quot;;<br />
+//hoặc let v = 1;<br />
 let r = v;<br />
 println!(&quot;{}&quot;,v);<br />
 }</p>
 </blockquote>
-<p>Code vẫn chạy, code này khác chỉ là dạng dữ liệu của <strong>v</strong> là <strong>&amp;str</strong> chứ không phải là <strong>String</strong> như lúc nãy, chúng ta phải hiểu chuyện này là sao đây. </p>
+<p>Code vẫn chạy, code này khác chỉ là dạng dữ liệu của <strong>v</strong> là <strong>&amp;str</strong> (hoặc <strong>interger</strong>) chứ không phải là <strong>String</strong> như lúc nãy, vậy cái ownership mình nói lúc nãy là sao ta.<br />
+Để hiểu rõ vấn đề, chúng ta đi qua 2 dạng bộ nhớ dữ liệu của Rust.</p>
+<ol>
+<li>
+<p><strong>Stack</strong> ( ngăn xếp) , các bạn tưởng tượng đó là tập hồ sơ xếp chông lên nhau, lấy ra xếp vào theo thứ tự.Stack truy xuất dữ liệu nhanh, ít tốn bộ nhớ<br />
+Tất cả dữ liệu lưu trên stack phải có kích thước cố định được biết trước.<br />
+Các dạng dữ liệu như &amp;str, interger (số nguyên) ,  array (mảng)... là dạng stack</p>
+</li>
+<li>
+<p><strong>Heap</strong> (nhánh,dạng cây) , bạn tưởng tượng như việc tìm chỗ ngồi ở một nhà hàng. Khi bạn vào nhà hàng, bạn nói số người trong nhóm của bạn, nhân viên sẽ tìm một bàn trống đủ chỗ cho mọi và dẫn bạn tới đó. Nếu ai đó trong nhóm đến muộn, họ có thể hỏi chỗ ngồi của bạn ở đâu để tìm bạn.Truy cập dữ liệu trên heap chậm hơn với trên stack bởi vì bạn phải theo con trỏ để đến được đó ,  các dữ liệu lưu trên heap kích thước không cố định, như dạng dữ liệu String, vector, struct ...</p>
+</li>
+</ol>
+<p>Trong ví dụ dưới vì &amp;str, interger ( dữ liệu stack ) có kích thước cố định, nhẹ xử lí nhanh nên khi thực hiên <strong>let r = v;</strong> chương trình tự động clone biến <strong>v</strong> và đưa vào <strong>r</strong> ,quyền của biến <strong>v</strong> vẫn giữ lại còn <strong>r</strong> là 1 clone của <strong>v</strong>.Đó là lí do code dưới vẫn chạy. </p>
+<blockquote>
+<p>fn main() {<br />
+let v = &quot;hello&quot;;<br />
+//hoặc let v = 1;<br />
+let r = v;<br />
+println!(&quot;{}&quot;,v);<br />
+}</p>
+</blockquote>
+<p>Dữ liệu dạng <strong>Heap</strong> thì ko tự clone nên ko work.Vậy chúng ta thử clone String nhé </p>
+<blockquote>
+<p>fn main() {<br />
+let v = &quot;hello&quot;.to_string();<br />
+let r = v.clone();<br />
+println!(&quot;{}&quot;,v);<br />
+}</p>
+</blockquote>
+<p>--&gt; Work<br />
+Nhưng với  <strong>Heap</strong> clone() là giải pháp chẳng đặng đừng thôi, vì clone chiếm bộ nhớ,gây chậm chương trình nhất là với những biến có dữ liệu lớn, giải pháp tham chiếu biến dùng thường xuyên hơn</p>
+<blockquote>
+<p>fn main() {<br />
+let v = &quot;hello&quot;.to_string();<br />
+let r = &v;<br />
+show_message(r);<br />
+println!(&quot;{}&quot;,v);<br />
+}<br />
+fn show_message(x:&amp;String){<br />
+println!(&quot;message: {}&quot;, x);<br />
+}</p>
+</blockquote>
+<p>Chúng ta tham chiếu biến <strong>v</strong> vào <strong>r</strong> bằng <strong>let r = &v;</strong> , biến <strong>v</strong> vẫn giữ quyền sở hữu biến.<br />
+Một lưu ý là khi đã tham chiếu cho biến khác ,mà biến đó vẫn còn tồn tại thì mình không được thay đổi giá trị biến</p>
+<blockquote>
+<p>fn main() {<br />
+let mut v = &quot;hello&quot;.to_string();<br />
+let r = &v;<br />
+v.push_str(&quot; world&quot;);<br />
+show_message(r);<br />
+println!(&quot;{}&quot;,v);<br />
+}<br />
+fn show_message(x:&amp;String){<br />
+println!(&quot;message: {}&quot;, x);<br />
+}</p>
+</blockquote>
+<p>chúng ta thêm vào biến <strong>v</strong> bằng <strong>v.push_str(&quot; world&quot;);</strong> --&gt; lỗi , nhưng lưu ý nếu chúng ta thêm vào bên dưới <strong>show_message(r);</strong> mọi chuyện vẫn ổn </p>
+<blockquote>
+<p>fn main() {<br />
+let mut v = &quot;hello&quot;.to_string();<br />
+let r = &v;<br />
+show_message(r);<br />
+v.push_str(&quot; world&quot;);<br />
+println!(&quot;{}&quot;,v);<br />
+}<br />
+fn show_message(x:&amp;String){<br />
+println!(&quot;message: {}&quot;, x);<br />
+}</p>
+</blockquote>
+<p>Biến <strong>r</strong> đã được đưa vào hàm <strong>show_message(r);</strong> và ko còn tồn tại nữa nên việc thay đổi của biến <strong>v</strong> là hợp lệ.<br />
+Còn 1 vấn đề nữa , biến <strong>r</strong> nhận tham chiếu từ <strong>v</strong> vậy <strong>r</strong> có thay đổi được không, có 2 câu trả lời , 1 là <strong>không</strong> , <strong>r</strong> không sở hữu biến. </p>
+<blockquote>
+<p>fn main() {<br />
+let mut v = &quot;hello&quot;.to_string();<br />
+let mut r = &v;<br />
+r.push_str(&quot; world&quot;);<br />
+show_message(r);<br />
+println!(&quot;{}&quot;,v);<br />
+}<br />
+fn show_message(x:&amp;String){<br />
+println!(&quot;message: {}&quot;, x);<br />
+}</p>
+<p>error[E0596]: cannot borrow <code>*r</code> as mutable, as it is behind a <code>&amp;</code> reference</p>
+</blockquote>
+<p>2 là <strong>được</strong>,chúng ta khai báo <strong>&amp;mut</strong> cho phép đổi giá trị biến tham chiếu. </p>
+<blockquote>
+<p>fn main() {<br />
+let mut v = &quot;hello&quot;.to_string();<br />
+let r = &amp;mut v;<br />
+r.push_str(&quot; world&quot;);<br />
+show_message(r);<br />
+println!(&quot;{}&quot;,v);<br />
+}<br />
+fn show_message(x:&amp;String){<br />
+println!(&quot;message: {}&quot;, x);<br />
+}</p>
+</blockquote>
+<p>Ok , DONE!</p>
              <hr/>
                 <div class="powr-comments" id="e67d472b_194"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
             </div>
