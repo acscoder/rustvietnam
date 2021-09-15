@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Khai báo biến - RustVietnam</title>
+    <title>Macros và Attributes - RustVietnam</title>
     <meta charset="UTF-8">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -23,21 +23,20 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 
 	<!-- This site is optimized with the Yoast SEO plugin v17.1 - https://yoast.com/wordpress/plugins/seo/ -->
-	<link rel="canonical" href="https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/" />
+	<link rel="canonical" href="https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/" />
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Khai báo biến - RustVietnam" />
-	<meta property="og:description" content="Khai báo biến trong Rust" />
-	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/" />
+	<meta property="og:title" content="Macros và Attributes - RustVietnam" />
+	<meta property="og:description" content="Dạng dữ liệu tổng quát" />
+	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/" />
 	<meta property="og:site_name" content="RustVietnam" />
-	<meta property="article:published_time" content="2021-09-10T11:28:43+00:00" />
-	<meta property="article:modified_time" content="2021-09-15T09:13:57+00:00" />
-	<meta property="og:image" content="https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_3-1.png" />
+	<meta property="article:published_time" content="2021-09-13T15:48:46+00:00" />
+	<meta property="article:modified_time" content="2021-09-15T09:23:47+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="Written by" />
 	<meta name="twitter:data1" content="admin" />
 	<meta name="twitter:label2" content="Est. reading time" />
-	<meta name="twitter:data2" content="2 minutes" />
+	<meta name="twitter:data2" content="3 minutes" />
 	<script type="application/ld+json" class="yoast-schema-graph">{
 	    "@context": "https://schema.org",
 	    "@graph": [
@@ -60,46 +59,34 @@
 	            "inLanguage": "en-US"
 	        },
 	        {
-	            "@type": "ImageObject",
-	            "@id": "https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/#primaryimage",
-	            "inLanguage": "en-US",
-	            "url": "https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_3-1.png",
-	            "contentUrl": "https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_3-1.png",
-	            "width": 739,
-	            "height": 211
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/#webpage",
-	            "url": "https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/",
-	            "name": "Khai b\u00e1o bi\u1ebfn - RustVietnam",
+	            "@id": "https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/#webpage",
+	            "url": "https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/",
+	            "name": "Macros v\u00e0 Attributes - RustVietnam",
 	            "isPartOf": {
 	                "@id": "https://localhost/rustvietnam/#website"
 	            },
-	            "primaryImageOfPage": {
-	                "@id": "https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/#primaryimage"
-	            },
-	            "datePublished": "2021-09-10T11:28:43+00:00",
-	            "dateModified": "2021-09-15T09:13:57+00:00",
+	            "datePublished": "2021-09-13T15:48:46+00:00",
+	            "dateModified": "2021-09-15T09:23:47+00:00",
 	            "author": {
 	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
 	            },
 	            "breadcrumb": {
-	                "@id": "https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/#breadcrumb"
+	                "@id": "https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/#breadcrumb"
 	            },
 	            "inLanguage": "en-US",
 	            "potentialAction": [
 	                {
 	                    "@type": "ReadAction",
 	                    "target": [
-	                        "https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/"
+	                        "https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/"
 	                    ]
 	                }
 	            ]
 	        },
 	        {
 	            "@type": "BreadcrumbList",
-	            "@id": "https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/#breadcrumb",
+	            "@id": "https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/#breadcrumb",
 	            "itemListElement": [
 	                {
 	                    "@type": "ListItem",
@@ -110,7 +97,7 @@
 	                {
 	                    "@type": "ListItem",
 	                    "position": 2,
-	                    "name": "Khai b\u00e1o bi\u1ebfn"
+	                    "name": "Macros v\u00e0 Attributes"
 	                }
 	            ]
 	        },
@@ -137,13 +124,13 @@
 
 
 <link rel='dns-prefetch' href='//s.w.org' />
-<link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Khai báo biến Comments Feed" href="https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/feed/" />
-<link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/172" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" />
+<link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Macros và Attributes Comments Feed" href="https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/feed/" />
+<link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/237" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" />
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /> 
 <meta name="generator" content="WordPress 5.8.1" />
-<link rel='shortlink' href='https://rustvietnam.com/?p=172' />
-<link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-co-ban-rust%2Fkhai-bao-bien%2F" />
-<link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-co-ban-rust%2Fkhai-bao-bien%2F&#038;format=xml" />
+<link rel='shortlink' href='https://rustvietnam.com/?p=237' />
+<link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-co-ban-rust%2Fmacros-attributes%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-co-ban-rust%2Fmacros-attributes%2F&#038;format=xml" />
 <link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>
 </head>
 
@@ -278,9 +265,9 @@
                 <div class="col px-0">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-lg-8 text-center text-white">
-                            <h1 class="display-2 text-white">Khai báo biến</h1>
+                            <h1 class="display-2 text-white">Macros và Attributes</h1>
                             <p class="lead">
-                                <p>Khai báo biến trong Rust</p>
+                                <p>Dạng dữ liệu tổng quát</p>
                             </p>
 
                         </div>
@@ -304,47 +291,81 @@
             </div>
 
             <div class="col-lg-8 single-content">
-            <p>Trong file src/main.rs , hoặc mở <a href="https://play.rust-lang.org/">https://play.rust-lang.org/</a></p>
-<pre><code class="language-html">fn main() {
-    let x = 5;
-    println!(&quot;The value of x is: {}&quot;, x);
-    x = 6;
-    println!(&quot;The value of x is: {}&quot;, x);
+            <p><strong>println!</strong> là một <strong>Macro</strong> mà chúng ta dùng thường xuyên, nhưng cho đến lúc này có lẽ chúng ta cũng chưa thể hiểu được macro là gì và nó khác gì so với hàm(function).<br />
+Định nghĩa chung thì <strong>macro</strong> là 1 chương trình nhỏ thực hiện một công việc nào đó và gọi mỗi khi cần. Dĩ nhiên là chưa rõ lắm chúng ta sẽ đi lần lượt những dạng <strong>macro</strong> và khai báo <strong>macro</strong> bằng <strong>macro_rules!</strong> </p>
+<p>1 - Macro #[derive] , sử dụng derive để đưa các tính năng vào bên trong struct và enum<br />
+2 - Attribute-like macros , định nghĩa và sử dụng attributes<br />
+3 - Function-like macros , macro dùng như một hàm</p>
+<h3>Sự khác nhau giữa macro và hàm</h3>
+<p>Macro tạo ra những đoạn code thêm vào những đoạn code khác (metaprogramming) --&gt; giúp chương trình ngắn gọn dễ hiểu, tái sử dụng  , ví dụ với <strong>derive macro</strong></p>
+<p><strong>Derive Macro</strong></p>
+<pre><code class="language-html">struct TestStruct{
+    a:i32,
+    b:String
+}
+fn main() {
+    let test_struct = TestStruct{ a:1 ,b:&quot;hello&quot;.to_string()};
+    println!(&quot;{:?}&quot;,v);
+}
+
+Đoạn code in ra biến **test_struct** , mọi việc không thuận lơi
+> error[E0277]: `TestStruct` doesn&#039;t implement `Debug`
+
+**TestStruct** cần phải có tính năng Debug thì mới có thể in ra, bên trên **TestStruct** ta thêm 
+> \#[derive(Debug)]
+
+Thì code sẽ ổn **#[derive(Debug)]** là 1 macro derive đem tính năng Debug vào **struct TestStruct** , khi compile chương trình **\#[derive(Debug)]** sẽ sản sinh ra code để phục vụ việc Debug **TestStruct** ,chúng ta không cần phải can thiệp vào bên trong **TestStruct**
+
+**Attribute-like macros**
+> \#[route(GET, &quot;/&quot;)]
+fn index() {
+// code trả về html
+}
+
+Ví dụ trên là macros kiểu Attribute dùng trong các web framework , khai báo đường dẫn &quot;/&quot; thì ta dùng hàm **index()** để xử lí và trả về html 
+
+**Function-like macros**
+**println!** là 1 Function-like macro , macro dùng như 1 function , các Function-like macro có dấu **!** 
+> println!(&quot;{} {}&quot;,&quot;hello&quot;,&quot;world&quot;);
+
+Khác với function , macro không làm ảnh hưởng tới quyền sở hữu biến, chúng ta thử tạo 1 macro với **macro_rules!**
+```html
+macro_rules! add{
+ // macth like arm for macro
+    ($a:expr,$b:expr)=>{
+ // macro expand to this code
+        {
+// $a and $b will be templated using the value/variable provided to macro
+            $a+$b
+        }
+    }
+}
+fn main(){
+ // call to macro, $a=1 and $b=2
+    println!("{}",add!(1,2) );
 }</code></pre>
-<p>1 đoạn code nhỏ biến x được khái báo với keyword <strong>let</strong> . Chạy đoạn code ta nhận ngay 1 lỗi<br />
-<img src="https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_3-1.png" alt="" /><br />
-Mặc định khi khai báo biến thì biến là 1 <strong>immutable</strong>, giá trị biến là cố định ko thay đổi thêm nữa </p>
-<blockquote>
-<p>cannot assign twice to immutable variable <code>x</code> </p>
-</blockquote>
-<p>Để có thể thay đổi giá trị thì  mình phải khai báo biến là một mutable với keyword <strong>mut</strong></p>
-<blockquote>
-<p>let mut x = 5;</p>
-</blockquote>
-<p>Thay <strong>let x = 5;</strong> bằng <strong>let mut x = 5;</strong> chương trình chúng ta sẽ chạy mà ko có lỗi gì.<br />
-Vậy chúng ta coi biến <strong>immutable</strong> như <strong>let x = 5;</strong> là một hằng số có được không.<br />
-Câu trả lời là không, ta gọi nó là biến immutable chứ ko gọi nó là hằng số (constant)<br />
-Vậy điểm khác biệt là gì.<br />
-Một biến immutable tuy không đổi nhưng nó có thể được khai báo lại trong quá trình dùng, ví dụ</p>
-<pre><code class="language-html">fn main() {
-    let x = 5;
-    println!(&quot;The value of x is: {}&quot;, x);
-    let x = 6;
-    println!(&quot;The value of x is: {}&quot;, x);
+<p>Chúng ta thêm code cho macro , trong trường hợp chỉ có 1 đầu biến đầu vào </p>
+<pre><code class="language-html">macro_rules! add{
+ // first arm match add!(1,2), add!(2,3) etc
+    ($a:expr,$b:expr)=>{
+        {
+            $a+$b
+        }
+    };
+// Second arm macth add!(1), add!(2) etc
+    ($a:expr)=>{
+        {
+            $a
+        }
+    }
+}
+fn main(){
+    let x = add!(1,2);
+    println!("{}",  x );
+    println!("{}", add!(4) );
 }</code></pre>
-<p>Chúng ta lặp lại khai báo biến <strong>let x = 6;</strong> thì giá trị của x thay đổi , cái này gọi là Shadowing , chuyện này ko xảy ra với hằng số, hằng số là cố định ko khai báo lại hay khai báo <strong>mut</strong> như biến được</p>
-<blockquote>
-<p>const MAX_POINTS: u32 = 100_000;</p>
-</blockquote>
-<p>Lưu ý khi Shadowing thì biến sau phải cùng dạng dữ liệu với ban đầu nếu không code sẽ lỗi. Ví dụ như vầy là lỗi </p>
-<pre><code class="language-html">fn main() {
-    let spaces = &quot;   &quot;;
-    let spaces = spaces.len();
-}</code></pre>
-<p>Ban đầu khai báo dạng dữ liệu là chuỗi nhưng tiếp theo đổi thành số thì sẽ không được chấp nhận.<br />
-Chúng ta sẽ nói thêm về dạng dữ liệu (data types) ở bài sau.</p>
              <hr/>
-                <div class="powr-comments" id="e67d472b_172"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
+                <div class="powr-comments" id="e67d472b_237"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
             </div>
 
         </div>

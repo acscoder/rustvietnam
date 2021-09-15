@@ -32,7 +32,7 @@
 	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/" />
 	<meta property="og:site_name" content="RustVietnam" />
 	<meta property="article:published_time" content="2021-08-24T14:24:58+00:00" />
-	<meta property="article:modified_time" content="2021-09-05T10:46:46+00:00" />
+	<meta property="article:modified_time" content="2021-09-15T08:40:21+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="Written by" />
 	<meta name="twitter:data1" content="admin" />
@@ -68,7 +68,7 @@
 	                "@id": "https://localhost/rustvietnam/#website"
 	            },
 	            "datePublished": "2021-08-24T14:24:58+00:00",
-	            "dateModified": "2021-09-05T10:46:46+00:00",
+	            "dateModified": "2021-09-15T08:40:21+00:00",
 	            "author": {
 	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
 	            },
@@ -320,24 +320,20 @@ sự dễ dàng -- Ngôn ngữ bậc cao như PHP , Nodejs , Java ... mọi vi�
 <p>Với Rust, phần tự động dọn dẹp bộ nhớ garbage collection bị loại bỏ thay vào đó là cơ chế borrow checker giúp biên dịch biến, quản lí bộ nhớ an toàn<br />
 đảm bảo chương trình có tốc độ của C++ và quản lí bộ nhớ dễ dàng như PHP , Nodejs , Java</p>
 <p>Quảng cáo nhiều rồi , code đầu tiên đây , như truyền thống anh em say Hello World nào </p>
-<blockquote>
-<p>fn main() {<br />
-println!(Hello, world!);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+    println!(Hello, world!);
+}</code></pre>
 <p>Hàm main là hàm bắt đầu chương trình , mọi thứ luôn bắt đầu từ main</p>
 <h4>Kiểu dữ liệu strings</h4>
 <p>Cũng như các ngôn ngữ khác , rust cũng có strings, integers, floats, arrays, and hash maps , tuy nhiêu do cách quản lí bộ nhớ nên sẽ có vài thứ hơi là lạ<br />
 Để bắt đầu tìm hiểu string , chúng ta thử 1 hàm đơn giản sau</p>
-<blockquote>
-<p>fn in_chuoi_ra_man_hinh(input_string: String) {<br />
-println!({}, input_string);<br />
-}<br />
-fn main() {<br />
-let test_string = String::from(Hello, World!);<br />
-in_chuoi_ra_man_hinh(test_string);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn in_chuoi_ra_man_hinh(input_string: String) {
+    println!({}, input_string);
+}
+fn main() {
+     let test_string = String::from(Hello, World!);
+    in_chuoi_ra_man_hinh(test_string);
+}</code></pre>
 <p>Kết quả vẫn là Hello, World! , ko có gì khác<br />
 hàm in_chuoi_ra_man_hinh cần 1 đầu vào là 1 String<br />
 hàm in ra màn hình println là hàm in ra có sẵn của Rust , dấu ! biểu thị nó chấp nhận nhiều biến<br />
@@ -346,16 +342,14 @@ string được lấy từ object String</p>
 <p>let test_string = String::from(Hello, World!);</p>
 </blockquote>
 <p>có vẻ rườm rà , thử cách khác xem</p>
-<blockquote>
-<p>fn in_chuoi_ra_man_hinh(input_string: str) {<br />
-println!({}, input_string);<br />
-}<br />
-fn main() {<br />
-let test_string = Hello, World!;<br />
-in_chuoi_ra_man_hinh(test_string);<br />
-}</p>
-</blockquote>
-<p>đoạn này mình dùng str thay vì String như khúc trước<br />
+<pre><code class="language-html">fn in_chuoi_ra_man_hinh(input_string: str) {
+    println!({}, input_string);
+}
+fn main() {
+    let test_string = Hello, World!;
+    in_chuoi_ra_man_hinh(test_string);
+}</code></pre>
+<p>Đoạn này mình dùng str thay vì String như khúc trước<br />
 và kết quả là 1 error</p>
 <blockquote>
 <p>error[E0277]: the size for values of type <code>str</code> cannot be known at compilation time</p>
@@ -375,25 +369,21 @@ Còn biến </p>
 </blockquote>
 <p>Là 1 object đã được cố định kích thước nêu dữ liệu là Stack memory</p>
 <p>Để chuyển string từ Heap sang Stack mình dùng hàm to_string:</p>
-<blockquote>
-<p>fn in_chuoi_ra_man_hinh(input_string: String) {<br />
-println!({}, input_string);<br />
-}<br />
-fn main() {<br />
-let test_string = Hello, World!;<br />
-in_chuoi_ra_man_hinh(test_string.to_string());<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn in_chuoi_ra_man_hinh(input_string: String) {
+    println!({}, input_string);
+}
+fn main() {
+    let test_string = Hello, World!;
+    in_chuoi_ra_man_hinh(test_string.to_string());
+}</code></pre>
 <p>Cách khác chúng ta sẽ không chuyển bằng hàm to_string , vẫn sữ dụng đinh dạng str như cũ nhưng tham chiếu str bằng borrowing </p>
-<blockquote>
-<p>fn in_chuoi_ra_man_hinh(input_string: &amp;str) {<br />
-println!({}, input_string);<br />
-}<br />
-fn main() {<br />
-let test_string = &amp;Hello, World!;<br />
-in_chuoi_ra_man_hinh(test_string);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn in_chuoi_ra_man_hinh(input_string: &amp;str) {
+    println!({}, input_string);
+}
+fn main() {
+    let test_string = &amp;Hello, World!;
+    in_chuoi_ra_man_hinh(test_string);
+}</code></pre>
 <p>thêm kí hiệu &amp;<br />
 chúng ta sẽ nói kĩ về Borrowing sau nhưng đại loại chúng ta sẽ cho biến test_string tham chiếu tới đoạn chữ Hello, World! , cái đưa và hàm ko phải là string mà là 1 đoạn tham chiếu (reference )</p>
 <h4>integers và floats</h4>
@@ -403,21 +393,17 @@ gồm các kích thước 8, 16, 32, 64, and 128 bits<br />
 ví dụ : i8<br />
 là số signed integers có kích thước 8bit , khoảng giá trị từ -128 đến 127 ( 2^8 số )<br />
 thử chạy nào này</p>
-<blockquote>
-<p>fn main() {<br />
-let number: i8 = 255;<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+    let number: i8 = 255;
+}</code></pre>
 <p>Ta sẽ có lỗi </p>
 <blockquote>
 <p>note: the literal <code>255</code> does not fit into the type <code>i8</code> whose range is <code>-128..=127</code></p>
 </blockquote>
 <p>nhưng nếu đổi i8 thành u8 thì sẽ ổn , u8 có giá trị từ 0 đến 255 </p>
-<blockquote>
-<p>fn main() {<br />
-let number: u8 = 255;<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+    let number: u8 = 255;
+}</code></pre>
 <h5>floats : số thực</h5>
 <p>Số thực thì chỉ có 2 loại hay dùng là f32 and f64 , cả 2 đều có giá trị âm, dương được ko phân biệt như integers</p>
 <p>có cách khác để khai báo kiểu dữ liệu cho số :</p>
@@ -433,12 +419,10 @@ hoặc let x = 1_f32;</p>
 </blockquote>
 <p>Số 1 này kiểu dự liệu float 32 bits</p>
 <p>Thử 1 ví dụ đơn giản sau </p>
-<blockquote>
-<p>fn main() {<br />
-let number = 1 + 30.2;<br />
-println!({}, number);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+let number = 1 + 30.2;
+println!({}, number);
+}</code></pre>
 <p>kết quả là </p>
 <blockquote>
 <p>error[E0277]: cannot add a float to an integer</p>
@@ -446,24 +430,20 @@ println!({}, number);<br />
 <p>Không thể cộng integer và float với nhau , vì đó là 2 kiểu dự liệu khác nhau<br />
 thật chán khi 1 phép + đơn giản vậy cũng làm khó.<br />
 Chúng ta phải lựa chọn kiểu dữ liệu </p>
-<blockquote>
-<p>fn main() {<br />
-let number = 1_f32 + 30.2;<br />
-println!({}, number);<br />
-}</p>
-</blockquote>
-<p>hàm trên mình chọn số 1 này kiểu dự liệu float 32 bits , dẫn đến kết quả là 31.2</p>
+<pre><code class="language-html">fn main() {
+    let number = 1_f32 + 30.2;
+    println!({}, number);
+}</code></pre>
+<p>Hàm trên mình chọn số 1 này kiểu dự liệu float 32 bits , dẫn đến kết quả là 31.2</p>
 <h3>Dữ liệu vector và mảng ( array )</h3>
 <p>Ở Rust , array là kích thước cố định , sau khi khai báo xong ko thêm ko bớt gì được nữa<br />
 dữ liệu chấp nhận trong Array cũng là 1 loại cố định , ví dụ :</p>
-<blockquote>
-<p>fn main() {<br />
-let int_array: [i32; 3] = [1, 2, 3];<br />
-for i in int_array.iter() {<br />
-println!({}, i);<br />
-}<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+    let int_array: [i32; 3] = [1, 2, 3];
+    for i in int_array.iter() {
+        println!({}, i);
+    }
+}</code></pre>
 <p>int_array có kích thước là 3 phần tử , kiểu dự liệu là i32</p>
 <blockquote>
 <p>let int_array: [i32; 3] = [1, 2, ba];<br />
@@ -471,118 +451,104 @@ hay let int_array: [i32; 3] = [1, 2, 3, 4];</p>
 </blockquote>
 <p>Là không hợp lệ</p>
 <p>Ủa vậy còn vector , vector chính là mảng có thể thay đổi kích thước , thêm , bớt được</p>
-<blockquote>
-<p>fn main() {<br />
-let str_vector: Vec&lt;&amp;str&gt; = vec![one, two, three];<br />
-for i in str_vector.iter() {<br />
-println!({}, i);<br />
-}<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+    let str_vector: Vec&lt;&amp;str&gt; = vec![one, two, three\];
+    for i in str_vector.iter() {
+        println!({}, i);
+    }
+}</code></pre>
 <p>Thử thêm 1 phần tử trong vector xem</p>
+<pre><code class="language-html">fn main() {
+    let str_vector: Vec&lt;&amp;str&gt; = vec![&quot;one&quot;,&quot; two&quot;, &quot;three&quot; ];
+    str_vector.push(&quot;four&quot;);
+    for i in str_vector.iter() {
+        println!({}, i);
+    }
+}</code></pre>
 <blockquote>
-<p>fn main() {<br />
-let str_vector: Vec&lt;&amp;str&gt; = vec![one, two, three];<br />
-str_vector.push(four);<br />
-for i in str_vector.iter() {<br />
-println!({}, i);<br />
-}<br />
-}</p>
 <p>lỗi : error[E0596]: cannot borrow <code>str_vector</code> as mutable, as it is not declared as mutable</p>
 </blockquote>
 <p>trong Rust , tất cả biến là cố định , khi mình muốn nó là dạng thay đổi được phải khai báo thêm mut cho biến đó , chương trình phải như vầy</p>
-<blockquote>
-<p>fn main() {<br />
-let mut str_vector: Vec&lt;&amp;str&gt; = vec![one, two, three];<br />
-str_vector.push(four);<br />
-for i in str_vector.iter() {<br />
-println!({}, i);<br />
-}<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+    let mut str_vector: Vec&lt;&amp;str&gt; = vec![one, two, three\];
+    str_vector.push(four);
+    for i in str_vector.iter() {
+        println!({}, i);
+    }
+}</code></pre>
 <p>--&gt; Work !!!</p>
 <h3>Kiểu dữ liệu hash maps</h3>
 <p>Cái này trong Python gọi là dictionary hay PHP gọi là Associative Arrays<br />
 ví dụ bên dưới mình sẽ khai báo 1 Hash maps giống như Associative Arrays trong PHP, $age = array(Peter=&gt;35, Ben=&gt;37, Joe=&gt;43);</p>
-<blockquote>
-<p>use std::collections::HashMap;<br />
-fn main() {<br />
-let mut age: HashMap&lt;&amp;str, i8&gt; = HashMap::new();<br />
-age.insert(Peter, 35);<br />
-age.insert(Ben, 37);<br />
-age.insert(Joe, 43);<br />
-println!(Đây là hashmap {:?}, age );<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use std::collections::HashMap;
+fn main() {
+    let mut age: HashMap&lt;&amp;str, i8&gt; = HashMap::new();
+    age.insert(Peter, 35);
+    age.insert(Ben, 37);
+    age.insert(Joe, 43);
+    println!(Đây là hashmap {:?}, age );
+}</code></pre>
 <p>Chi tiết về cái HashMap ở đây <a href="https://doc.rust-lang.org/beta/std/collections/struct.HashMap.html">https://doc.rust-lang.org/beta/std/collections/struct.HashMap.html</a><br />
 Chúng ta sẽ làm nhiều hơn với HashMap ở chương sau</p>
 <h3>Kiểm tra kết quả và bắt lỗi</h3>
 <p>Lỗi là 1 thứ phiền toái , bất ki lỗi nào cũng khiến rust dừng biên dịch , chúng ta phải bắt lỗi trước khi chuyện đó xảy ra<br />
 ví dụ như bạn kiểm tra 1 biến có tồn tại hay không chẳng hạn<br />
 trong Rust ko có try and except như các ngôn ngữ khác , nó chơi cách khác Option và Result</p>
-<blockquote>
-<p>fn error_check(check: bool) -&gt; Result&lt;i8, &amp;\'static str&gt; {<br />
-if check == true {<br />
-Err(this is an error)<br />
-} else {<br />
-Ok(1)<br />
-}<br />
-}<br />
-fn main() {<br />
-let result: i8 = error_check(false).unwrap();<br />
-println!({}, result);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn error_check(check: bool) -&gt; Result&lt;i8, &#039;static str&gt; {
+    if check == true {
+        Err(this is an error)
+    } else {
+        Ok(1)
+    }
+}
+fn main() {
+    let result: i8 = error_check(false).unwrap();
+    println!({}, result);
+}</code></pre>
 <p>Code ví dụ trên , hàm error_check sẽ trả về 1 Result , Result này sẽ là 1 trong 2 kết quả , hoặc là Err (lỗi) hoăc là Ok ( ốn )<br />
 chạy code check là false --&gt; hàm OK --&gt; 1<br />
 bạn thử với error_check(true) xem</p>
 <p>Một hàm hay dùng nhất trong Rust là hàm match , dùng để kiểm tra,so sánh kết quả<br />
 chúng ta sửa code trên lại dùng match để kiểm tra kết quả result là ok hay err</p>
-<blockquote>
-<p>fn error_check(check: bool) -&gt; Result&lt;i8, &amp;\'static str&gt; {<br />
-if check == true {<br />
-Err(this is an error)<br />
-} else {<br />
-Ok(1)<br />
-}<br />
-}<br />
-fn main() {<br />
-let result: Result&lt;i8, &amp;\'static str&gt; = error_check(true);<br />
-match result {<br />
-Ok(x) =&gt; println!(it\'s a result of: {}, x),<br />
-Err(x) =&gt; println!(báo lỗi : {}, x)<br />
-}<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn error_check(check: bool) -&gt; Result&lt;i8,&#039;static str&gt; {
+    if check == true {
+        Err(this is an error)
+    } else {
+        Ok(1)
+    }
+}
+fn main() {
+    let result: Result&lt;i8, &#039;static str&gt; = error_check(true);
+    match result {
+        Ok(x) =&gt; println!(it\&#039;s a result of: {}, x),
+        Err(x) =&gt; println!(báo lỗi : {}, x)
+    }
+}</code></pre>
 <p>1 cách khác ngắn gọn hơn là dùng expect</p>
-<blockquote>
-<p>fn error_check(check: bool) -&gt; Result&lt;i8, 'static str&gt; {<br />
-if check == true {<br />
-Err(this is an error)<br />
-} else {<br />
-Ok(1)<br />
-}<br />
-}<br />
-fn main() {<br />
-let result: i8 = error_check(true).expect(Báo lỗi : );<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn error_check(check: bool) -&gt; Result&lt;i8, &#039;static str&gt; {
+    if check == true {
+        Err(this is an error)
+    } else {
+        Ok(1)
+    }
+}
+fn main() {
+    let result: i8 = error_check(true).expect(Báo lỗi : );
+}</code></pre>
 <p>hoặc check err bằng if với hàm is_err()</p>
-<blockquote>
-<p>fn error_check(check: bool) -&gt; Result&lt;i8, &amp;\'static str&gt; {<br />
-if check == true {<br />
-Err(this is an error)<br />
-} else {<br />
-Ok(1)<br />
-}<br />
-}<br />
-fn main() {<br />
-let result: Result&lt;i8, &amp;\'static str&gt; = error_check(true);<br />
-if result.is_err() {<br />
-println!(Báo lỗi);<br />
-}<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn error_check(check: bool) -&gt; Result&lt;i8,&#039;static str&gt; {
+    if check == true {
+        Err(this is an error)
+    } else {
+        Ok(1)
+    }
+}
+fn main() {
+let result: Result&lt;i8, &amp;\&#039;static str&gt; = error_check(true);
+if result.is_err() {
+    println!(Báo lỗi);
+}
+}</code></pre>
 <h3>Làm việc với quyền sơ hữu biến ( variable ownership )</h3>
 <p>Như đã nói Rust nó ko dọn bộ nhớ với garbage collector như người ta mà nó đặt ra quy định quyền sở hữu biến (sau sẽ gọi là variable ownership nhé) để quản lí bộ nhớ<br />
 cái trò variable ownership này mới đầu thì sẽ thấy nó kì quặc và khó chịu nhưng nó đem lại hiệu quả cho chương trình code bằng Rust , mình hiểu nó thì mọi việc sẽ trở nên suông sẽ<br />
@@ -603,125 +569,109 @@ ngay khi 1 biến ra khỏi vùng hoạt động , nó sẽ bị gỡ đi</p>
 </ul>
 <p>Dĩ nhiên nếu dừng lại ở đây thì giải thích về variable ownership trên sẽ vô cùng khó hiểu , chúng ta sẽ tiếp tục làm rõ chi tiết<br />
 Xem xét ví dụ sau : </p>
+<pre><code class="language-html">fn main() {
+let one: String = String::from(one);
+{
+println!({}, one);
+let two: String = String::from(two);
+}
+println!({}, one);
+println!({}, two);
+}</code></pre>
 <blockquote>
-<p>fn main() {<br />
-let one: String = String::from(one);<br />
-{<br />
-println!({}, one);<br />
-let two: String = String::from(two);<br />
-}<br />
-println!({}, one);<br />
-println!({}, two);<br />
-}</p>
 <p>lỗi : error[E0425]: cannot find value <code>two</code> in this scope</p>
 </blockquote>
 <p>Biến two được khai báo bên trong ngoặc {} , nó chỉ có hiệu lực bên trong { } ra khỏi thì nó đã ko tồn tại</p>
 <p>Ví dụ tiếp theo chúng ta chỉ đơn giản in ra hello world 2 lần , quá dễ !!</p>
-<blockquote>
-<p>fn in_chuoi_ra_man_hinh(input_string: String) {<br />
-println!({}, input_string);<br />
-}<br />
-fn main() {<br />
-let test_string = String::from(Hello, World!);<br />
-in_chuoi_ra_man_hinh(test_string);<br />
-in_chuoi_ra_man_hinh(test_string);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn in_chuoi_ra_man_hinh(input_string: String) {
+    println!({}, input_string);
+}
+fn main() {
+    let test_string = String::from(Hello, World!);
+    in_chuoi_ra_man_hinh(test_string);
+    in_chuoi_ra_man_hinh(test_string);
+}</code></pre>
 <p>Không thể tin nổi , Hello, World! 1 lần thì được , 2 lần thì fail ngay , Why!!!</p>
 <blockquote>
 <p>Lỗi : error[E0382]: use of moved value: <code>test_string</code></p>
 </blockquote>
-<p>Nó bảo biến test_string đã được chuyển đi chỗ khác rồi<br />
-vậy là lần đâu hàm in_chuoi_ra_man_hinh(test_string) thực thi , biến test_string đã chuyển vô đó rồi, lần 2 gọi thì ko thấy nó đâu.<br />
+<p>Nó bảo biến test_string đã được chuyển đi chỗ khác rồi, vậy là lần đâu hàm in_chuoi_ra_man_hinh(test_string) thực thi , biến test_string đã chuyển vô đó rồi, lần 2 gọi thì ko thấy nó đâu.<br />
 Thêm 1 ví dụ khác về  chuyển đi chỗ khác  nhé</p>
-<blockquote>
-<p>fn in_chuoi_ra_man_hinh(input_string: String) {<br />
-println!({}, input_string);<br />
-}<br />
-fn main() {<br />
-let test_string = String::from(Hello, World!);</p>
-</blockquote>
-<p>let test_string_2 = test_string ;</p>
-<p>in_chuoi_ra_man_hinh(test_string);<br />
-}</p>
+<pre><code class="language-html">fn in_chuoi_ra_man_hinh(input_string: String) {
+println!({}, input_string);
+}
+fn main() {
+let test_string = String::from(Hello, World!);
+
+let test_string_2 = test_string ;
+
+in_chuoi_ra_man_hinh(test_string);
+}</code></pre>
 <p>Chúng ta chỉ gọi 1 lần in_chuoi_ra_man_hinh(test_string) nhưng trước đo chúng ta chuyển biến test_string vô test_string_2 rồi nên khi ta goi nó thì ko thấy đâu</p>
 <blockquote>
 <p>let test_string_2 = test_string ;</p>
 </blockquote>
 <p>Kết quả cũng y như trên</p>
 <p>Đó, tới đây bạn đã thấy về quyền sỡ hửu của biến , sau khi đem sử dụng hoặc gán vào biến khác thì nó ko còn nữa<br />
-Vậy như ví dụ trên để gán let test_string_2 = test_string mà ko mất test_string đi ta phải làm sao<br />
+Vậy như ví dụ trên để gán <strong>let test_string_2 = test_strin</strong>g mà ko mất test_string đi ta phải làm sao<br />
 Clone:</p>
 <blockquote>
 <p>let test_string_2 = test_string.clone() ;</p>
 </blockquote>
-<p>Borrow: cho mượn</p>
+<p>Chúng ta clone <strong>test_string</strong> và gán vào <strong>test_string_2</strong> --&gt; <strong>test_string</strong> vẫn giữ quyền của mình, cách làm này dơn giản nhưng chỉ phù hợp với biến có giá trị đơn giản,ít dung lượng vì tốn bộ nhớ.</p>
+<p>Borrow: cho mượn quyền</p>
 <blockquote>
 <p>let test_string_2 = &amp;test_string ;</p>
 </blockquote>
-<h3>Lifetime</h3>
-<blockquote>
-<p>fn main() {<br />
-let one;<br />
-{<br />
-let two: i8 = 2;<br />
-one = &two;<br />
-} // -----------------------&gt; biến two đã kết thúc tại đây<br />
-println!(r: {}, one);<br />
-}<br />
-error[E0597]: <code>two</code> does not live long enough</p>
-</blockquote>
-<p>Biến two đã kết thúc nên biến one tham chiếu vô đó cũng tạch theo. </p>
+<p>Dùng dấu <strong>&amp;</strong> để biểu thị <strong>test_string_2</strong> chỉ mượn giá trị <strong>test_string</strong> chứ ko sở hữu , <strong>test_string</strong> vẫn giữ quyền của mình.<br />
+Các bạn có thể tham khảo cơ bản về <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/" title="ownership và borrowing">ownership và borrowing</a> ở đây :<br />
+<a href="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/">https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/</a> </p>
 <h3>Xây dựng kiểu cấu trúc (structs)</h3>
 <p>Không giống như các ngôn ngữ khác , Rust ko có class , thay vào đó mình dùng struct<br />
 mình tạo 1 struct giống như class trong PHP :</p>
-<blockquote>
-<p>&lt;?php<br />
-class Fruit {<br />
-// Properties<br />
-public $name;<br />
-public $color;<br />
-// Methods<br />
-function __construct($name,$color) {<br />
-$this-&gt;name = $name;<br />
-$this-&gt;color = $color;<br />
-}<br />
-function get_name() {<br />
-return $this-&gt;name;<br />
-}<br />
-function get_color() {<br />
-return $this-&gt;color;<br />
-}<br />
-}<br />
-?&gt;</p>
-</blockquote>
+<pre><code class="language-html">&lt;?php
+class Fruit {
+    // Properties
+    public $name;
+    public $color;
+    // Methods
+    function __construct($name,$color) {
+        $this-&gt;name = $name;
+        $this-&gt;color = $color;
+    }
+    function get_name() {
+        return $this-&gt;name;
+    }
+    function get_color() {
+        return $this-&gt;color;
+    }
+}
+?&gt;</code></pre>
 <p>Ví dụ là 1 class trái cây Fruit , có 2 thuộc tính là name và color , 2 hàm get_name,get_color , 1 hàm khởi tạo</p>
-<blockquote>
-<p>#[derive(Debug)]<br />
-struct Fruit {<br />
-name: String,<br />
-color: String<br />
-}<br />
-impl Fruit {<br />
-fn new(input_name: &amp;str, input_color: &amp;str) -&gt; Self {<br />
-Self {<br />
-name: input_name.to_string(),<br />
-color: input_color.to_string(),<br />
-}<br />
-}<br />
-fn get_name(&amp;self) -&gt; &amp;str {<br />
-&amp;self.name<br />
-}<br />
-fn get_color(&amp;self) -&gt; &amp;str {<br />
-&amp;self.color<br />
-}<br />
-}<br />
-fn main() {<br />
-let fruit_1 = Fruit::new(Apple,red);<br />
-println!(Fruit Name {}, fruit_1.get_name() );<br />
-println!(Fruit Color {}, fruit_1.get_color() );<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">#[derive(Debug)]
+struct Fruit {
+    name: String,
+    color: String
+}
+impl Fruit { 
+    fn new(input_name: &amp;str, input_color: &amp;str) -&gt; Self {
+    Self {
+        name: input_name.to_string(), 
+        color: input_color.to_string(), 
+    }
+    } 
+    fn get_name(&amp;self) -&gt; &amp;str {
+        &amp;self.name
+    }
+    fn get_color(&amp;self) -&gt; &amp;str {
+        &amp;self.color
+    }
+}
+fn main() {
+    let fruit_1 = Fruit::new(Apple,red);
+    println!(Fruit Name {}, fruit_1.get_name() );
+    println!(Fruit Color {}, fruit_1.get_color() );
+}</code></pre>
 <h3>Kiểu dữ liệu enum</h3>
 <p>Như ví dụ trên , chúng ta muốn kiểu dữ liệu của màu là rgb(255,124,34) chẳng hạng , ta dùng enum để định nghĩa kiểu dữ liệu mà mình cần</p>
 <blockquote>
@@ -758,48 +708,46 @@ println!(Fruit Color {:?}, fruit_1.get_color() );<br />
 <h3>Traits</h3>
 <p>Rust gọi là traits còn ngôn ngữ khác gọi là interface<br />
 Đây là khai báo tập hợp các hàm có thể dùng cho struct</p>
-<blockquote>
-<p>trait CanEdit {<br />
-fn edit(&amp;self) {<br />
-println!(user is editing);<br />
-}<br />
-}<br />
-trait CanCreate {<br />
-fn create(&amp;self) {<br />
-println!(user is creating);<br />
-}<br />
-}<br />
-trait CanDelete {<br />
-fn delete(&amp;self) {<br />
-println!(user is deleting);<br />
-}<br />
-}<br />
-struct AdminUser {<br />
-name: String,<br />
-password: String,<br />
-}<br />
-impl CanDelete for AdminUser {}<br />
-impl CanCreate for AdminUser {}<br />
-impl CanEdit for AdminUser {}<br />
-struct EditorUser {<br />
-name: String,<br />
-password: String,<br />
-}<br />
-impl CanEdit for AdminUser {}</p>
-</blockquote>
-<p>trong ví dụ AdminUser được sử dụng 3 trail CanDelete,CanCreate,CanEdit<br />
+<pre><code class="language-html">trait CanEdit {
+     fn edit(&amp;self) {
+     println!(user is editing);
+     }
+}
+trait CanCreate {
+     fn create(&amp;self) {
+     println!(user is creating);
+     }
+}
+trait CanDelete {
+     fn delete(&amp;self) {
+     println!(user is deleting);
+     }
+}
+struct AdminUser {
+    name: String,
+    password: String,
+}
+impl CanDelete for AdminUser {}
+impl CanCreate for AdminUser {}
+impl CanEdit for AdminUser {}
+struct EditorUser {
+    name: String,
+    password: String,
+}
+impl CanEdit for AdminUser {}</code></pre>
+<p>Trong ví dụ AdminUser được sử dụng 3 trail CanDelete,CanCreate,CanEdit<br />
 EditorUser được sử dụng 1 trail CanEdit</p>
 <h3>Metaprogramming</h3>
 <p>Thử 1 đoạn code cực dễ </p>
+<pre><code class="language-html">struct Coordinate &lt;T&gt; {
+    x: T, 
+    y: T
+}
+fn main() {
+    let test = Coordinate{x: 1, y:2};
+    println!({:?}, test);
+}</code></pre>
 <blockquote>
-<p>struct Coordinate <T> {<br />
-x: T,<br />
-y: T<br />
-}<br />
-fn main() {<br />
-let test = Coordinate{x: 1, y:2};<br />
-println!({:?}, test)<br />
-}</p>
 <p>Lỗi error[E0277]: <code>Coordinate&lt;{integer}&gt;</code> doesn\'t implement <code>Debug</code></p>
 </blockquote>
 <p>Nó ko muốn in ra trừ khi được hỗ trợ chạy ở chế độ Debug , chúng ta thêm Metaprogramming và đầu struct , và mọi thứ ổn</p>
@@ -814,7 +762,9 @@ let test = Coordinate{x: 1, y:2};<br />
 println!({:?}, test)<br />
 }</p>
 </blockquote>
-<p>Metaprogramming là vô cũng phổ biến và hữu dụng trong Rust , chúng ta sẽ gặp nó thường xuyên và hiểu nhiều hơn trong những chương kế tiếp !!!!</p>
+<p>Metaprogramming là vô cũng phổ biến và hữu dụng trong Rust , chúng ta sẽ gặp nó thường xuyên và hiểu nhiều hơn trong những chương kế tiếp !!!!<br />
+Giới thiệu cơ bản về macro <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/" title="tại đây">tại đây</a>:<br />
+<a href="https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/">https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/</a></p>
              <hr/>
                 <div class="powr-comments" id="e67d472b_1"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
             </div>

@@ -32,7 +32,7 @@
 	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/" />
 	<meta property="og:site_name" content="RustVietnam" />
 	<meta property="article:published_time" content="2021-08-26T11:41:46+00:00" />
-	<meta property="article:modified_time" content="2021-09-07T10:19:59+00:00" />
+	<meta property="article:modified_time" content="2021-09-15T08:45:25+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="Written by" />
 	<meta name="twitter:data1" content="admin" />
@@ -68,7 +68,7 @@
 	                "@id": "https://localhost/rustvietnam/#website"
 	            },
 	            "datePublished": "2021-08-26T11:41:46+00:00",
-	            "dateModified": "2021-09-07T10:19:59+00:00",
+	            "dateModified": "2021-09-15T08:45:25+00:00",
 	            "author": {
 	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
 	            },
@@ -332,18 +332,16 @@ bên dưới [dependencies]  ta thêm vào </p>
 <p>rand = &quot;0.8.0&quot;</p>
 </blockquote>
 <p>trong file main.rs</p>
-<blockquote>
-<p>use rand::prelude::<em>;<br />
-fn generate_float(generator: &amp;mut ThreadRng) -&gt; f64 {<br />
-    let placeholder: f64 = generator.gen();<br />
-    return placeholder </em> 10.0<br />
-}<br />
-fn main() {<br />
-    let mut rng: ThreadRng = rand::thread_rng();<br />
-    let random_number = generate_float(&amp;mut rng);<br />
-    println!(&quot;{}&quot;, random_number);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use rand::prelude::*;
+fn generate_float(generator: &amp;mut ThreadRng) -&gt; f64 {
+    let placeholder: f64 = generator.gen();
+    return placeholder * 10.0
+}
+fn main() {
+    let mut rng: ThreadRng = rand::thread_rng();
+    let random_number = generate_float(&amp;mut rng);
+    println!(&quot;{}&quot;, random_number);
+}</code></pre>
 <p>ThreadRng tạo ra 1 số ngẫu nhiên trong khoảng 0--&gt;1<br />
 --&gt; hàm generate_float tạo ra 1 số ngẫu nhiên trong khoảng 0--&gt;10</p>
 <h2>Documenting</h2>
@@ -369,11 +367,9 @@ document trong rust được viết theo định dạng markdown (<a href="https
 <h3>Tương tác với cargo</h3>
 <p>Trong trường hợp khi build code chúng ta cần đưa tham số vào , chúng ta sử dúng std (standard library)</p>
 <p>ví dụ sau chúng ta in ra tất cả những biến được đưa vào khi compile</p>
-<blockquote>
-<p>use std::env;<br />
-let args: Vec<String> = env::args().collect();<br />
-println!(&quot;{:?}&quot;, args);</p>
-</blockquote>
+<pre><code class="language-html">use std::env;
+let args: Vec&lt;String&gt; = env::args().collect();
+println!(&quot;{:?}&quot;, args);</code></pre>
 <p>Chạy lệnh </p>
 <blockquote>
 <p>cargo run some_variable another_variable</p>
@@ -397,195 +393,174 @@ cả 2 được kế thừa từ task cơ bản là base<br />
 trong to_do chúng ta thêm mục structs , trong structs ta thêm file mod.rs là default cho module và các file khác như hình</p>
 <p>mục structs là nơi chứa code để khai báo cấu trúc dữ liệu cho project của mình</p>
 <p>cấu trúc dữ liệu cơ bản base cho task ở base.rs  :</p>
-<blockquote>
-<p>pub struct Base {<br />
-    pub title: String,<br />
-    pub status: String<br />
-}<br />
-impl Base {<br />
-    pub fn new(input_title: &amp;str, input_status: &amp;str) -&gt; Self {<br />
-        return Self {title: input_title.to_string(),status: input_status.to_string()}<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">pub struct Base {
+    pub title: String,
+    pub status: String
+}
+impl Base {
+    pub fn new(input_title: &amp;str, input_status: &amp;str) -&gt; Self {
+        return Self {title: input_title.to_string(),status: input_status.to_string()}
+    }
+}</code></pre>
 <p>Trong file  to_do/structs/mod.rs<br />
 ta khai báo base </p>
 <blockquote>
 <p>mod base;</p>
 </blockquote>
 <p>file done.rs</p>
-<blockquote>
-<p>use super::base::Base;<br />
-pub struct Done {<br />
-    pub super_struct: Base<br />
-}<br />
-impl Done {<br />
-    pub fn new(input_title: &amp;str) -&gt; Done {<br />
-        let base: Base = Base::new(input_title,<br />
-                                   &quot;done&quot;);<br />
-        return Done{super_struct: base}<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use super::base::Base;
+pub struct Done {
+    pub super_struct: Base
+}
+impl Done {
+    pub fn new(input_title: &amp;str) -&gt; Done {
+        let base: Base = Base::new(input_title, &quot;done&quot;);
+        return Done{super_struct: base}
+    }
+}</code></pre>
 <p>các bạn lưu ý , trong rust thì struct không có kế thừa như các ngôn ngữ khác , chúng ta chỉ có thể lồng struct base bên trong struct done</p>
-<p>tương tự với  Pending  </p>
-<blockquote>
-<p>use super::base::Base;<br />
-pub struct Pending {<br />
-    pub super_struct: Base<br />
-}<br />
-impl Pending {<br />
-    pub fn new(input_title: &amp;str) -&gt; Pending {<br />
-        let base: Base = Base::new(input_title,<br />
-                                   &quot;pending&quot;);<br />
-        return Pending{super_struct: base}<br />
-    }<br />
-}</p>
-</blockquote>
+<p>Tương tự với  Pending  </p>
+<pre><code class="language-html">use super::base::Base;
+pub struct Pending {
+    pub super_struct: Base
+}
+impl Pending {
+    pub fn new(input_title: &amp;str) -&gt; Pending {
+        let base: Base = Base::new(input_title, &quot;pending&quot;);
+        return Pending{super_struct: base}
+    }
+}</code></pre>
 <p>Hàm new là hàm khởi tạo<br />
 chúng ta cập nhập file mod.rs</p>
-<blockquote>
-<p>mod base;<br />
-pub mod done;<br />
-pub mod pending;</p>
-</blockquote>
+<pre><code class="language-html">mod base;
+pub mod done;
+pub mod pending;</code></pre>
 <p>trong main.rs , chúng ta thử gọi hàm các module vừa khai báo</p>
-<blockquote>
-<p>mod to_do;<br />
-use to_do::structs::done::Done;<br />
-use to_do::structs::pending::Pending;<br />
-fn main() {<br />
-    let done: Done = Done::new(&quot;shopping&quot;);<br />
-    println!(&quot;{}&quot;, done.super_struct.title);<br />
-    println!(&quot;{}&quot;, done.super_struct.status);<br />
-    let pending: Pending = Pending::new(&quot;laundry&quot;);<br />
-    println!(&quot;{}&quot;, pending.super_struct.title);<br />
-    println!(&quot;{}&quot;, pending.super_struct.status);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">mod to_do;
+use to_do::structs::done::Done;
+use to_do::structs::pending::Pending;
+fn main() {
+    let done: Done = Done::new(&quot;shopping&quot;);
+    println!(&quot;{}&quot;, done.super_struct.title);
+    println!(&quot;{}&quot;, done.super_struct.status);
+    let pending: Pending = Pending::new(&quot;laundry&quot;);
+    println!(&quot;{}&quot;, pending.super_struct.title);
+    println!(&quot;{}&quot;, pending.super_struct.status);
+}</code></pre>
 <p>chúng ta tái cấu trúc code của mình bằng  factory pattern ( xem thêm về factory pattern <a href="https://viblo.asia/p/design-pattern-factory-pattern-part-1-XqaGEmxZGWK">https://viblo.asia/p/design-pattern-factory-pattern-part-1-XqaGEmxZGWK</a>)</p>
 <p>Trong to_do/mod.rs</p>
-<blockquote>
-<p>pub mod structs;<br />
-use structs::done::Done;<br />
-use structs::pending::Pending;<br />
-pub enum ItemTypes {<br />
-    Pending(Pending),<br />
-    Done(Done)<br />
-}<br />
-pub fn to_do_factory(item_type: &amp;str, item_title: &amp;str) -&gt;        Result&lt;ItemTypes, &amp;'static str&gt; {<br />
-    if item_type == &quot;pending&quot; {<br />
-        let pending_item = Pending::new(item_title);<br />
-        Ok(ItemTypes::Pending(pending_item))<br />
-    }<br />
-    else if item_type == &quot;done&quot; {<br />
-        let done_item = Done::new(item_title);<br />
-        Ok(ItemTypes::Done(done_item))<br />
-    }<br />
-    else {<br />
-        Err(&quot;this is not accepted&quot;)<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">pub mod structs;
+use structs::done::Done;
+use structs::pending::Pending;
+pub enum ItemTypes {
+    Pending(Pending),
+    Done(Done)
+}
+pub fn to_do_factory(item_type: &amp;str, item_title: &amp;str) -&gt; Result&lt;ItemTypes,&#039;static str&gt; {
+    if item_type == &quot;pending&quot; {
+        let pending_item = Pending::new(item_title);
+        Ok(ItemTypes::Pending(pending_item))
+    }
+    else if item_type == &quot;done&quot; {
+        let done_item = Done::new(item_title);
+        Ok(ItemTypes::Done(done_item))
+    }
+    else {
+        Err(&quot;this is not accepted&quot;)
+    }
+}</code></pre>
 <p>Hàm to_do_factory sẽ trả về 1 task Pending hoặc Done hoặc lỗi dựa trên cấu trúc rẽ nhánh if else. Dĩ nhiên code trên có vẻ hơi rườm rà nhưng khi chương trình phức tạp hơn quản lí theo kiểu factory này nó sẽ tốt hơn nhiều.</p>
 <p>Hiện tại mấy cái to-do vẫn đang trống , chưa có tính năng gì , vậy ta thêm cho nó tính năng CRUD (create,retrive,update,delete) cơ bản với traits</p>
 <h3>Khai báo hàm với Traits</h3>
 <p>Để đảm bảo tính dễ chỉnh sửa và phát triển chúng ta sẽ giữ cho các trait đơn giản  và độc lập nhất có thể.<br />
 Trong thư mục structs ta tạo thư mục trails , tạo file  mod.rs khai báo 4 mod của CRUD</p>
-<blockquote>
-<p>pub mod create;<br />
-pub mod delete;<br />
-pub mod edit;<br />
-pub mod get;</p>
-</blockquote>
+<pre><code class="language-html">pub mod create;
+pub mod delete;
+pub mod edit;
+pub mod get;</code></pre>
 <p>Tương ứng 4 mod ta tạo 4 files create.rs, delete.rs, edit.rs, get.rs</p>
-<blockquote>
-<p>pub trait Create {<br />
-    fn create(&amp;self, title: &amp;str) {<br />
-        println!(&quot;{} is being created&quot;, title);<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">pub trait Create {
+    fn create(&amp;self, title: &amp;str) {
+        println!(&quot;{} is being created&quot;, title);
+    }
+}</code></pre>
 <p>trait Create có 1 hàm là create, tương tự ta có các trail khác </p>
-<p>pub trait Delete {<br />
-    fn delete(&amp;self, title: &amp;str) {<br />
-        println!(&quot;{} is being deleted&quot;, title);<br />
-    }<br />
-}</p>
-<p>pub trait Get {<br />
-    fn get(&amp;self, title: &amp;str) {<br />
-        println!(&quot;{} is being fetched&quot;, title);<br />
-    }<br />
-}</p>
-<p>pub trait Edit {<br />
-    fn set_to_done(&amp;self, title: &amp;str) {<br />
-        println!(&quot;{} is being set to done&quot;, title);<br />
-    }<br />
-    fn set_to_pending(&amp;self, title: &amp;str) {<br />
-        println!(&quot;{} is being set to pending&quot;, title);<br />
-    }<br />
-}</p>
+<pre><code class="language-html">pub trait Delete {
+    fn delete(&amp;self, title: &amp;str) {
+        println!(&quot;{} is being deleted&quot;, title);
+    }
+}
+
+pub trait Get {
+    fn get(&amp;self, title: &amp;str) {
+        println!(&quot;{} is being fetched&quot;, title);
+    }
+}
+
+pub trait Edit {
+    fn set_to_done(&amp;self, title: &amp;str) {
+        println!(&quot;{} is being set to done&quot;, title);
+    }
+    fn set_to_pending(&amp;self, title: &amp;str) {
+        println!(&quot;{} is being set to pending&quot;, title);
+    }
+}</code></pre>
 <p>trait Edit có 2 hàm là set_to_done , set_to_pending</p>
 <p>Ok , bây giờ ta sẽ implement các trait này vào task của mình , mở file done.rs</p>
-<blockquote>
-<p>use super::base::Base;<br />
-use super::traits::get::Get;<br />
-use super::traits::delete::Delete;<br />
-use super::traits::edit::Edit;<br />
-pub struct Done {<br />
-    pub super_struct: Base<br />
-}<br />
-impl Done {<br />
-    pub fn new(input_title: &amp;str) -&gt; Done {<br />
-        let input_status: String = String::from(&quot;done&quot;);<br />
-        let base: Base = Base::new(input_title, &quot;done&quot;);<br />
-        return Done{super_struct: base}<br />
-    }<br />
-}<br />
-impl Get for Done {}<br />
-impl Delete for Done {}<br />
-impl Edit for Done {}</p>
-</blockquote>
-<p>tương tự với pending.rs</p>
-<blockquote>
-<p>use super::base::Base;<br />
-use super::traits::create::Create;<br />
-use super::traits::edit::Edit;<br />
-use super::traits::get::Get;<br />
-use super::traits::delete::Delete;<br />
-pub struct Pending {<br />
-    pub super_struct: Base<br />
-}<br />
-impl Pending {<br />
-    pub fn new(input_title: &amp;str) -&gt; Pending {<br />
-        let base: Base = Base::new(input_title, &quot;pending&quot;);<br />
-        return Pending{super_struct: base}<br />
-    }<br />
-}<br />
-impl Create for Pending {}<br />
-impl Edit for Pending {}<br />
-impl Get for Pending {}<br />
-impl Delete for Pending {}</p>
-</blockquote>
+<pre><code class="language-html">use super::base::Base;
+use super::traits::get::Get;
+use super::traits::delete::Delete;
+use super::traits::edit::Edit;
+pub struct Done {
+    pub super_struct: Base
+}
+impl Done {
+    pub fn new(input_title: &amp;str) -&gt; Done {
+        let input_status: String = String::from(&quot;done&quot;);
+        let base: Base = Base::new(input_title, &quot;done&quot;);
+        return Done{super_struct: base}
+    }
+}
+impl Get for Done {}
+impl Delete for Done {}
+impl Edit for Done {}
+
+tương tự với pending.rs
+> use super::base::Base;
+use super::traits::create::Create;
+use super::traits::edit::Edit;
+use super::traits::get::Get;
+use super::traits::delete::Delete;
+pub struct Pending {
+    pub super_struct: Base
+}
+impl Pending {
+    pub fn new(input_title: &amp;str) -&gt; Pending {
+        let base: Base = Base::new(input_title, &quot;pending&quot;);
+        return Pending{super_struct: base}
+    }
+}
+impl Create for Pending {}
+impl Edit for Pending {}
+impl Get for Pending {}
+impl Delete for Pending {}</code></pre>
 <p>Vậy là các structs của chúng ta đã được nâng cấp sức mạnh , Done thêm vào Get,Delete,Edit còn Pending thêm vào Create,Get,Delete,Edit</p>
 <p>Rồi, bây giờ ta sử dụng chúng trong main.rs</p>
-<blockquote>
-<p>mod to_do;<br />
-use to_do::ItemTypes;<br />
-use to_do::to_do_factory;<br />
-use to_do::structs::traits::create::Create;<br />
-fn main() {<br />
-    let to_do_item: Result&lt;ItemTypes, &amp;'static str&gt; =        to_do_factory(<br />
-            pending&quot;, &quot;washing&quot;);<br />
-    match to_do_item.unwrap() {<br />
-        ItemTypes::Pending(item) =&gt; item.create(<br />
-        &amp;item.super_struct.title),<br />
-        ItemTypes::Done(item) =&gt; println!(<br />
-        &quot;it's a done item with the title: {}&quot;,<br />
-        item.super_struct.title)<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">mod to_do;
+use to_do::ItemTypes;
+use to_do::to_do_factory;
+use to_do::structs::traits::create::Create;
+fn main() {
+    let to_do_item: Result&lt;ItemTypes, &amp;&#039;static str&gt; =        to_do_factory(
+            pending&quot;, &quot;washing&quot;);
+    match to_do_item.unwrap() {
+        ItemTypes::Pending(item) =&gt; item.create(
+        &amp;item.super_struct.title),
+        ItemTypes::Done(item) =&gt; println!(
+        &quot;it&#039;s a done item with the title: {}&quot;, 
+        item.super_struct.title)
+    }
+}</code></pre>
 <p>bạn lưu ý có 1 chút bất tiện ở đây </p>
 <blockquote>
 <p>use to_do::structs::traits::create::Create;</p>
@@ -607,61 +582,55 @@ fn main() {<br />
 serde_json = {version = &quot;1.0&quot;,  default-features = false,  features = [&quot;alloc&quot;]}</p>
 </blockquote>
 <p>Để cho gọn ,các hàm đọc và ghi JSON ta để chung trong 1 file src/state.rs</p>
-<blockquote>
-<p>use std::fs::File;<br />
-use std::fs;<br />
-use std::io::Read;<br />
-use serde_json::Map;<br />
-use serde_json::value::Value;<br />
-use serde_json::json;<br />
-pub fn read_file(file_name: &amp;str) -&gt; Map&lt;String, Value&gt; {<br />
-    let mut file = File::open(file_name.to_string()).unwrap();<br />
-    /// chúng ta khai báo 1 String object<br />
-    let mut data = String::new();<br />
-    /// đưa nội dung file vào tham chiếu data<br />
-    file.read_to_string(&amp;mut data).unwrap();<br />
-    /// lấy text từ tham chiếu data để tạo json value<br />
-    let json: Value = serde_json::from_str(&amp;data).unwrap();<br />
-    /// clone biến rồi trả lại kết quả ,nếu không clone nó sẽ trả về tham chiếu<br />
-    let state: Map&lt;String, Value&gt; = json.as_object().unwrap().clone();<br />
-    return state<br />
-}<br />
-pub fn write_to_file(file_name: &amp;str, state: &amp;mut Map&lt;String, Value&gt;) {<br />
-    let new_data = json!(state);<br />
-    fs::write(file_name.to_string(), new_data.to_string()).expect(&quot;Unable to write file&quot;);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use std::fs::File;
+use std::fs;
+use std::io::Read;
+use serde_json::Map;
+use serde_json::value::Value;
+use serde_json::json;
+pub fn read_file(file_name: &amp;str) -&gt; Map&lt;String, Value&gt; {
+    let mut file = File::open(file_name.to_string()).unwrap();
+    /// chúng ta khai báo 1 String object
+    let mut data = String::new();
+    /// đưa nội dung file vào tham chiếu data 
+    file.read_to_string(&amp;mut data).unwrap();
+    /// lấy text từ tham chiếu data để tạo json value
+    let json: Value = serde_json::from_str(&amp;data).unwrap();
+    /// clone biến rồi trả lại kết quả ,nếu không clone nó sẽ trả về tham chiếu
+    let state: Map&lt;String, Value&gt; = json.as_object().unwrap().clone();
+    return state
+}
+pub fn write_to_file(file_name: &amp;str, state: &amp;mut Map&lt;String, Value&gt;) {
+    let new_data = json!(state);
+    fs::write(file_name.to_string(), new_data.to_string()).expect(&quot;Unable to write file&quot;);
+}</code></pre>
 <p>Hàm read_file chúng ta đọc text từ file bằng hàm của thư viện chuẩn std , serde_json sẽ chuyển text đó từ String sang Json map</p>
 <p>Hàm write_to_file thì ngược lại, chuyển Json map sang String và lưu file</p>
 <p>chúng ta tạo 1 file state.json với nội dung rỗng như vầy {} hoặc có dữ liệu tùy bạn , mình sẽ đọc file json và in ra màn hình trên main.rs </p>
-<blockquote>
-<p>mod state;<br />
-use std::env;<br />
-use state::{write_to_file, read_file};<br />
-use serde_json::value::Value;<br />
-use serde_json::{Map, json};<br />
-fn main() {<br />
-let mut state: Map&lt;String, Value&gt; = read_file(&quot;./state.json&quot;);<br />
-println!(&quot;{:?}&quot;, state);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">mod state;
+use std::env;
+use state::{write_to_file, read_file};
+use serde_json::value::Value;
+use serde_json::{Map, json};
+fn main() {  
+    let mut state: Map&lt;String, Value&gt; = read_file(&quot;./state.json&quot;);
+    println!(&quot;{:?}&quot;, state);
+}</code></pre>
 <p>File state.json để trong thư mục todo_app nhé.<br />
 Tiếp theo là ghi file </p>
-<blockquote>
-<p>mod state;<br />
-use std::env;<br />
-use state::{write_to_file, read_file};<br />
-use serde_json::value::Value;<br />
-use serde_json::{Map, json};<br />
-fn main() {<br />
-let args: Vec<String> = env::args().collect();<br />
-let status: &amp;String = &amp;args[1];<br />
-let title: &amp;String = &amp;args[2];<br />
-let mut state: Map&lt;String, Value&gt; = read_file(&quot;./state.json&quot;);<br />
-state.insert(title.to_string(), json!(status));<br />
-write_to_file(&quot;./state.json&quot;, &amp;mut state);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">mod state;
+use std::env;
+use state::{write_to_file, read_file};
+use serde_json::value::Value;
+use serde_json::{Map, json};
+fn main() {  
+    let args: Vec&lt;String&gt; = env::args().collect();
+    let status: &amp;String = &amp;args[1];
+    let title: &amp;String = &amp;args[2];
+    let mut state: Map&lt;String, Value&gt; = read_file(&quot;./state.json&quot;);
+    state.insert(title.to_string(), json!(status));
+    write_to_file(&quot;./state.json&quot;, &amp;mut state);
+}</code></pre>
 <p>chạy lệnh để build , nhớ là mình lấy vô 2 biến status và title , ví dụ mình thêm vô task &quot;coding&quot;:&quot;pending&quot;</p>
 <blockquote>
 <p>cargo run &quot;pending&quot; &quot;coding&quot;</p>
@@ -670,146 +639,130 @@ write_to_file(&quot;./state.json&quot;, &amp;mut state);<br />
 <h3>Quay lại với traits</h3>
 <p>Bây giờ chúng ta thêm tính năng cho các trails đã tạo lúc trước<br />
 Chúng ta update hàm Get</p>
-<blockquote>
-<p>use serde_json::Map;<br />
-use serde_json::value::Value;<br />
-pub trait Get {<br />
-    fn get(&amp;self, title: &amp;String, state: &amp;Map&lt;String, Value&gt;) {<br />
-        let item: Option&lt;&amp;Value&gt; = state.get(title);<br />
-        match item {<br />
-            Some(result) =&gt; {<br />
-                println!(&quot;\n\nItem: {}&quot;, title);<br />
-                println!(&quot;Status: {}\n\n&quot;, result);<br />
-            },<br />
-            None =&gt; println!(&quot;item: {} was not found&quot;, title)<br />
-        }<br />
-    }<br />
-}<br />
-Hàm get gọi từ serde_json::Map để lấy kết quả , sau đó chúng ta sử dụng match kiểm tra , in ra kết quả hoặc in ra báo lỗi nếu item không tồn tại.</p>
-</blockquote>
+<pre><code class="language-html">use serde_json::Map;
+use serde_json::value::Value;
+pub trait Get {
+    fn get(&amp;self, title: &amp;String, state: &amp;Map&lt;String, Value&gt;) {
+        let item: Option&lt;&amp;Value&gt; = state.get(title);
+        match item {
+            Some(result) =&gt; {
+                println!(&quot;\n\nItem: {}&quot;, title);
+                println!(&quot;Status: {}\n\n&quot;, result);
+            },
+            None =&gt; println!(&quot;item: {} was not found&quot;, title)
+        }
+    }
+}</code></pre>
+<p>Hàm get gọi từ serde_json::Map để lấy kết quả , sau đó chúng ta sử dụng match kiểm tra , in ra kết quả hoặc in ra báo lỗi nếu item không tồn tại.</p>
 <p>Tiếp theo là trail Create , ta ghi &quot;title&quot;:&quot;status&quot; vào file state.json</p>
-<blockquote>
-<p>use serde_json::Map;<br />
-use serde_json::value::Value;<br />
-use serde_json::json;<br />
-use crate::state::write_to_file;<br />
-pub trait Create {<br />
-    fn create(&amp;self, title: &amp;String, status: &amp;String,            state: &amp;mut Map&lt;String, Value&gt;) {<br />
-        state.insert(title.to_string(), json!(status));<br />
-        write_to_file(&quot;./state.json&quot;, state);<br />
-        println!(&quot;\n\n{} is being created\n\n&quot;, title);<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use serde_json::Map;
+use serde_json::value::Value;
+use serde_json::json;
+use crate::state::write_to_file;
+pub trait Create {
+    fn create(&amp;self, title: &amp;String, status: &amp;String,            state: &amp;mut Map&lt;String, Value&gt;) {
+        state.insert(title.to_string(), json!(status));
+        write_to_file(&quot;./state.json&quot;, state);
+        println!(&quot;\n\n{} is being created\n\n&quot;, title);
+    }
+}</code></pre>
 <p>Trail Delete , chúng ta xóa 1 item bên trong file state.json và save trạng thái mới.</p>
-<blockquote>
-<p>use serde_json::Map;<br />
-use serde_json::value::Value;<br />
-use crate::state::write_to_file;<br />
-pub trait Delete {<br />
-    fn delete(&amp;self, title: &amp;String,               state: &amp;mut Map&lt;String, Value&gt;) {<br />
-        state.remove(title);<br />
-        write_to_file(&quot;./state.json&quot;, state);<br />
-        println!(&quot;\n\n{} is being deleted\n\n&quot;, title);<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use serde_json::Map;
+use serde_json::value::Value;
+use crate::state::write_to_file;
+pub trait Delete {
+    fn delete(&amp;self, title: &amp;String,               state: &amp;mut Map&lt;String, Value&gt;) {
+        state.remove(title);
+        write_to_file(&quot;./state.json&quot;, state);
+        println!(&quot;\n\n{} is being deleted\n\n&quot;, title);
+    }
+}</code></pre>
 <p>Trail Edit chúng ta có 2 hàm, dành cho pending và done</p>
-<blockquote>
-<p>use serde_json::Map;<br />
-use serde_json::value::Value;<br />
-use serde_json::json;<br />
-use crate::state::write_to_file;<br />
-pub trait Edit {<br />
-    fn set_to_done(&amp;self, title: &amp;String,                    state: &amp;mut Map&lt;String, Value&gt;) {<br />
-        state.insert(title.to_string(),                      json!(String::from(&quot;done&quot;)));<br />
-        write_to_file(&quot;./state.json&quot;, state);<br />
-        println!(&quot;\n\n{} is being set to done\n\n&quot;, title);<br />
-    }<br />
-    fn set_to_pending(&amp;self, title: &amp;String,<br />
-                      state: &amp;mut Map&lt;String, Value&gt;) {<br />
-        state.insert(title.to_string(),<br />
-                     json!(String::from(&quot;pending&quot;)));<br />
-        write_to_file(&quot;./state.json&quot;, state);<br />
-        println!(&quot;\n\n{} is being set to pending\n\n&quot;, title);<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use serde_json::Map;
+use serde_json::value::Value;
+use serde_json::json;
+use crate::state::write_to_file;
+pub trait Edit {
+    fn set_to_done(&amp;self, title: &amp;String,                    state: &amp;mut Map&lt;String, Value&gt;) {
+        state.insert(title.to_string(),                      json!(String::from(&quot;done&quot;)));
+        write_to_file(&quot;./state.json&quot;, state);
+        println!(&quot;\n\n{} is being set to done\n\n&quot;, title);
+    }
+    fn set_to_pending(&amp;self, title: &amp;String, 
+                      state: &amp;mut Map&lt;String, Value&gt;) {
+        state.insert(title.to_string(), 
+                     json!(String::from(&quot;pending&quot;)));
+        write_to_file(&quot;./state.json&quot;, state);
+        println!(&quot;\n\n{} is being set to pending\n\n&quot;, title);
+    }
+}</code></pre>
 <p>Rồi xong , vậy là 4 trails của mình đã tương tác với file state.json , dĩ nhiên chúng ta có thể dùng trực tiếp trong main.rs nhưng với 1 ứng dụng rắc rối hơn thì mọi thứ sẽ khó quản lí, ta tách riêng các trail này ra quản lí trong 1 file  src/processes.rs</p>
-<blockquote>
-<p>use serde_json::Map;<br />
-use serde_json::value::Value;<br />
-use super::to_do::ItemTypes;<br />
-use super::to_do::structs::done::Done;<br />
-use super::to_do::structs::pending::Pending;<br />
-use super::to_do::structs::traits::get::Get;<br />
-use super::to_do::structs::traits::create::Create;<br />
-use super::to_do::structs::traits::delete::Delete;<br />
-use super::to_do::structs::traits::edit::Edit;</p>
-</blockquote>
+<pre><code class="language-html">use serde_json::Map;
+use serde_json::value::Value;
+use super::to_do::ItemTypes;
+use super::to_do::structs::done::Done;
+use super::to_do::structs::pending::Pending;
+use super::to_do::structs::traits::get::Get;
+use super::to_do::structs::traits::create::Create;
+use super::to_do::structs::traits::delete::Delete;
+use super::to_do::structs::traits::edit::Edit;</code></pre>
 <p>Sau đó chúng ta khai báo 2 hàm xử lí Done và Pending</p>
-<blockquote>
-<p>fn process_pending(item: Pending,                command: String, state: &amp;Map&lt;String, Value&gt;) {<br />
-    let mut state = state.clone();<br />
-    match command.as_str() {<br />
-        &quot;get&quot; =&gt; item.get(&amp;item.super_struct.title, &amp;state),<br />
-        &quot;create&quot; =&gt; item.create(&amp;item.super_struct.title,                     &amp;item.super_struct.status, &amp;mut state),<br />
-        &quot;delete&quot; =&gt; item.delete(&amp;item.super_struct.title,                                 &amp;mut state),<br />
-        &quot;edit&quot; =&gt; item.set_to_done(&amp;item.super<em>struct.title,                                    &amp;mut state),<br />
-        </em> =&gt; println!(&quot;command: {} not supported&quot;, command)<br />
-    }<br />
-}<br />
-fn process_done(item: Done,<br />
-                command: String, state: &amp;Map&lt;String, Value&gt;) {<br />
-    let mut state = state.clone();<br />
-    match command.as_str() {<br />
-        &quot;get&quot; =&gt; item.get(&amp;item.super_struct.title, &amp;state),<br />
-        &quot;delete&quot; =&gt; item.delete(&amp;item.super_struct.title,                                 &amp;mut state),<br />
-        &quot;edit&quot; =&gt; item.set_to_pending(&amp;item.super<em>struct.title,                                       &amp;mut state),<br />
-        </em> =&gt; println!(&quot;command: {} not supported&quot;, command)<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn process_pending(item: Pending,                command: String, state: &amp;Map&lt;String, Value&gt;) {
+    let mut state = state.clone();
+    match command.as_str() {
+        &quot;get&quot; =&gt; item.get(&amp;item.super_struct.title, &amp;state),
+        &quot;create&quot; =&gt; item.create(&amp;item.super_struct.title,                     &amp;item.super_struct.status, &amp;mut state),
+        &quot;delete&quot; =&gt; item.delete(&amp;item.super_struct.title,                                 &amp;mut state),
+        &quot;edit&quot; =&gt; item.set_to_done(&amp;item.super_struct.title,                                    &amp;mut state),
+        _ =&gt; println!(&quot;command: {} not supported&quot;, command)
+    }
+}
+fn process_done(item: Done, 
+                command: String, state: &amp;Map&lt;String, Value&gt;) {
+    let mut state = state.clone();
+    match command.as_str() {
+        &quot;get&quot; =&gt; item.get(&amp;item.super_struct.title, &amp;state),
+        &quot;delete&quot; =&gt; item.delete(&amp;item.super_struct.title,                                 &amp;mut state),
+        &quot;edit&quot; =&gt; item.set_to_pending(&amp;item.super_struct.title,                                       &amp;mut state),
+        _ =&gt; println!(&quot;command: {} not supported&quot;, command)
+    }
+}</code></pre>
 <p>Tiếp theo là 1 hàm publish để nó có thể sử dụng trong main</p>
-<blockquote>
-<p>pub fn process_input(item: ItemTypes, command: String,                     state: &amp;Map&lt;String, Value&gt;) {<br />
-    match item {<br />
-        ItemTypes::Pending(item) =&gt; process_pending(item,            command, state),<br />
-        ItemTypes::Done(item) =&gt; process_done(item,            command, state)<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">pub fn process_input(item: ItemTypes, command: String,                     state: &amp;Map&lt;String, Value&gt;) {
+    match item {
+        ItemTypes::Pending(item) =&gt; process_pending(item,            command, state),
+        ItemTypes::Done(item) =&gt; process_done(item,            command, state)
+    }
+}</code></pre>
 <p>Vậy là trong main.rs , code chúng ta sẽ gọn gàn hơn như sau :</p>
-<blockquote>
-<p>mod state;<br />
-mod to_do;<br />
-mod processes;<br />
-use std::env;<br />
-use state::read_file;<br />
-use serde_json::value::Value;<br />
-use serde_json::Map;<br />
-use to_do::to_do_factory;<br />
-use processes::process_input;<br />
-fn main() {<br />
-    let args: Vec<String> = env::args().collect();<br />
-    let command: &amp;String = &amp;args[1];<br />
-    let title: &amp;String = &amp;args[2];<br />
-    let state: Map&lt;String, Value&gt; =<br />
-        read_file(&quot;./state.json&quot;);<br />
-    let status: String;<br />
-    match &amp;state.get(*&amp;title) {<br />
-        Some(result) =&gt; {<br />
-            status = result.to_string().replace('\&quot;', &quot;&quot;);<br />
-        }<br />
-        None=&gt; {<br />
-            status = &quot;pending&quot;;<br />
-        }<br />
-    }<br />
-    let item = to_do_factory(&amp;status,<br />
-                             title).expect(&amp;status);<br />
-    process_input(item, command.to_string(), &amp;state);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">mod state;
+mod to_do;
+mod processes;
+use std::env;
+use state::read_file;
+use serde_json::value::Value;
+use serde_json::Map;
+use to_do::to_do_factory;
+use processes::process_input;
+fn main() {
+    let args: Vec&lt;String&gt; = env::args().collect();
+    let command: &amp;String = &amp;args[1];
+    let title: &amp;String = &amp;args[2];
+    let state: Map&lt;String, Value&gt; =
+        read_file(&quot;./state.json&quot;);
+    let status: String;
+    match &amp;state.get(*&amp;title) {
+        Some(result) =&gt; {
+            status = result.to_string().replace(&#039;\&quot;&#039;, &quot;&quot;);
+        }
+        None=&gt; {
+            status = &quot;pending&quot;;
+        }
+    }
+    let item = to_do_factory(&amp;status, 
+                             title).expect(&amp;status);
+    process_input(item, command.to_string(), &amp;state);
+}</code></pre>
 <p>OK , bây giờ các bạn chạy cargo run với 2 biến 1 là command , 2 là title của task, mình ví dụ </p>
 <blockquote>
 <p>cargo run create washing</p>

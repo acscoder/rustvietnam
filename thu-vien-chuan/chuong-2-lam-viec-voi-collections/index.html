@@ -31,7 +31,7 @@
 	<meta property="og:url" content="https://rustvietnam.com/thu-vien-chuan/chuong-2-lam-viec-voi-collections/" />
 	<meta property="og:site_name" content="RustVietnam" />
 	<meta property="article:published_time" content="2021-09-02T15:29:58+00:00" />
-	<meta property="article:modified_time" content="2021-09-05T12:37:31+00:00" />
+	<meta property="article:modified_time" content="2021-09-15T09:08:44+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="Written by" />
 	<meta name="twitter:data1" content="admin" />
@@ -67,7 +67,7 @@
 	                "@id": "https://localhost/rustvietnam/#website"
 	            },
 	            "datePublished": "2021-09-02T15:29:58+00:00",
-	            "dateModified": "2021-09-05T12:37:31+00:00",
+	            "dateModified": "2021-09-15T09:08:44+00:00",
 	            "author": {
 	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
 	            },
@@ -294,28 +294,24 @@
             <h2>Sử dụng vector</h2>
 <p>Trong các Collections thì vector là phổ biến nhất, vector là 1 mảng có thể thay đổi kích thước(size).<br />
 Ok, mở play ground <a href="https://play.rust-lang.org/">https://play.rust-lang.org/</a> hoặc tạo file mới và compile cũng được.</p>
-<blockquote>
-<p>fn main() {<br />
-let cars = vec![&quot;Toyota&quot;, &quot;Tesla&quot;, &quot;Lambogini&quot;];<br />
-println!(&quot;cars: {:?}&quot;, cars);<br />
-let mut fruits = Vec::new();<br />
-fruits.push(&quot;apple&quot;);<br />
-fruits.push(&quot;tomato&quot;);<br />
-fruits.push(&quot;pear&quot;);<br />
-println!(&quot;fruits: {:?}&quot;, fruits);<br />
-let last = fruits.pop();<br />
-if let Some(last) = last {<br />
-println!(&quot;Removed {} from {:?}&quot;, last, fruits);<br />
-}<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+    let cars = vec![&quot;Toyota&quot;, &quot;Tesla&quot;, &quot;Lambogini&quot;];
+    println!(&quot;cars: {:?}&quot;, cars);
+    let mut fruits = Vec::new();
+    fruits.push(&quot;apple&quot;);
+    fruits.push(&quot;tomato&quot;);
+    fruits.push(&quot;pear&quot;);
+    println!(&quot;fruits: {:?}&quot;, fruits);
+    let last = fruits.pop();
+    if let Some(last) = last {
+        println!(&quot;Removed {} from {:?}&quot;, last, fruits);
+    }
+}</code></pre>
 <p>Có 2 cách khai báo vector, 1 khai báo với số phần tử có sẵn <strong>let cars = vec![&quot;Toyota&quot;, &quot;Tesla&quot;, &quot;Lambogini&quot;];</strong> , 2 khai báo với 1 vector rỗng và thay đổi sau <strong>let mut fruits = Vec::new();</strong><br />
 Các bạn lưu ý đoạn này</p>
-<blockquote>
-<p>if let Some(last) = last {<br />
-println!(&quot;Removed {} from {:?}&quot;, last, fruits);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">if let Some(last) = last {
+    println!(&quot;Removed {} from {:?}&quot;, last, fruits);
+}</code></pre>
 <p>Đây là cách dùng match đơn giản, với nhiều option lựa chọn hơn thì mình sẽ dùng kiểu như vầy:</p>
 <blockquote>
 <p>match optional {<br />
@@ -324,257 +320,235 @@ None =&gt; println!(&quot;has no value&quot;),<br />
 }</p>
 </blockquote>
 <p>Một số các hàm để xử lí vector</p>
-<blockquote>
-<p>fruits.insert(1, &quot;grape&quot;);<br />
-//Thêm &quot;grape&quot; và vị trí 1<br />
-fruits.swap(0, 1);<br />
-//hoán đổi vị trí 2 item 0 và 1 cho nhau<br />
-let first = fruits.first();<br />
-//lấy giá trị đầu tiên của vector<br />
-let last = fruits.last();<br />
-//lấy giá trị cuối của vector<br />
-let second = fruits.get(1);<br />
-let second = fruits[1];<br />
-//lấy giá trị ở vị trí 1 của vector<br />
-let second_fruit = fruits.remove(1);<br />
-//Xóa giá trị ở vị trí 1 của vector</p>
-<p>let bunch_of_zeroes = vec![0; 5];<br />
-// Tạo vector 5 phần tử 0 , [0, 0, 0, 0, 0]<br />
-let mut names = vec![&quot;Aaron&quot;, &quot;Felicia&quot;, &quot;Alex&quot;, &quot;Daniel&quot;];<br />
-names.retain(|name| name.starts_with('A'));<br />
-println!(&quot;Names starting with A: {:?}&quot;, names);<br />
-// Hàm retain giữ lại phần tử với điều kiện name.starts_with('A') tên bắt đầu là A<br />
-let mut nums = vec![1, 2, 2, 3, 4, 4, 4, 5];<br />
-nums.dedup();<br />
-//hàm dedup loại bỏ phần tử trùng lặp trong mảng,kết quả là [1, 2, 3, 4, 5]<br />
-nums.sort();//sắp xếp<br />
-nums.reverse();//đảo ngược mảng</p>
-<p>let mut alphabet = vec!['a', 'b', 'c'];<br />
-for letter in alphabet.drain(..2) {<br />
-print!(&quot;{} &quot;, letter);<br />
-}<br />
-//bỏ tất cả chỉ giữ lại 2 phần tử đầu<br />
-alphabet.clear();<br />
-// loại bỏ tất cả các phần tử<br />
-alphabet.is_empty();<br />
-// kiểm tra nếu vec là rỗng</p>
-</blockquote>
+<pre><code class="language-html">fruits.insert(1, &quot;grape&quot;);
+//Thêm &quot;grape&quot; và vị trí 1
+fruits.swap(0, 1);
+//hoán đổi vị trí 2 item 0 và 1 cho nhau
+let first = fruits.first();
+//lấy giá trị đầu tiên của vector
+let last = fruits.last();
+//lấy giá trị cuối của vector
+let second = fruits.get(1);
+let second = fruits[1];
+//lấy giá trị ở vị trí 1 của vector
+let second_fruit = fruits.remove(1);
+//Xóa giá trị ở vị trí 1 của vector</code></pre>
+<pre><code class="language-html">let bunch_of_zeroes = vec![0; 5];
+// Tạo vector 5 phần tử 0 , [0, 0, 0, 0, 0]
+let mut names = vec![&quot;Aaron&quot;, &quot;Felicia&quot;, &quot;Alex&quot;, &quot;Daniel&quot;];
+names.retain(|name| name.starts_with(&#039;A&#039;));
+println!(&quot;Names starting with A: {:?}&quot;, names);
+// Hàm retain giữ lại phần tử với điều kiện name.starts_with(&#039;A&#039;) tên bắt đầu là A
+let mut nums = vec![1, 2, 2, 3, 4, 4, 4, 5];
+nums.dedup();
+//hàm dedup loại bỏ phần tử trùng lặp trong mảng,kết quả là [1, 2, 3, 4, 5]
+nums.sort();//sắp xếp
+nums.reverse();//đảo ngược mảng</code></pre>
+<pre><code class="language-html">let mut alphabet = vec![&#039;a&#039;, &#039;b&#039;, &#039;c&#039;];
+for letter in alphabet.drain(..2) {
+print!(&quot;{} &quot;, letter);
+}
+//bỏ tất cả chỉ giữ lại 2 phần tử đầu
+alphabet.clear();
+// loại bỏ tất cả các phần tử
+alphabet.is_empty();
+// kiểm tra nếu vec là rỗng</code></pre>
 <p>Chúng ta có thể tách 1 vec thành 2 vec </p>
-<blockquote>
-<p>fn main(){<br />
-let mut colors = vec![&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;, &quot;teal&quot;];<br />
-println!(&quot;colors before splitting: {:?}&quot;, colors);<br />
-let half = colors.len() / 2;<br />
-let mut second_half = colors.split_off(half);<br />
-println!(&quot;colors after splitting: {:?}&quot;, colors);<br />
-println!(&quot;second_half: {:?}&quot;, second_half);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main(){
+let mut colors = vec![&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;, &quot;teal&quot;];
+   println!(&quot;colors before splitting: {:?}&quot;, colors);
+   let half = colors.len() / 2;
+   let mut second_half = colors.split_off(half);
+   println!(&quot;colors after splitting: {:?}&quot;, colors);
+   println!(&quot;second_half: {:?}&quot;, second_half);
+}</code></pre>
 <p>Nhập 2 vec lại với nhau với hàm <strong>append</strong></p>
-<blockquote>
-<p>colors.append(&amp;mut second_half);<br />
-println!(&quot;colors after appending: {:?}&quot;, colors);<br />
-// This empties the second vector<br />
-println!(&quot;second_half after appending: {:?}&quot;, second_half);</p>
-</blockquote>
+<pre><code class="language-html">colors.append(&amp;mut second_half);
+   println!(&quot;colors after appending: {:?}&quot;, colors);
+   // This empties the second vector
+   println!(&quot;second_half after appending: {:?}&quot;, second_half);</code></pre>
 <p>Trong JS có hàm splice để loại bỏ/thay thế các phần tử trong mảng rất tiện, chúng ta cũng có nó trong Rust</p>
-<blockquote>
-<p>fn main(){<br />
-let mut stuff = vec![&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;];<br />
-println!(&quot;Original stuff: {:?}&quot;, stuff);<br />
-let stuff_to_insert = vec![&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];<br />
-let removed<em>stuff: Vec&lt;</em>&gt; = stuff.splice(1..4, stuff_to_insert).collect();<br />
-println!(&quot;Spliced stuff: {:?}&quot;, stuff);<br />
-println!(&quot;Removed stuff: {:?}&quot;, removed_stuff);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">fn main(){
+    let mut stuff = vec![&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;];
+    println!(&quot;Original stuff: {:?}&quot;, stuff);
+    let stuff_to_insert = vec![&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+    let removed_stuff: Vec&lt;_&gt; = stuff.splice(1..4, stuff_to_insert).collect();
+    println!(&quot;Spliced stuff: {:?}&quot;, stuff);
+    println!(&quot;Removed stuff: {:?}&quot;, removed_stuff);
+}</code></pre>
 <p>Thay thế các phần tử ở <strong>stuff</strong> bằng các phần tử <strong>stuff_to_insert</strong> , vị trí thay thế <strong>1..4</strong>, nếu ta thay vec <strong>let stuff_to_insert = Vec::new();</strong> là vector rỗng thì sẽ là remove các phần tử 1,2,3.<br />
 Trường hợp chúng ta làm việc với vector có số lượng phần tử lớn. </p>
-<blockquote>
-<p>let mut large_vec: Vec<i32> = Vec::with_capacity(1_000_000);<br />
-// vector large_vec được khai báo với dung lượng đến 1 triệu phần tử<br />
-large_vec.shrink_to_fit();<br />
-//nếu ta không dùng nhiều thì chúng ta có thể gọi lệnh shrink_to_fit để co dung lượng lại tới mức cần thiết để tiết kiệm bộ nhớ</p>
-</blockquote>
+<pre><code class="language-html">let mut large_vec: Vec&lt;i32&gt; = Vec::with_capacity(1_000_000);
+// vector large_vec được khai báo với dung lượng đến 1 triệu phần tử
+large_vec.shrink_to_fit();
+//nếu ta không dùng nhiều thì chúng ta có thể gọi lệnh shrink_to_fit để co dung lượng lại tới mức cần thiết để tiết kiệm bộ nhớ</code></pre>
 <h2>Sử dụng string</h2>
 <p>Một string chính là một mảng các kí tự<br />
 vì vậy các hàm để xử lí string hoàn toàn tương tự như vector ta đã xem ở trên, ví dụ</p>
-<blockquote>
-<p>fn main(){<br />
-let mut s = String::new();<br />
-s.push('H');<br />
-s.push('e');<br />
-s.push('l');<br />
-s.push('l');<br />
-s.push('o');<br />
-println!(&quot;string: {}&quot;, s);<br />
-}<br />
-// kết quả in ra string: Hello<br />
-Tách chuỗi<br />
-let (first, second) = &quot;Hello There&quot;.split_at(5);<br />
-// tách 1 chuỗi thành 2 tại vị trí 5</p>
-<p>let haiku = &quot;\<br />
-she watches\n\<br />
-satisfied after love\n\<br />
-he lies\n\<br />
-looking up at nothing\n\<br />
-&quot;;<br />
-for line in haiku.lines() {<br />
-println!(&quot;\t{}.&quot;, line);<br />
-}<br />
-//hàm <strong>haiku.lines</strong> đọc từng dòng trong chuỗi văn bản.</p>
-<p>for s in &quot;Never;Give;Up&quot;.split(';') {<br />
-println!(&quot;{}&quot;, s);<br />
-}<br />
-// Tách chuỗi bằng kí tự ;<br />
-let s: Vec<_> = &quot;Never;Give ;Up&quot;.split(';').collect();<br />
-// Tách chuỗi bằng kí tự ; và chuyển thành 1 vector</p>
-<p>for s in &quot;I'm2fast4you&quot;.split(char::is_numeric) {<br />
-println!(&quot;{}&quot;, s);<br />
-}<br />
-// tách bằng điều kiện kí tự là số</p>
-<p>for s in &quot;It's not your fault, it's mine&quot;.splitn(3,<br />
-char::is_whitespace) {<br />
-println!(&quot;{}&quot;, s);<br />
-}<br />
-// hàm <strong>splitn</strong> giới hạn số lần tách, ở đây tách làm 3</p>
-<p>for c in &quot;The Dark Knight rises&quot;.matches(char::is_uppercase) {<br />
-println!(&quot;{}&quot;, c);<br />
-}<br />
-// tách chuỗi theo mẫu</p>
-</blockquote>
+<pre><code class="language-html">fn main(){
+    let mut s = String::new();
+    s.push(&#039;H&#039;);
+    s.push(&#039;e&#039;);
+    s.push(&#039;l&#039;);
+    s.push(&#039;l&#039;);
+    s.push(&#039;o&#039;);
+    println!(&quot;string: {}&quot;, s);
+}
+// kết quả in ra string: Hello
+Tách chuỗi
+> let (first, second) = &quot;Hello There&quot;.split_at(5);
+// tách 1 chuỗi thành 2 tại vị trí 5</code></pre>
+<pre><code class="language-html">let haiku = &quot;\
+            she watches\n\
+                 satisfied after love\n\
+                 he lies\n\
+                 looking up at nothing\n\
+                 &quot;;
+    for line in haiku.lines() {
+        println!(&quot;\t{}.&quot;, line);
+    }
+//hàm **haiku.lines** đọc từng dòng trong chuỗi văn bản.</code></pre>
+<pre><code class="language-html">for s in &quot;Never;Give;Up&quot;.split(&#039;;&#039;) {
+       println!(&quot;{}&quot;, s);
+    }
+// Tách chuỗi bằng kí tự ;
+let s: Vec&lt;_&gt; = &quot;Never;Give ;Up&quot;.split(&#039;;&#039;).collect();
+// Tách chuỗi bằng kí tự ; và chuyển thành 1 vector</code></pre>
+<pre><code class="language-html">for s in &quot;I&#039;m2fast4you&quot;.split(char::is_numeric) {
+        println!(&quot;{}&quot;, s);
+    }
+// tách bằng điều kiện kí tự là số</code></pre>
+<pre><code class="language-html">> for s in &quot;It&#039;s not your fault, it&#039;s mine&quot;.splitn(3,
+        char::is_whitespace) {
+        println!(&quot;{}&quot;, s);
+    }
+// hàm **splitn** giới hạn số lần tách, ở đây tách làm 3</code></pre>
+<pre><code class="language-html">> for c in &quot;The Dark Knight rises&quot;.matches(char::is_uppercase) {
+        println!(&quot;{}&quot;, c);
+    }
+// tách chuỗi theo mẫu</code></pre>
 <p>Xử lí các khoảng trắng<br />
 Bạn thử đoạn code này</p>
-<blockquote>
-<p>let a_lot_of<em>whitespace = &quot;    I   love spaaace     &quot;;<br />
-let s: Vec&lt;</em>&gt; = a_lot_of_whitespace.split(' ').collect();<br />
-println!(&quot;{:?}&quot;, s);</p>
-</blockquote>
+<pre><code class="language-html">let a_lot_of_whitespace = &quot;    I   love spaaace     &quot;;
+   let s: Vec&lt;_&gt; = a_lot_of_whitespace.split(&#039; &#039;).collect();
+   println!(&quot;{:?}&quot;, s);</code></pre>
 <p>Kết quả ko hay lắm </p>
 <blockquote>
 <p>[&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;I&quot;, &quot;&quot;, &quot;&quot;, &quot;love&quot;, &quot;spaaace&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;]</p>
 </blockquote>
 <p>Ta cần cách thức để loại bỏ các khoảng space ko mong muốn.</p>
-<blockquote>
-<p>let s: Vec<_> = a_lot_of_whitespace.split_whitespace().collect();<br />
-// dùng hàm <strong>split_whitespace</strong> thay <strong>split</strong></p>
-<p>let username = &quot;   P3ngu1n\n&quot;.trim();<br />
-// dùng hàm <strong>trim</strong> để xóa khoảng trắng đầu và cuối của chuỗi<br />
-let username = &quot;   P3ngu1n\n&quot;.trim_left();<br />
-//dùng hàm <strong>trim_left</strong> để xóa khoảng trắng đầu chuỗi<br />
-let username = &quot;   P3ngu1n\n&quot;.trim_right();<br />
-//dùng hàm <strong>trim_left</strong> để xóa khoảng trắng cuối chuỗi</p>
-<p>let num = &quot;12&quot;.parse::<i32>();<br />
-// ép kiểu kí tự thành số</p>
-</blockquote>
+<pre><code class="language-html">let s: Vec&lt;_&gt; = a_lot_of_whitespace.split_whitespace().collect();
+// dùng hàm **split_whitespace** thay **split**
+
+> let username = &quot;   P3ngu1n\n&quot;.trim();
+  // dùng hàm **trim** để xóa khoảng trắng đầu và cuối của chuỗi
+   let username = &quot;   P3ngu1n\n&quot;.trim_left();
+   //dùng hàm **trim_left** để xóa khoảng trắng đầu chuỗi
+   let username = &quot;   P3ngu1n\n&quot;.trim_right();
+//dùng hàm **trim_left** để xóa khoảng trắng cuối chuỗi
+
+let num = &quot;12&quot;.parse::&lt;i32&gt;();
+// ép kiểu kí tự thành số</code></pre>
 <p>Chỉnh sửa chuỗi </p>
-<blockquote>
-<p>let s = &quot;My dad is the best dad&quot;;<br />
-let new_s = s.replace(&quot;dad&quot;, &quot;mom&quot;);<br />
-println!(&quot;new_s: {}&quot;, new_s);<br />
-// thay thế chữ &quot;<strong>dad</strong>&quot; thành chữ &quot;<strong>mom</strong>&quot; trong chuỗi <strong>new_s</strong></p>
-<p>let lowercase = s.to_lowercase();<br />
-let uppercase = s.to_uppercase();<br />
-// chuyển thành in thường, in hoa</p>
-<p>let hello = &quot;Hello! &quot;;<br />
-println!(&quot;Three times hello: {}&quot;, hello.repeat(3));<br />
-// Lặp kí tự 3 lần</p>
-</blockquote>
+<pre><code class="language-html"> let s = &quot;My dad is the best dad&quot;;
+   let new_s = s.replace(&quot;dad&quot;, &quot;mom&quot;);
+   println!(&quot;new_s: {}&quot;, new_s);
+// thay thế chữ &quot;**dad**&quot; thành chữ &quot;**mom**&quot; trong chuỗi **new_s**
+
+let lowercase = s.to_lowercase();
+let uppercase = s.to_uppercase();
+// chuyển thành in thường, in hoa
+
+let hello = &quot;Hello! &quot;;
+println!(&quot;Three times hello: {}&quot;, hello.repeat(3));
+// Lặp kí tự 3 lần</code></pre>
 <h2>Xử lí collection bằng iterators (con chạy)</h2>
 <p>iterators là vòng lặp chạy qua tất các phần tử trong collection để xử lí nó.<br />
 Với Vector </p>
-<blockquote>
-<p>let names = vec![&quot;Joe&quot;, &quot;Miranda&quot;, &quot;Alice&quot;];<br />
-let mut iter = names.iter();<br />
-// ta có 1 iterator bằng hàm <strong>iter</strong></p>
-</blockquote>
+<pre><code class="language-html">let names = vec![&quot;Joe&quot;, &quot;Miranda&quot;, &quot;Alice&quot;];
+let mut iter = names.iter();
+// ta có 1 iterator bằng hàm **iter**</code></pre>
 <p>Với chuỗi ta ko có hàm <strong>iter</strong> mà dùng hàm <strong>char</strong></p>
-<blockquote>
-<p>let mut alphabet = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;.chars();</p>
-<p>let mut alphabet = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;.chars().enumerate();<br />
-// Hàm <strong>enumerate</strong> tạo iterator chi tiết với kí tự và index của kí tự, chúng ta thử vòng lặp for sẽ thấy<br />
-for (index, letter) in alphabet {<br />
-println!(&quot;#{}. letter in the alphabet: {}&quot;, index + 1,letter);<br />
-}<br />
-// nếu không dùng <strong>enumerate</strong> thì sẽ ko lấy được số index như bên trên nhé</p>
-</blockquote>
+<pre><code class="language-html">let mut alphabet = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;.chars();
+
+let mut alphabet = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;.chars().enumerate();
+// Hàm **enumerate** tạo iterator chi tiết với kí tự và index của kí tự, chúng ta thử vòng lặp for sẽ thấy 
+for (index, letter) in alphabet {
+      println!(&quot;#{}. letter in the alphabet: {}&quot;, index + 1,letter);
+    }
+// nếu không dùng **enumerate** thì sẽ ko lấy được số index như bên trên nhé</code></pre>
 <p>iterators với số </p>
-<blockquote>
-<p>let nums = 0..10;<br />
-// Dãy từ 0 đến 10<br />
-let nums = 0..;<br />
-// Dãy từ 0 đến vô tận<br />
-let nums: Vec<_> = (1..10).collect();<br />
-// dùng hàm <strong>collect</strong> để chuyển iter thành vector</p>
-</blockquote>
+<pre><code class="language-html">let nums = 0..10;
+// Dãy từ 0 đến 10
+let nums = 0..;
+// Dãy từ 0 đến vô tận
+let nums: Vec&lt;_&gt; = (1..10).collect();
+// dùng hàm **collect** để chuyển iter thành vector</code></pre>
 <p>Thường thì ta hay dùng vòng lặp <strong>for ... in ...</strong> để duyệt con chạy, có 1 cách khác là dùng <strong>while</strong></p>
-<blockquote>
-<p>fn main() {<br />
-let mut alphabet = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;.chars();<br />
-while let Some(single_char) = alphabet.next() {<br />
-println!(&quot;{}&quot;,single_char);<br />
-}<br />
-}<br />
-//Dùng hàm <strong>next</strong> để gọi tuần tự các phần tử trong con chạy cho đến hết</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+     let mut alphabet = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;.chars();
+     while let Some(single_char) = alphabet.next() {
+        println!(&quot;{}&quot;,single_char);
+     }
+}</code></pre>
+<p>//Dùng hàm <strong>next</strong> để gọi tuần tự các phần tử trong con chạy cho đến hết</p>
 <p>Một số hàm khác </p>
-<blockquote>
-<p>if iter.next().is_none() {<br />
-println!(&quot;No names left&quot;);<br />
-}<br />
-// kiểm tra con chạy đã hết</p>
-<p>let letter = alphabet.nth(3);<br />
-// lấy phần tử ở vị trí thứ 4 trong con chạy<br />
-let last_letter = alphabet.last();<br />
-// lấy phần tử cuối trong con chạy</p>
-</blockquote>
+<pre><code class="language-html">if iter.next().is_none() {
+        println!(&quot;No names left&quot;);
+    }
+// kiểm tra con chạy đã hết
+
+> let letter = alphabet.nth(3);
+// lấy phần tử ở vị trí thứ 4 trong con chạy
+let last_letter = alphabet.last();
+// lấy phần tử cuối trong con chạy</code></pre>
 <p>Con chạy với số</p>
-<blockquote>
-<p>let all<em>nums = 0..;<br />
-let nums: Vec&lt;</em>&gt; = all_nums.take(5).collect();<br />
-println!(&quot;The first five numbers are: {:?}&quot;, nums);<br />
-//Hàm <strong>take(5)</strong> lấy 5 số đầu tiên của iterator </p>
-<p>let sum: i32 = (1..11).sum();<br />
-let product: i32 = (1..11).product();<br />
-println!(<br />
-&quot;When operating on the first ten positive numbers\n\<br />
-their sum is {} and\n\<br />
-their product is {}.&quot;,<br />
-sum, product<br />
-);<br />
-// Hàm <strong>sum</strong> : tổng, <strong>product</strong> : nhân </p>
-<p>let nums: Vec<_> = (0..11).skip(2).collect();<br />
-// Hàm <strong>skip(2)</strong> bỏ qua 2 số đầu</p>
-<p>let nums: Vec<_> = (0..).take_while(|x| x * x &lt; 50).collect();<br />
-// Hàm <strong>take_while</strong> nhận số theo điều kiện có bình phương nhỏ hơn 50 </p>
-<p>let names = [&quot;Alfred&quot;, &quot;Andy&quot;, &quot;Jose&quot;, &quot;Luke&quot;];<br />
-let names: Vec<_> = names.iter().skip_while(|x| x.starts_with('A')).collect();<br />
-println!(&quot;Names that don't start with 'A': {:?}&quot;, names);<br />
-//Tương tự với hàm <strong>skip_while</strong> là loại bỏ theo điều kiện, ở đây là loại bỏ các phần tử bắt đầu là kí tự A</p>
-</blockquote>
+<pre><code class="language-html">let all_nums = 0..;
+let nums: Vec&lt;_&gt; = all_nums.take(5).collect();
+println!(&quot;The first five numbers are: {:?}&quot;, nums);
+//Hàm **take(5)** lấy 5 số đầu tiên của iterator 
+
+let sum: i32 = (1..11).sum();
+   let product: i32 = (1..11).product();
+   println!(
+     &quot;When operating on the first ten positive numbers\n\
+      their sum is {} and\n\
+      their product is {}.&quot;,
+      sum, product
+   );
+// Hàm **sum** : tổng, **product** : nhân 
+
+ let nums: Vec&lt;_&gt; = (0..11).skip(2).collect();
+// Hàm **skip(2)** bỏ qua 2 số đầu
+
+ let nums: Vec&lt;_&gt; = (0..).take_while(|x| x * x &lt; 50).collect();
+// Hàm **take_while** nhận số theo điều kiện có bình phương nhỏ hơn 50 
+
+let names = [&quot;Alfred&quot;, &quot;Andy&quot;, &quot;Jose&quot;, &quot;Luke&quot;];
+let names: Vec&lt;_&gt; = names.iter().skip_while(|x| x.starts_with(&#039;A&#039;)).collect();
+println!(&quot;Names that don&#039;t start with &#039;A&#039;: {:?}&quot;, names);
+//Tương tự với hàm **skip_while** là loại bỏ theo điều kiện, ở đây là loại bỏ các phần tử bắt đầu là kí tự A</code></pre>
 <p>Tương tự chúng ta cũng có hàm <strong>filter</strong> để lọc phần tử</p>
-<blockquote>
-<p>fn main() {<br />
-let countries = [<br />
-&quot;U.S.A.&quot;,<br />
-&quot;Germany&quot;,<br />
-&quot;France&quot;,<br />
-&quot;Italy&quot;,<br />
-&quot;India&quot;,<br />
-&quot;Pakistan&quot;,<br />
-&quot;Burma&quot;,<br />
-];<br />
-let countries_with<em>i: Vec&lt;</em>&gt; = countries<br />
-.iter()<br />
-.filter(|country| country.contains('i'))<br />
-.collect();<br />
-println!(<br />
-&quot;Countries containing the letter 'i': {:?}&quot;,<br />
-countries_with_i<br />
-);<br />
-}<br />
-// Lọc danh sách các quốc gia có chứa kí tự 'i'</p>
-</blockquote>
+<pre><code class="language-html">fn main() {
+    let countries = [
+     &quot;U.S.A.&quot;,
+        &quot;Germany&quot;,
+        &quot;France&quot;,
+        &quot;Italy&quot;,
+        &quot;India&quot;,
+        &quot;Pakistan&quot;,
+        &quot;Burma&quot;,
+   ];
+   let countries_with_i: Vec&lt;_&gt; = countries
+     .iter()
+     .filter(|country| country.contains(&#039;i&#039;))
+     .collect();
+   println!(
+     &quot;Countries containing the letter &#039;i&#039;: {:?}&quot;,
+     countries_with_i
+   );
+}
+// Lọc danh sách các quốc gia có chứa kí tự &#039;i&#039;</code></pre>
              <hr/>
                 <div class="powr-comments" id="e67d472b_64"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
             </div>

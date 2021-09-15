@@ -31,7 +31,7 @@
 	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/hien-thi-trang-web-tren-trinh-duyet/" />
 	<meta property="og:site_name" content="RustVietnam" />
 	<meta property="article:published_time" content="2021-09-07T11:04:52+00:00" />
-	<meta property="article:modified_time" content="2021-09-10T09:19:35+00:00" />
+	<meta property="article:modified_time" content="2021-09-15T09:11:34+00:00" />
 	<meta property="og:image" content="https://rustvietnam.com/wp-content/uploads/2021/09/B16813_Figure_5.1.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="Written by" />
@@ -80,7 +80,7 @@
 	                "@id": "https://rustvietnam.com/lap-trinh-web-voi-rust/hien-thi-trang-web-tren-trinh-duyet/#primaryimage"
 	            },
 	            "datePublished": "2021-09-07T11:04:52+00:00",
-	            "dateModified": "2021-09-10T09:19:35+00:00",
+	            "dateModified": "2021-09-15T09:11:34+00:00",
 	            "author": {
 	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
 	            },
@@ -317,23 +317,19 @@
 <p>Các chương trước chúng ta xài JSON , bây giờ là lúc render HTML ( nếu chưa biết về Html/js/css thì các bạn quay xe sớm nhé ).<br />
 Trong src/views tạo folder <strong>app</strong> tạo <strong>items.rs</strong> và <strong>mod.rs</strong><br />
 Trong file <strong>items.rs</strong> </p>
-<blockquote>
-<p>use actix_web::HttpResponse;<br />
-pub async fn items() -&gt; HttpResponse {<br />
-HttpResponse::Ok()<br />
-.content_type(&quot;text/html; charset=utf8&quot;).body(<code><code>&quot;&lt;h1&gt;Items&lt;/h1&gt;&quot;</code></code>)<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use actix_web::HttpResponse;
+pub async fn items() -&gt; HttpResponse {
+    HttpResponse::Ok()
+        .content_type(&quot;text/html; charset=utf8&quot;).body(```&quot;&lt;h1&gt;Items&lt;/h1&gt;&quot;```)
+}</code></pre>
 <p>Một code đơn giản Trả về HTML body <code><code>**&lt;h1&gt;Items&lt;/h1&gt;** </code></code></p>
 <p>Trong <strong>mod,rs</strong> ta khai báo factory cho view item ở trên, tương tự như những factory đã có trước đó</p>
-<blockquote>
-<p>use actix_web::web;<br />
-mod items;<br />
-use super::path::Path;<br />
-pub fn app_factory(app: &amp;mut web::ServiceConfig) {<br />
-let base_path: Path = Path{prefix: String::from(&quot;/&quot;)}; app.route(&amp;base_path.define(String::from(&quot;&quot;)),web::get().to(items::items));<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use actix_web::web;
+mod items;
+use super::path::Path;
+pub fn app_factory(app: &amp;mut web::ServiceConfig) {
+let base_path: Path = Path{prefix: String::from(&quot;/&quot;)}; app.route(&amp;base_path.define(String::from(&quot;&quot;)),web::get().to(items::items));
+}</code></pre>
 <p>Trong <strong>views/mod.rs</strong> ta thêm </p>
 <blockquote>
 <p>mod app;</p>
@@ -345,13 +341,11 @@ let base_path: Path = Path{prefix: String::from(&quot;/&quot;)}; app.route(&amp;
 <p>Chạy <strong>cargo run</strong> chúng ta sẽ có kết quả<br />
 <img src="https://rustvietnam.com/wp-content/uploads/2021/09/B16813_Figure_5.1.jpg" alt="" /><br />
 Ok , chúng ta đã có cái HTML đầu tiên của mình.Tiếp theo chúng ta xây dựng hàm để đọc nội dung file lấy HTML , tạo file <strong>views/app/content_loader.rs</strong></p>
-<blockquote>
-<p>use std::fs;<br />
-pub fn read_file(file_path: &amp;str) -&gt; String {<br />
-let data: String = fs::read_to_string(file_path).expect(&quot;Unable to read file&quot;);<br />
-return data<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use std::fs;
+pub fn read_file(file_path: &amp;str) -&gt; String {
+    let data: String = fs::read_to_string(file_path).expect(&quot;Unable to read file&quot;);
+    return data
+}</code></pre>
 <p>Trong folder <strong>src</strong> ta tạo folder <strong>templates</strong> để chứa tất cả các template html cảu mình, tạo 1 file <strong>main.html</strong></p>
 <pre><code class="language-html">&lt;body&gt;
     &lt;h1&gt;To Do Items&lt;/h1&gt;
@@ -470,52 +464,48 @@ Chúng ta cần làm là </p>
 <p>Tiếp theo 2 là tạo <strong>javascript/main.js</strong> chúng tạm thời để file trống<br />
 Bước 3 tạo <strong>css/main.css</strong> và <strong>css/base.css</strong><br />
 Bước 4 File <strong>views/app/items.rs</strong></p>
-<blockquote>
-<p>use actix_web::HttpResponse;<br />
-use super::content_loader::read_file;<br />
-use super::content_loader::add_component;<br />
-/// Renders the main view that shows all items in the state.<br />
-///<br />
-/// # Returns<br />
-/// * (HttpResponse) with HTML<br />
-pub async fn items() -&gt; HttpResponse {<br />
-let mut html_data = read_file(        String::from(&quot;./templates/main.html&quot;));<br />
-let javascript_data: String = read_file(<br />
-String::from(&quot;./javascript/main.js&quot;));<br />
-let css_data: String = read_file(<br />
-String::from(&quot;./css/main.css&quot;));<br />
-let base_css_data: String = read_file(<br />
-String::from(&quot;./css/base.css&quot;));<br />
-html_data = html_data.replace(&quot;{{JAVASCRIPT}}&quot;, &amp;javascript_data);<br />
-html_data = html_data.replace(&quot;{{CSS}}&quot;, &amp;css_data);<br />
-html_data = html_data.replace(&quot;{{BASE_CSS}}&quot;, &amp;base_css_data);<br />
-html_data = add_component(String::from(&quot;header&quot;), html_data);<br />
-HttpResponse::Ok()<br />
-.content_type(&quot;text/html; charset=utf-8&quot;)<br />
-.body(html_data)<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use actix_web::HttpResponse;
+use super::content_loader::read_file;
+use super::content_loader::add_component;
+/// Renders the main view that shows all items in the state.
+///
+/// # Returns
+/// * (HttpResponse) with HTML
+pub async fn items() -&gt; HttpResponse {
+    let mut html_data = read_file(        String::from(&quot;./templates/main.html&quot;));
+    let javascript_data: String = read_file(
+ String::from(&quot;./javascript/main.js&quot;));
+    let css_data: String = read_file(
+        String::from(&quot;./css/main.css&quot;));
+    let base_css_data: String = read_file(
+        String::from(&quot;./css/base.css&quot;));
+    html_data = html_data.replace(&quot;{{JAVASCRIPT}}&quot;, &amp;javascript_data);
+    html_data = html_data.replace(&quot;{{CSS}}&quot;, &amp;css_data);
+    html_data = html_data.replace(&quot;{{BASE_CSS}}&quot;, &amp;base_css_data);
+    html_data = add_component(String::from(&quot;header&quot;), html_data);
+    HttpResponse::Ok()
+        .content_type(&quot;text/html; charset=utf-8&quot;)
+        .body(html_data)
+}</code></pre>
 <p>Code trên chúng ta dùng injecting <strong>html_data = html_data.replace(“{{JAVASCRIPT}}”, &amp;javascript_data);</strong> để chèn js/css và component header vào main.html sau đó trả kết quả html về trình duyệt <strong>HttpResponse::Ok()<br />
 .content_type(“text/html; charset=utf-8”)<br />
 .body(html_data)</strong><br />
 Ok, vậy chúng ta sẽ có giao diện cơ bản<br />
 <img src="https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_2.png" alt="" /><br />
 Để cho dễ chạy mình bỏ qua cái khoản login , giữ file <strong>main.rs</strong> như cũ </p>
-<blockquote>
-<p>use actix_web::{App, HttpServer};<br />
-mod state;<br />
-mod to_do;<br />
-mod views;<br />
-mod processes;<br />
-mod json_serialization;<br />
-#[actix_web::main]<br />
-async fn main() -&gt; std::io::Result&lt;()&gt; {<br />
-HttpServer::new(|| {<br />
-let app = App::new().configure(views::views_factory);<br />
-app<br />
-}).bind(&quot;127.0.0.1:8000&quot;)?.run().await<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use actix_web::{App, HttpServer};
+mod state;
+mod to_do;
+mod views;
+mod processes;
+mod json_serialization;
+#[actix_web::main]
+async fn main() -&gt; std::io::Result&lt;()&gt; {
+    HttpServer::new(|| {
+        let app = App::new().configure(views::views_factory);
+        app
+    }).bind(&quot;127.0.0.1:8000&quot;)?.run().await
+}</code></pre>
 <p>Tiếp tục chúng ta show list các task từ file <strong>state.json</strong> , chúng ta sẽ code ở <strong>javascript/main.js</strong> dùng ajax để load nội dung file <strong>state.json</strong> sau đó chèn html vô view </p>
 <pre><code class="language-html">function apiCall(url, method) {
 let xhr = new XMLHttpRequest();
@@ -595,27 +585,25 @@ let json = {
 call.send(JSON.stringify(json));
 }</code></pre>
 <p><strong>/item/edit</strong> , <strong>/item/create/</strong> thì đã có nhưng <strong>/item/delete/</strong> thì chưa , trong <strong>src/views/to_do</strong> chúng ta thêm vào <strong>delete.rs</strong></p>
-<blockquote>
-<p>use actix_web::{web, HttpResponse};<br />
-use serde_json::value::Value;<br />
-use serde_json::Map;<br />
-use super::utils::return_state;<br />
-use crate::state::read_file;<br />
-use crate::to_do::to_do_factory;<br />
-use crate::json_serialization::to_do_item::ToDoItem;<br />
-use crate::processes::process_input;<br />
-pub async fn delete(to_do_item: web::Json<ToDoItem>) -&gt; HttpResponse {<br />
-let state: Map&lt;String, Value&gt; = read_file(String::from(&quot;./state.json&quot;));<br />
-let title: String = to_do_item.title.clone();<br />
-let status: String = to_do_item.status.clone();<br />
-match to_do_factory(&amp;status, title) {<br />
-Err(_item) =&gt; return HttpResponse::BadRequest().json(<br />
-format!(&quot;{} not accepted&quot;, status)),<br />
-Ok(item) =&gt; process_input(item, String::from(&quot;delete&quot;), &amp;state)<br />
-}<br />
-return HttpResponse::Ok().json(return_state())<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use actix_web::{web, HttpResponse};
+use serde_json::value::Value;
+use serde_json::Map;
+use super::utils::return_state;
+use crate::state::read_file;
+use crate::to_do::to_do_factory;
+use crate::json_serialization::to_do_item::ToDoItem;
+use crate::processes::process_input;
+pub async fn delete(to_do_item: web::Json&lt;ToDoItem&gt;) -&gt; HttpResponse {
+    let state: Map&lt;String, Value&gt; = read_file(String::from(&quot;./state.json&quot;));
+    let title: String = to_do_item.title.clone();
+    let status: String = to_do_item.status.clone();
+    match to_do_factory(&amp;status, title) {
+        Err(_item) =&gt; return HttpResponse::BadRequest().json(
+            format!(&quot;{} not accepted&quot;, status)),
+        Ok(item) =&gt; process_input(item, String::from(&quot;delete&quot;), &amp;state)
+    }
+    return HttpResponse::Ok().json(return_state())
+}</code></pre>
 <p>Trong <strong>src/views/to_do/mod.rs</strong> thêm vào khai báo <strong>mod delete;</strong> và factory</p>
 <blockquote>
 <p>app.route(&amp;base_path.define(String::from(&quot;/delete&quot;)),web::post().to(delete::delete));</p>

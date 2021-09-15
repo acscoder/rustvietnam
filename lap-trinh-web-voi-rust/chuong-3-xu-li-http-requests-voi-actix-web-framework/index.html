@@ -32,7 +32,7 @@
 	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/" />
 	<meta property="og:site_name" content="RustVietnam" />
 	<meta property="article:published_time" content="2021-08-26T11:43:32+00:00" />
-	<meta property="article:modified_time" content="2021-09-05T10:46:04+00:00" />
+	<meta property="article:modified_time" content="2021-09-15T08:49:49+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="Written by" />
 	<meta name="twitter:data1" content="admin" />
@@ -68,7 +68,7 @@
 	                "@id": "https://localhost/rustvietnam/#website"
 	            },
 	            "datePublished": "2021-08-26T11:43:32+00:00",
-	            "dateModified": "2021-09-05T10:46:04+00:00",
+	            "dateModified": "2021-09-15T08:49:49+00:00",
 	            "author": {
 	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
 	            },
@@ -319,88 +319,75 @@ actix-rt = &quot;2.2&quot;</p>
 </blockquote>
 <p>actix-web chính là cái framework của mình, còn actix-rt là crate xử lí bất đồng bộ trong luồng đơn hiện tại (single-threaded)<br />
 Đoạn code dưới chạy 1 webserver nhỏ tại <a href="http://localhost:8000/">http://localhost:8000/</a></p>
-<blockquote>
-<p>use actix_web::{web, App, HttpRequest, HttpServer, Responder};<br />
-async fn greet(req: HttpRequest) -&gt; impl Responder {<br />
-    let name = req.match_info().get(&quot;name&quot;).unwrap_or(&quot;World&quot;);<br />
-    format!(&quot;Hello {}!&quot;, name)<br />
-}<br />
-#[actix_web::main]<br />
-async fn main() -&gt; std::io::Result&lt;()&gt; {<br />
-    HttpServer::new(|| {<br />
-        App::new()<br />
-            .route(&quot;/&quot;, web::get().to(greet))<br />
-            .route(&quot;/{name}&quot;, web::get().to(greet))<br />
-    })<br />
-        .bind(&quot;127.0.0.1:8000&quot;)?<br />
-        .run()<br />
-        .await<br />
-}</p>
-</blockquote>
-<p>thử <a href="http://localhost:8000/">http://localhost:8000/</a> và <a href="http://localhost:8000/ten%20cua%20ban">http://localhost:8000/ten%20cua%20ban</a> ....<br />
+<pre><code class="language-html">use actix_web::{web, App, HttpRequest, HttpServer, Responder};
+async fn greet(req: HttpRequest) -&gt; impl Responder {
+    let name = req.match_info().get(&quot;name&quot;).unwrap_or(&quot;World&quot;);
+    format!(&quot;Hello {}!&quot;, name)
+}
+#[actix_web::main]
+async fn main() -&gt; std::io::Result&lt;()&gt; {
+    HttpServer::new(|| {
+        App::new()
+            .route(&quot;/&quot;, web::get().to(greet))
+            .route(&quot;/{name}&quot;, web::get().to(greet))
+    })
+        .bind(&quot;127.0.0.1:8000&quot;)?
+        .run()
+        .await
+}</code></pre>
+<p>Thử <a href="http://localhost:8000/">http://localhost:8000/</a> và <a href="http://localhost:8000/ten%20cua%20ban">http://localhost:8000/ten%20cua%20ban</a> ....<br />
 Ở đây chúng ta dùng Actix Web structs đọc data từ http request </p>
 <h2>Tìm hiểu veed Closures</h2>
 <p>Closures về cơ bản nó là 1 hàm, dĩ nhiên có hơi khan khác 1 chút ở cách thể hiện.Ví dụ :</p>
-<blockquote>
-<p>let test_function: fn(String) = |string_input: &amp;str| {<br />
-println!(&quot;{}&quot;, string_input);<br />
-};<br />
-test_function(&quot;test&quot;);</p>
-</blockquote>
-<p>So sánh với function : </p>
-<blockquote>
-<p>test_function(string_input: &amp;str) -&gt; String{<br />
-println!(&quot;{}&quot;, string_input);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">let test_function: fn(String) = |string_input: &amp;str| {
+    println!(&quot;{}&quot;, string_input);
+};
+test_function(&quot;test&quot;);
+
+So sánh với function : 
+> test_function(string_input: &amp;str) -&gt; String{
+    println!(&quot;{}&quot;, string_input);
+}</code></pre>
 <p>Ủa vây Closures có gì hay??<br />
 Ở closures function sẽ được đăng kí vào 1 biến , khi hết khu vực hoạt động biến sẽ được giải phóng bộ nhớ , ví dụ </p>
-<blockquote>
-<p>{<br />
-    let test_function: fn(String) = |string_input: &amp;str| {<br />
-        println!(&quot;{}&quot;, string_input);<br />
-    };<br />
-}<br />
-test_function(&quot;test&quot;);<br />
-Hàm này sẽ báo function not found in this scope  </p>
-</blockquote>
+<pre><code class="language-html">{
+    let test_function: fn(String) = |string_input: &amp;str| {
+        println!(&quot;{}&quot;, string_input);
+    };
+}
+test_function(&quot;test&quot;);</code></pre>
+<p>Hàm này sẽ báo function not found in this scope  </p>
 <p>Là 1 biến thì closures nó tương tác với biến khác cùng cấp , function thì ko</p>
-<blockquote>
-<p>let test = String::from(&quot;test&quot;);<br />
-let test_function = || {<br />
-println!(&quot;{}&quot;, test);<br />
-};<br />
-test_function();</p>
-</blockquote>
+<pre><code class="language-html">let test = String::from(&quot;test&quot;);
+let test_function = || {
+    println!(&quot;{}&quot;, test);
+};
+test_function();</code></pre>
 <p>closures test_function() ở trên vẫn nhận biến test , nhưng nếu là hàm thì sẽ báo lỗi ngay.<br />
 closures là biến đặc biệt nhưng vẫn tuân thủ qui tắc sở hữu nhé </p>
-<blockquote>
-<p>let test = String::from(&quot;test&quot;);<br />
-let test_function = || {<br />
-    println!(&quot;{}&quot;, test);<br />
-    return test + &amp;String::from(&quot; case&quot;)<br />
-};<br />
-let outcome: String = test_function();</p>
-</blockquote>
+<pre><code class="language-html">let test = String::from(&quot;test&quot;);
+let test_function = || {
+    println!(&quot;{}&quot;, test);
+    return test + &amp;String::from(&quot; case&quot;)
+};
+let outcome: String = test_function();</code></pre>
 <p>Tiếp theo, chúng ta sẽ tìm hiểu về luồng (Thread)<br />
 Các bạn thử đoạn code sau</p>
-<blockquote>
-<p>use std::{thread, time};<br />
-fn do_something(number: i8) -&gt; i8 {<br />
-println!(&quot;number {} is running&quot;, number);<br />
-let two_seconds = time::Duration::new(2, 0);<br />
-thread::sleep(two_seconds);<br />
-return 2<br />
-}<br />
-fn main() {<br />
-let now = time::Instant::now();<br />
-let one: i8 = do_something(1);<br />
-let two: i8 = do_something(2);<br />
-let three: i8 = do_something(3);<br />
-println!(&quot;time elapsed {:?}&quot;, now.elapsed());<br />
-println!(&quot;result {}&quot;, one + two + three);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use std::{thread, time};
+fn do_something(number: i8) -&gt; i8 {
+    println!(&quot;number {} is running&quot;, number);
+    let two_seconds = time::Duration::new(2, 0);
+    thread::sleep(two_seconds);
+    return 2
+}
+fn main() {
+    let now = time::Instant::now();
+    let one: i8 = do_something(1);
+    let two: i8 = do_something(2);
+    let three: i8 = do_something(3);
+    println!(&quot;time elapsed {:?}&quot;, now.elapsed());
+    println!(&quot;result {}&quot;, one + two + three);
+}</code></pre>
 <p>Code thực hiện tuần tự từ trên xuống dưới,mỗi lần hàm do_something gọi hệ thống sẽ bị dừng 2s vậy 3 lần gọi --&gt; 6s</p>
 <blockquote>
 <p>number 1 is running<br />
@@ -410,27 +397,25 @@ time elapsed 6.001135168s<br />
 result 6</p>
 </blockquote>
 <p>Dĩ nhiên đó là thông thường, đây là code phân luồng để thực hiện đồng thời 3 hàm do_something</p>
-<blockquote>
-<p>use std::{thread, time};<br />
-use std::thread::JoinHandle;<br />
-fn do_something(number: i8) -&gt; i8 {<br />
-    println!(&quot;number {} is running&quot;, number);<br />
-    let two_seconds = time::Duration::new(2, 0);<br />
-    thread::sleep(two_seconds);<br />
-    return 2<br />
-}<br />
-fn main() {<br />
-    let now = time::Instant::now();<br />
-    let thread_one: JoinHandle<i8> = thread::spawn(        || do_something(1));<br />
-    let thread_two: JoinHandle<i8> = thread::spawn(        || do_something(2));<br />
-    let thread_three: JoinHandle<i8> = thread::spawn(        || do_something(3));<br />
-    let result_one = thread_one.join();<br />
-    let result_two = thread_two.join();<br />
-    let result_three = thread_three.join();<br />
-    println!(&quot;time elapsed {:?}&quot;, now.elapsed());<br />
-    println!(&quot;result {}&quot;, result_one.unwrap() +                           result_two.unwrap() +                           result_three.unwrap());<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use std::{thread, time};
+use std::thread::JoinHandle;
+fn do_something(number: i8) -&gt; i8 {
+    println!(&quot;number {} is running&quot;, number);
+    let two_seconds = time::Duration::new(2, 0);
+    thread::sleep(two_seconds);
+    return 2
+}
+fn main() {
+    let now = time::Instant::now();
+    let thread_one: JoinHandle&lt;i8&gt; = thread::spawn(        || do_something(1));
+    let thread_two: JoinHandle&lt;i8&gt; = thread::spawn(        || do_something(2));
+    let thread_three: JoinHandle&lt;i8&gt; = thread::spawn(        || do_something(3));
+    let result_one = thread_one.join();
+    let result_two = thread_two.join();
+    let result_three = thread_three.join();
+    println!(&quot;time elapsed {:?}&quot;, now.elapsed());
+    println!(&quot;result {}&quot;, result_one.unwrap() +                           result_two.unwrap() +                           result_three.unwrap());
+}</code></pre>
 <p>kết quả </p>
 <blockquote>
 <p>number 3 is running<br />
@@ -454,27 +439,23 @@ Trong Cargo.toml ta thêm vào 1 gói futures</p>
 futures = &quot;0.3.5&quot;</p>
 </blockquote>
 <p>Trong lập trình thì futures có nghĩa là 1 đoạn code đã tồn tại trong hệ thống nhưng chưa được xử lí, khi nào call hay wait thì hệ thống sẽ chạy và trả kết quả, Futures còn được dùng như là 1 promise, delay hay deferred.</p>
-<blockquote>
-<p>async fn do_something(number: i8) -&gt; i8 {<br />
-    println!(&quot;number {} is running&quot;, number);<br />
-    let two_seconds = time::Duration::new(2, 0);<br />
-    thread::sleep(two_seconds);<br />
-    return 2<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">async fn do_something(number: i8) -&gt; i8 {
+    println!(&quot;number {} is running&quot;, number);
+    let two_seconds = time::Duration::new(2, 0);
+    thread::sleep(two_seconds);
+    return 2
+}</code></pre>
 <p>hàm do_something được khai báo với async  -&gt; nó là 1 future<br />
 quay lai với thread  lúc nãy </p>
-<blockquote>
-<p>use futures::executor::block_on;<br />
-use std::{thread, time};<br />
-fn main() {<br />
-    let now = time::Instant::now();<br />
-    let future_one = do_something(1);<br />
-    let outcome = block_on(future_one);<br />
-    println!(&quot;time elapsed {:?}&quot;, now.elapsed());<br />
-    println!(&quot;Here is the outcome: {}&quot;, outcome);<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use futures::executor::block_on;
+use std::{thread, time};
+fn main() {
+    let now = time::Instant::now();
+    let future_one = do_something(1);
+    let outcome = block_on(future_one);
+    println!(&quot;time elapsed {:?}&quot;, now.elapsed());
+    println!(&quot;Here is the outcome: {}&quot;, outcome);
+}</code></pre>
 <p>Hàm block_on chạy future_one chờ đợi tại đó trong 2s để nhận kết quả trả về,dĩ nhiên là nó hoạt động giống như code theard lúc đầu mình làm </p>
 <blockquote>
 <p>number 1 is running<br />
@@ -482,39 +463,35 @@ time elapsed 2.000179301s<br />
 Here is the outcome: 2</p>
 </blockquote>
 <p>Kết quả trả về từ 1 async có thể lấy từ gọi await</p>
+<pre><code class="language-html">let future_two = async {
+    return do_something(2).await
+};
+let future_two = block_on(future_two);
+println!(&quot;Here is the outcome: {:?}&quot;, future_two);</code></pre>
 <blockquote>
-<p>let future_two = async {<br />
-return do_something(2).await<br />
-};<br />
-let future_two = block_on(future_two);<br />
-println!(&quot;Here is the outcome: {:?}&quot;, future_two);</p>
 <p>number 2 is running<br />
 Here is the outcome: 2</p>
 </blockquote>
 <p>Các bạn lưu ý điểm khác biệt giữa hàm block_on và await là await gọi bên trong hàm/closure async </p>
-<blockquote>
-<p>let future_two = async {<br />
-let outcome_two = do_something(2).await;<br />
-let outcome_three = do_something(3).await;<br />
-[outcome_two, outcome_three]<br />
-};<br />
-let future_two = block_on(future_two);<br />
-println!(&quot;Here is the outcome: {:?}&quot;, future_two);</p>
-</blockquote>
+<pre><code class="language-html">let future_two = async {
+    let outcome_two = do_something(2).await;
+    let outcome_three = do_something(3).await;
+    [outcome_two, outcome_three]
+};
+let future_two = block_on(future_two);
+println!(&quot;Here is the outcome: {:?}&quot;, future_two);</code></pre>
 <p>Dĩ nhiên là những code trên để mô tả cách hoạt động của async,await chứ chưa nói lên hiệu quả khác biệt gì hết , kết quả vẫn mất 4s chờ.<br />
 Chúng ta lại dùng hàm join để gọi cả 2 outcome_two,outcome_three cùng chạy 1 lúc để giảm thời gian chờ từ 4s -&gt; 2s</p>
-<blockquote>
-<p>let future_two = async {<br />
-let outcome_two = do_something(2);<br />
-let outcome_three = do_something(3);<br />
-join!(outcome_two, outcome_three)<br />
-};<br />
-let now = time::Instant::now();<br />
-let future_two = block_on(future_two);<br />
-println!(&quot;time elapsed {:?}&quot;, now.elapsed());<br />
-println!(&quot;Here is the outcome: {:?}&quot;, future_two);</p>
-</blockquote>
-<p>kết quả là </p>
+<pre><code class="language-html">let future_two = async {
+    let outcome_two = do_something(2);
+    let outcome_three = do_something(3);
+    join!(outcome_two, outcome_three)
+};
+let now = time::Instant::now();
+let future_two = block_on(future_two);
+println!(&quot;time elapsed {:?}&quot;, now.elapsed());
+println!(&quot;Here is the outcome: {:?}&quot;, future_two);</code></pre>
+<p>Kết quả là </p>
 <blockquote>
 <p>number 2 is running<br />
 number 3 is running<br />
@@ -527,25 +504,23 @@ Chúng ta thêm crate async_std </p>
 <p>async-std = &quot;1.6.3&quot;</p>
 </blockquote>
 <p>Với crate này chúng ta khai báo futures :</p>
-<blockquote>
-<p>use std::vec::Vec;<br />
-use async_std;<br />
-use futures::future::join_all<br />
-let third_outcome = async {<br />
-let mut futures_vec = Vec::new();<br />
-let future_four = do_something(4);<br />
-let future_five = do_something(5);<br />
-futures_vec.push(future_four);<br />
-futures_vec.push(future_five);<br />
-let handles = futures_vec.into_iter().map(async<em>std::task::spawn).collect::&lt;Vec&lt;</em>&gt;&gt;();<br />
-let results = join_all(handles).await;<br />
-return results<br />
-};<br />
-let now = time::Instant::now();<br />
-let result = block_on(third_outcome);<br />
-println!(&quot;time elapsed for join vec {:?}&quot;, now.elapsed());<br />
-println!(&quot;Here is the result: {:?}&quot;, result);</p>
-</blockquote>
+<pre><code class="language-html">use std::vec::Vec;
+use async_std;
+use futures::future::join_all
+let third_outcome = async {
+    let mut futures_vec = Vec::new();
+    let future_four = do_something(4);
+    let future_five = do_something(5);
+    futures_vec.push(future_four);
+    futures_vec.push(future_five);
+    let handles = futures_vec.into_iter().map(async_std::task::spawn).collect::&lt;Vec&lt;_&gt;&gt;();
+    let results = join_all(handles).await;
+    return results
+};
+let now = time::Instant::now();
+let result = block_on(third_outcome);
+println!(&quot;time elapsed for join vec {:?}&quot;, now.elapsed());
+println!(&quot;Here is the result: {:?}&quot;, result);</code></pre>
 <p>Hơi dài dòng hơn 1 chút nhưng kết quả ngon rồi đã có 2s </p>
 <blockquote>
 <p>number 4 is running<br />
@@ -556,73 +531,63 @@ Here is the result: [2, 2]</p>
 <p>Code trên chúng ta đưa 2 future future_four,future_five vào trong vector sau đó map với hàm async_std::task::spawn  từ crate async_std , chúng ta đã có xử lý bất đồng bộ đồng thời 2 task trên cùng 1 luồng.<br />
 Tới đây chúng ta đã làm được cả threads và async , bây giờ còn 1 chuyện hơi trắc trở nữa là truyền biến vào luồng.Như đã biết cái cơ chế sỡ hữu biến giúp rust an toàn nhưng nó làm mọi sự rắc rối hơn 1 chút ,chúng ta sẽ thảo luận cách chia sẽ dữ liệu giữa các luồng</p>
 <ul>
-<li>std::sync::Arc: dạng dữ liệu này có thể tham chiếu vào bên trong luồng<br />
-<blockquote>
-<p>use std::sync::Arc;<br />
-use std::thread;<br />
-let names = Arc::new(vec![&quot;dave&quot;, &quot;chloe&quot;, &quot;simon&quot;]);<br />
-let reference_data = Arc::clone(&amp;names);<br />
-    <br />
-let new_thread = thread::spawn(move || {<br />
-    println!(&quot;{}&quot;, reference_data[1]);<br />
-});<br />
-reference_data đã được clone từ names để sử dụng trong luồng new_thread</p>
-</blockquote>
+<li>std::sync::Arc: dạng dữ liệu này có thể tham chiếu vào bên trong luồng
+<pre><code class="language-html">use std::sync::Arc;
+use std::thread;
+let names = Arc::new(vec![&quot;dave&quot;, &quot;chloe&quot;, &quot;simon&quot;]);
+let reference_data = Arc::clone(&amp;names);
+    
+let new_thread = thread::spawn(move || {
+    println!(&quot;{}&quot;, reference_data[1]);
+});</code></pre>
+<p>reference_data đã được clone từ names để sử dụng trong luồng new_thread</p>
 </li>
-<li>std::sync::Mutex: dạng dữ liệu có thể sử dụng và thay đổi bên trong luồng<br />
-<blockquote>
-<p>use std::sync::Mutex;<br />
-use std::thread;<br />
-let count = Mutex::new(0);<br />
-let new_thread = thread::spawn(move || {<br />
-    *count.lock().unwrap() += 1;<br />
-});</p>
-</blockquote>
-</li>
-</ul>
+<li>std::sync::Mutex: dạng dữ liệu có thể sử dụng và thay đổi bên trong luồng
+<pre><code class="language-html">use std::sync::Mutex;
+use std::thread;
+let count = Mutex::new(0);
+let new_thread = thread::spawn(move || {
+    *count.lock().unwrap() += 1;
+});</code></pre>
 <p>bên trong luồng new_thread Mutex count được lock (khóa) sau đó unwrap rồi + thêm 1<br />
 Nhìn lại đoạn code webserver đầu chương chúng ta đã nắm rõ hết các concept cần thiết. Tất cả cá khái niệm chính để làm việc với bất đồng bộ đã được trình bày , dĩ nhiên ko phải là tất cả, nếu các bạn có thấy khó hiểu thì nó cũng là lẽ thường, đừng lo.<br />
 Thông tin thêm về Actix crate  <a href="https://actix.rs/book/actix/sec-0-quick-start.html">https://actix.rs/book/actix/sec-0-quick-start.html</a> dùng để viết các app sử dụng kĩ thuật bất đồng bộ (concurrent)<br />
 Actix crate dựa trên mô hình chính là Actor, ở đây 1 Actor là 1 nhóm code độc lập có khả năng tính toán và tương tác với những Actor khác thông qua truyền/nhận message.<br />
 Cái document trên viết rất tốt rồi, nói thêm đâm ra rối các bạn có thể tham khảo .</p>
+</li>
+</ul>
 <h2>Quản lí các views trong Actix Web framework</h2>
 <p>Ở phần đầu, chúng ta đã in ra format!(&quot;Hello {}!&quot;, name) ở main.rs , dĩ nhiên chúng ra ko thể code tất cả trong file đó, chúng ta sẽ tạo 1 cấu trúc thư mục để quản lí các views của mình, vd như sau: </p>
-<blockquote>
-<p>├── main.rs<br />
-└── views<br />
-    ├── auth<br />
-    │   ├── login.rs<br />
-    │   ├── logout.rs<br />
-    │   └── mod.rs<br />
-    ├── mod.rs<br />
-    └── path.rs</p>
-</blockquote>
+<pre><code class="language-html">├── main.rs
+└── views
+    ├── auth
+    │   ├── login.rs
+    │   ├── logout.rs
+    │   └── mod.rs
+    ├── mod.rs
+    └── path.rs</code></pre>
 <p>main.rs là nơi khai báo chính cho server, chúng ta khai báo các URL trong path.rs, các view đăng nhập, đăng xuất login.rs logout.rs ở trong thư mục auth.<br />
 Rõ ràng rồi hén, bắt đầu là main.rs :</p>
-<blockquote>
-<p>use actix_web::{App, HttpServer};<br />
-mod views;<br />
-#[actix_rt::main]<br />
-async fn main() -&gt; std::io::Result&lt;()&gt; {<br />
-HttpServer::new(|| {<br />
-let app = App::new();<br />
-return app<br />
-}).bind(&quot;127.0.0.1:8000&quot;)?<br />
-.run()<br />
-.await<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use actix_web::{App, HttpServer};
+mod views;
+#[actix_rt::main]
+async fn main() -&gt; std::io::Result&lt;()&gt; {
+    HttpServer::new(|| {
+    let app = App::new();
+    return app
+    }).bind(&quot;127.0.0.1:8000&quot;)?
+    .run()
+    .await
+}</code></pre>
 <p>Khai báo của chúng ta là 1 app trống chưa có config gì hết nhé .Tiếp theo trong views/path.rs  ta khai báo struct Path cho các uri /abc-xyz </p>
-<blockquote>
-<p>pub struct Path {<br />
-    pub prefix: String<br />
-}<br />
-impl Path {<br />
-    pub fn define(&amp;self, following_path: String) -&gt; String {<br />
-        return self.prefix.to_owned() + &amp;following_path<br />
-    }<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">pub struct Path {
+    pub prefix: String
+}
+impl Path {
+    pub fn define(&amp;self, following_path: String) -&gt; String {
+        return self.prefix.to_owned() + &amp;following_path
+    }
+}</code></pre>
 <p>struct Path được impl hàm define trả lại string của Path::prefix cộng với following_path . Trong views/auth/login.rs chúng ta làm đơn giản như sau </p>
 <blockquote>
 <p>pub async fn login() -&gt; String {<br />
@@ -636,42 +601,36 @@ format!(&quot;Logout view&quot;)<br />
 }</p>
 </blockquote>
 <p>File views/auth/mod.rs chúng ta làm 1 factory để trả lại view login, logout</p>
-<blockquote>
-<p>use actix_web::web;<br />
-mod login;<br />
-mod logout;<br />
-use super::path::Path;<br />
-pub fn auth_factory(app: &amp;mut web::ServiceConfig) {<br />
-    let base_path: Path = Path{prefix: String::from(&quot;/auth&quot;)};<br />
-    app.route(&amp;base_path.define(String::from(&quot;/login&quot;)),<br />
-              web::get().to(login::login))<br />
-       .route(&amp;base_path.define(String::from(&quot;/logout&quot;)),<br />
-              web::get().to(logout::logout));<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use actix_web::web;
+mod login;
+mod logout;
+use super::path::Path;
+pub fn auth_factory(app: &amp;mut web::ServiceConfig) {
+    let base_path: Path = Path{prefix: String::from(&quot;/auth&quot;)};
+    app.route(&amp;base_path.define(String::from(&quot;/login&quot;)),
+              web::get().to(login::login))
+       .route(&amp;base_path.define(String::from(&quot;/logout&quot;)),
+              web::get().to(logout::logout));
+}</code></pre>
 <p>Trong  views/mod.rs ta kahai báo view factory </p>
-<blockquote>
-<p>use actix_web::web;<br />
-mod path;<br />
-mod auth;<br />
-pub fn views_factory(app: &amp;mut web::ServiceConfig) {<br />
-    auth::auth_factory(app);<br />
-};</p>
-</blockquote>
+<pre><code class="language-html">use actix_web::web;
+mod path;
+mod auth;
+pub fn views_factory(app: &amp;mut web::ServiceConfig) {
+    auth::auth_factory(app);
+};</code></pre>
 <p>Sau đó ta quay lại main.rs để khai báo view cho App</p>
-<blockquote>
-<p>use actix_web::{App, HttpServer};<br />
-mod views;<br />
-#[actix_rt::main]<br />
-async fn main() -&gt; std::io::Result&lt;()&gt; {<br />
-HttpServer::new(|| {<br />
-let app = App::new().configure(views::views_factory);<br />
-return app<br />
-}).bind(&quot;127.0.0.1:8000&quot;)?<br />
-.run()<br />
-.await<br />
-}</p>
-</blockquote>
+<pre><code class="language-html">use actix_web::{App, HttpServer};
+mod views;
+#[actix_rt::main]
+async fn main() -&gt; std::io::Result&lt;()&gt; {
+    HttpServer::new(|| {
+    let app = App::new().configure(views::views_factory);
+    return app
+    }).bind(&quot;127.0.0.1:8000&quot;)?
+    .run()
+    .await
+}</code></pre>
 <p>OK , cargo run thôi nào<br />
 Mở trình duyệt web <a href="http://localhost:8000/auth/login,http://localhost:8000/auth/logout">http://localhost:8000/auth/login,http://localhost:8000/auth/logout</a> để thử xem nhé !!! </p>
              <hr/>
