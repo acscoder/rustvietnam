@@ -1,47 +1,4 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Xử lí Dữ liệu HTTP Requests với Actix Web framework - RustVietnam</title>
-    <meta charset="UTF-8"/>
-	<link rel="profile" href="http://gmpg.org/xfn/11"/>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
-    <meta http-equiv="Cache-control" content="public"/>
-    <meta http-equiv="Cache-control" content="max-age=604800"/>
-    <meta http-equiv="Cache-control" content="Content-Encoding=gzip"/>
-
-    <link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' />
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script>
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
-
-	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-
-	<!-- This site is optimized with the Yoast SEO plugin v17.1 - https://yoast.com/wordpress/plugins/seo/ -->
-	<link rel="canonical" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/" />
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Xử lí Dữ liệu HTTP Requests với Actix Web framework - RustVietnam" />
-	<meta property="og:description" content="Tìm hiểu cơ bản về lập trình bất đồng bộ (asynchronous programming) với Actix Web framework" />
-	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/" />
-	<meta property="og:site_name" content="RustVietnam" />
-	<meta property="article:published_time" content="2021-08-27T09:32:30+00:00" />
-	<meta property="article:modified_time" content="2021-09-15T08:53:23+00:00" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:label1" content="Written by" />
-	<meta name="twitter:data1" content="admin" />
-	<meta name="twitter:label2" content="Est. reading time" />
-	<meta name="twitter:data2" content="13 minutes" />
-	<script type="application/ld+json" class="yoast-schema-graph">{
+<!DOCTYPE html><html><head><title>Xử lí Dữ liệu HTTP Requests với Actix Web framework - RustVietnam</title><meta charset="UTF-8"/><link rel="profile" href="http://gmpg.org/xfn/11"/><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta http-equiv="Cache-control" content="public"/><meta http-equiv="Cache-control" content="max-age=604800"/><meta http-equiv="Cache-control" content="Content-Encoding=gzip"/><link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' /><link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script> <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" /><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' /><link rel="canonical" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/" /><meta property="og:locale" content="en_US" /><meta property="og:type" content="article" /><meta property="og:title" content="Xử lí Dữ liệu HTTP Requests với Actix Web framework - RustVietnam" /><meta property="og:description" content="Tìm hiểu cơ bản về lập trình bất đồng bộ (asynchronous programming) với Actix Web framework" /><meta property="og:url" content="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/" /><meta property="og:site_name" content="RustVietnam" /><meta property="article:published_time" content="2021-08-27T09:32:30+00:00" /><meta property="article:modified_time" content="2021-09-15T08:53:23+00:00" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:label1" content="Written by" /><meta name="twitter:data1" content="admin" /><meta name="twitter:label2" content="Est. reading time" /><meta name="twitter:data2" content="13 minutes" /> <script type="application/ld+json" class="yoast-schema-graph">{
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
@@ -123,190 +80,7 @@
 	            "url": "https://rustvietnam.com/author/admin/"
 	        }
 	    ]
-	}</script>
-	<!-- / Yoast SEO plugin. -->
-
-
-<link rel='dns-prefetch' href='//s.w.org' />
-<link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Xử lí Dữ liệu HTTP Requests với Actix Web framework Comments Feed" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/feed/" />
-<link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/26" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" />
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /> 
-<meta name="generator" content="WordPress 5.8.1" />
-<link rel='shortlink' href='https://rustvietnam.com/?p=26' />
-<link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework%2F" />
-<link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework%2F&#038;format=xml" />
-<link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>
-</head>
-
-<body>
-<!-- Navbar -->
-<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
-    <div class="container">
-        <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com">
-            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
-            <span>RustVietnam</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse" id="navbar_global">
-            <div class="navbar-collapse-header">
-                <div class="row">
-                    <div class="col-6 collapse-brand">
-                        <a href="https://rustvietnam.com">
-                            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
-                        </a>
-                    </div>
-                    <div class="col-6 collapse-close">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-ui-04 d-lg-none"></i>
-                        <span class="nav-link-inner--text">Nền tảng</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-xl">
-                        <div class="dropdown-menu-inner">
-                            <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center">
-                                <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
-                                    <i class="ni ni-spaceship"></i>
-                                </div>
-                                <div class="media-body ml-3">
-                                    <h6 class="heading text-primary mb-md-1">Bắt đầu</h6>
-                                    <p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p>
-                                </div>
-                            </a>
-                            <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center">
-                                <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
-                                    <i class="ni ni-palette"></i>
-                                </div>
-                                <div class="media-body ml-3">
-                                    <h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6>
-                                    <p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p>
-                                </div>
-                            </a>
-                            <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center">
-                                <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
-                                    <i class="ni ni-ui-04"></i>
-                                </div>
-                                <div class="media-body ml-3">
-                                    <h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5>
-                                    <p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p>
-                                </div>
-
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-collection d-lg-none"></i>
-                        <span class="nav-link-inner--text">Nâng cao</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a>
-                        <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a>
-                        <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a>
-                        <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a>
-                    </div>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-collection d-lg-none"></i>
-                        <span class="nav-link-inner--text">Network</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a>
-                        <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a>
-                    </div>
-                </li>
-                <li> <a target="_blank" rel="nofollow" href="https://docs.rust-embedded.org/book/#:~:text=Embedded%20Rust%20is%20for%20everyone%20who%20wants%20to,language%20provides.%20%28See%20also%20Who%20Rust%20Is%20For%29" class="nav-link" >
-                        Lập trình nhúng
-                    </a></li>
-                <li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" >
-                        BlockChain
-                    </a></li>
-            </ul>
-
-            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-
-                <li class="nav-item d-none d-lg-block">
-                    <a href="mailto:hocrust@gmail.com" target="_blank" rel="nofollow" class="btn btn-primary btn-icon">
-                        <span class="nav-link-inner--text">Liên hệ</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<!-- End Navbar -->
-    <div class="section section-hero section-shaped">
-        <div class="shape shape-style-1 shape-primary">
-            <span class="span-150"></span>
-            <span class="span-50"></span>
-            <span class="span-50"></span>
-            <span class="span-75"></span>
-            <span class="span-100"></span>
-            <span class="span-75"></span>
-            <span class="span-50"></span>
-            <span class="span-100"></span>
-            <span class="span-50"></span>
-            <span class="span-100"></span>
-        </div>
-        <div class="page-header">
-            <div class="container shape-container d-flex align-items-center py-lg">
-                <div class="col px-0">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-lg-8 text-center text-white">
-                            <h1 class="display-2 text-white">Xử lí Dữ liệu HTTP Requests với Actix Web framework</h1>
-                            <p class="lead">
-                                <p>Tìm hiểu cơ bản về lập trình bất đồng bộ (asynchronous programming) với  Actix Web framework</p>
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="separator separator-bottom separator-skew zindex-100">
-            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-            </svg>
-        </div>
-    </div>
-
-<section class="section">
-    <div class="container">
-        <div class="row justify-content-center flex-row-reverse">
-            <div class="col-lg-4 single-sidebar">
-
-                <h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/">Lập trình Web với Rust</a></h2> <ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/">Chương 1 - Hướng dẫn cơ bản về lập trình với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/">Chương 2 - Thiết kế một Web App với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/">Chương 3 - Xử lí HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/">Chương 4  - Xử lí Dữ liệu HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/hien-thi-trang-web-tren-trinh-duyet/">Chương 5 - Hiển thị trang Web trên trình duyệt</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/">Chương 6 - Cơ sở dữ liệu PostgreSQL</a></li></ul>
-            </div>
-
-            <div class="col-lg-8 single-content">
-            <p>Trong chương trước chúng ta đã sử dụng Actix web để tạo lập 1 web server với views đơn giản, chương này chúng ta sẽ đi xa hơn, nhận nhiều dữ liệu hơn từ request của user.<br />
-Trong chương này chúng ta sẽ cover 1 số topic sau:</p>
-<ul>
-<li>Nhận data và truyền vào view</li>
-<li>Sử dung gói(crate) serde để serialize structs thành json và ngược lại</li>
-<li>Sử dụng Actix-web trả lại kết quả json</li>
-<li>Làm một middleware để xử lí dữ liệu trước tầng views</li>
-<li>Extract dữ liệu từ header của request</li>
-</ul>
-<p>Wow, bắt đầu thôi!!!</p>
-<p>Chương 2 chúng ta đã làm cái todo app, chương này chúng ta sẽ tích hợp các to_do app này vào cái web đã làm trong chương 3 , di chuyển to_do,processes.rs,state.rs vào web_app/src</p>
-<pre><code class="language-html">├── to_do
+	}</script> <link rel='dns-prefetch' href='//s.w.org' /><link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Xử lí Dữ liệu HTTP Requests với Actix Web framework Comments Feed" href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/feed/" /><link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/26" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 5.8.1" /><link rel='shortlink' href='https://rustvietnam.com/?p=26' /><link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework%2F" /><link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fchuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework%2F&#038;format=xml" /><link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script> </head><body><nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2"><div class="container"> <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> <span>RustVietnam</span> </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button><div class="navbar-collapse collapse" id="navbar_global"><div class="navbar-collapse-header"><div class="row"><div class="col-6 collapse-brand"> <a href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> </a></div><div class="col-6 collapse-close"> <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span></span> <span></span> </button></div></div></div><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-ui-04 d-lg-none"></i> <span class="nav-link-inner--text">Nền tảng</span> </a><div class="dropdown-menu dropdown-menu-xl"><div class="dropdown-menu-inner"> <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-primary rounded-circle text-white"> <i class="ni ni-spaceship"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Bắt đầu</h6><p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-success rounded-circle text-white"> <i class="ni ni-palette"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6><p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-warning rounded-circle text-white"> <i class="ni ni-ui-04"></i></div><div class="media-body ml-3"><h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5><p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p></div></a></div></div></li><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Nâng cao</span> </a><div class="dropdown-menu"> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a> <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a> <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a> <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a></div></li></ul><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Network</span> </a><div class="dropdown-menu"> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a> <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a></div></li><li> <a target="_blank" rel="nofollow" href="https://docs.rust-embedded.org/book/#:~:text=Embedded%20Rust%20is%20for%20everyone%20who%20wants%20to,language%20provides.%20%28See%20also%20Who%20Rust%20Is%20For%29" class="nav-link" > Lập trình nhúng </a></li><li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" > BlockChain </a></li></ul><ul class="navbar-nav align-items-lg-center ml-lg-auto"><li class="nav-item d-none d-lg-block"> <a href="mailto:hocrust@gmail.com" target="_blank" rel="nofollow" class="btn btn-primary btn-icon"> <span class="nav-link-inner--text">Liên hệ</span> </a></li></ul></div></div></nav><div class="section section-hero section-shaped"><div class="shape shape-style-1 shape-primary"> <span class="span-150"></span> <span class="span-50"></span> <span class="span-50"></span> <span class="span-75"></span> <span class="span-100"></span> <span class="span-75"></span> <span class="span-50"></span> <span class="span-100"></span> <span class="span-50"></span> <span class="span-100"></span></div><div class="page-header"><div class="container shape-container d-flex align-items-center py-lg"><div class="col px-0"><div class="row align-items-center justify-content-center"><div class="col-lg-8 text-center text-white"><h1 class="display-2 text-white">Xử lí Dữ liệu HTTP Requests với Actix Web framework</h1><p class="lead"><p>Tìm hiểu cơ bản về lập trình bất đồng bộ (asynchronous programming) với  Actix Web framework</p></p></div></div></div></div></div><div class="separator separator-bottom separator-skew zindex-100"> <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg"> <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon> </svg></div></div><section class="section"><div class="container"><div class="row justify-content-center flex-row-reverse"><div class="col-lg-4 single-sidebar"><h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/">Lập trình Web với Rust</a></h2><ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/">Chương 1 - Hướng dẫn cơ bản về lập trình với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/">Chương 2 - Thiết kế một Web App với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/">Chương 3 - Xử lí HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/">Chương 4  - Xử lí Dữ liệu HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/hien-thi-trang-web-tren-trinh-duyet/">Chương 5 - Hiển thị trang Web trên trình duyệt</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/">Chương 6 - Cơ sở dữ liệu PostgreSQL</a></li></ul></div><div class="col-lg-8 single-content"><p>Trong chương trước chúng ta đã sử dụng Actix web để tạo lập 1 web server với views đơn giản, chương này chúng ta sẽ đi xa hơn, nhận nhiều dữ liệu hơn từ request của user.<br /> Trong chương này chúng ta sẽ cover 1 số topic sau:</p><ul><li>Nhận data và truyền vào view</li><li>Sử dung gói(crate) serde để serialize structs thành json và ngược lại</li><li>Sử dụng Actix-web trả lại kết quả json</li><li>Làm một middleware để xử lí dữ liệu trước tầng views</li><li>Extract dữ liệu từ header của request</li></ul><p>Wow, bắt đầu thôi!!!</p><p>Chương 2 chúng ta đã làm cái todo app, chương này chúng ta sẽ tích hợp các to_do app này vào cái web đã làm trong chương 3 , di chuyển to_do,processes.rs,state.rs vào web_app/src</p><pre><code class="language-html">├── to_do
 │   ├── mod.rs
 │   └── structs
 │       ├── base.rs
@@ -318,15 +92,7 @@ Trong chương này chúng ta sẽ cover 1 số topic sau:</p>
 │           ├── delete.rs
 │           ├── edit.rs
 │           ├── get.rs
-│           └── mod.rs</code></pre>
-<p>chúng ta thêm khai báo module vào file main.rs </p>
-<blockquote>
-<p>mod state;<br />
-mod to_do;<br />
-mod processes;</p>
-</blockquote>
-<p>bên trong folder views chúng ta thêm vào view cho todo ,chúng ta sẽ ko truyền dữ liệu qua command line như cũ mà qua phương thức GET của web</p>
-<pre><code class="language-html">├── auth
+│           └── mod.rs</code></pre><p>chúng ta thêm khai báo module vào file main.rs</p><blockquote><p>mod state;<br /> mod to_do;<br /> mod processes;</p></blockquote><p>bên trong folder views chúng ta thêm vào view cho todo ,chúng ta sẽ ko truyền dữ liệu qua command line như cũ mà qua phương thức GET của web</p><pre><code class="language-html">├── auth
 │   ├── login.rs
 │   ├── logout.rs
 │   └── mod.rs
@@ -334,10 +100,7 @@ mod processes;</p>
 ├── path.rs
 └── to_do
     ├── create.rs
-    └── mod.rs</code></pre>
-<p>Thêm crate serde_json vào Cargo.toml luôn nhé<br />
-Trong to_do/create.rs</p>
-<pre><code class="language-html">use serde_json::value::Value;
+    └── mod.rs</code></pre><p>Thêm crate serde_json vào Cargo.toml luôn nhé<br /> Trong to_do/create.rs</p><pre><code class="language-html">use serde_json::value::Value;
 use serde_json::Map;
 use actix_web::HttpRequest;
 use crate::to_do;
@@ -352,46 +115,28 @@ pub async fn create(req: HttpRequest) -&gt; String {
     let item = to_do::to_do_factory(&amp;String::from(&quot;pending&quot;), title).expect(&quot;create &quot;); // 3
     process_input(item, &quot;create&quot;.to_string(), &amp;state); // 4
     return format!(&quot;{} created&quot;, title_reference) // 5
-}</code></pre>
-<p>trong code trên mình nhận giá trị title từ phương thức GET</p>
-<blockquote>
-<p>let title: String = req.match_info().get(&quot;title&quot;).unwrap().to_string();</p>
-</blockquote>
-<p>Vậy thì Path đến create sẽ có cấu trúc sau</p>
-<blockquote>
-<p><a href="http://localhost:8000/item/create/{title">http://localhost:8000/item/create/{title</a>}</p>
-</blockquote>
-<p>Dâú ngoặc nhọn thể hiện cho title là biến , mình sẽ khai báo trong views/to_do/mod.rs  như sau: </p>
-<pre><code class="language-html">use actix_web::web;
+}</code></pre><p>trong code trên mình nhận giá trị title từ phương thức GET</p><blockquote><p>let title: String = req.match_info().get(&quot;title&quot;).unwrap().to_string();</p></blockquote><p>Vậy thì Path đến create sẽ có cấu trúc sau</p><blockquote><p><a href="http://localhost:8000/item/create/{title">http://localhost:8000/item/create/{title</a>}</p></blockquote><p>Dâú ngoặc nhọn thể hiện cho title là biến , mình sẽ khai báo trong views/to_do/mod.rs  như sau:</p><pre><code class="language-html">use actix_web::web;
 mod create;
 use super::path::Path;
 pub fn item_factory(app: &amp;mut web::ServiceConfig) {
     let base_path: Path = Path{prefix: String::from(&quot;/item&quot;)};
     app.route(&amp;base_path.define( String::from(&quot;/create/{title}&quot;)),
             web::get().to(create::create));
-}</code></pre>
-<p>Cập nhập views_factory để thêm vào to_do item_factory </p>
-<pre><code class="language-html">use actix_web::web;
+}</code></pre><p>Cập nhập views_factory để thêm vào to_do item_factory</p><pre><code class="language-html">use actix_web::web;
 mod path;
 mod auth;
 mod to_do;
 pub fn views_factory(app: &amp;mut web::ServiceConfig) {
     auth::auth_factory(app);
     to_do::item_factory(app);
-}</code></pre>
-<p>Cargo run chạy chương trình nhé<br />
-Ok, vậy là chúng ta đã create item và lưu vào file json rồi nhé, json là kiểu cơ sở dữ liệu cơ bản và dễ hiểu nhất,dĩ nhiên chúng ta sẽ học cách xài csdl xịn sò hơn là PostgreSQL ở chương 6.</p>
-<p>Trong views\to_do chúng ta tạo thêm 1 view get để lấy dữ liệu đã save trong file state.json</p>
-<pre><code class="language-html">use actix_web::{web, Responder};
+}</code></pre><p>Cargo run chạy chương trình nhé<br /> Ok, vậy là chúng ta đã create item và lưu vào file json rồi nhé, json là kiểu cơ sở dữ liệu cơ bản và dễ hiểu nhất,dĩ nhiên chúng ta sẽ học cách xài csdl xịn sò hơn là PostgreSQL ở chương 6.</p><p>Trong views\to_do chúng ta tạo thêm 1 view get để lấy dữ liệu đã save trong file state.json</p><pre><code class="language-html">use actix_web::{web, Responder};
 use serde_json::value::Value;
 use serde_json::Map;
 use crate::state::read_file;
 pub async fn get() -&gt; impl Responder {
     let state: Map&lt;String, Value&gt; = read_file(String::from(        &quot;./state.json&quot;));
     return web::Json(state);
-}</code></pre>
-<p>thêm khai báo cho get và to_do/mod.rs</p>
-<pre><code class="language-html">use actix_web::web;
+}</code></pre><p>thêm khai báo cho get và to_do/mod.rs</p><pre><code class="language-html">use actix_web::web;
 mod create;
 mod get;
 use super::path::Path;
@@ -399,21 +144,9 @@ pub fn item_factory(app: &amp;mut web::ServiceConfig) {
     let base_path: Path = Path{prefix: String::from(&quot;/item&quot;)};
     app.route(&amp;base_path.define( String::from(&quot;/create/{title}&quot;)),web::get().to(create::create));
     app.route(&amp;base_path.define( String::from(&quot;/get&quot;)),web::get().to(get::get));
-}</code></pre>
-<p>chạy lệnh cargo run sau đó mở <a href="http://localhost:8000/item/get">http://localhost:8000/item/get</a> trong trình duyệt.<br />
-Ok, đã hiển thị được dữ liệu ở dạng json !!!<br />
-Chúng ta sẽ tiếp tục nâng cấp sức manh cho app của mình<br />
-Trong file to_do/structs/mod.rs ta đổi mod base; thành pub mod base; cho phép truy cập module này từ bên ngoài.<br />
-Chúng ta tạo module mới json_serialization:</p>
-<pre><code class="language-html">├── json_serialization
+}</code></pre><p>chạy lệnh cargo run sau đó mở <a href="http://localhost:8000/item/get">http://localhost:8000/item/get</a> trong trình duyệt.<br /> Ok, đã hiển thị được dữ liệu ở dạng json !!!<br /> Chúng ta sẽ tiếp tục nâng cấp sức manh cho app của mình<br /> Trong file to_do/structs/mod.rs ta đổi mod base; thành pub mod base; cho phép truy cập module này từ bên ngoài.<br /> Chúng ta tạo module mới json_serialization:</p><pre><code class="language-html">├── json_serialization
 │   ├── mod.rs
-│   └── to_do_items.rs</code></pre>
-<p>trong Cargo.toml mình thêm vào crate serde :</p>
-<blockquote>
-<p>serde = &quot;1&quot;</p>
-</blockquote>
-<p>Trong src/json_serialization/to_do_items.rs</p>
-<pre><code class="language-html">use serde::Serialize;
+│   └── to_do_items.rs</code></pre><p>trong Cargo.toml mình thêm vào crate serde :</p><blockquote><p>serde = &quot;1&quot;</p></blockquote><p>Trong src/json_serialization/to_do_items.rs</p><pre><code class="language-html">use serde::Serialize;
 use crate::to_do::ItemTypes;
 use crate::to_do::structs::base::Base;
 #[derive(Serialize)]
@@ -422,10 +155,7 @@ pub struct ToDoItems {
     pub done_items: Vec&lt;Base&gt;,
     pub pending_item_count: i8,
     pub done_item_count: i8
-}</code></pre>
-<p>Chúng ta khai báo struct ToDoItems với macro là #[derive(Serialize)] từ crate serde, macro này implement cái trail Serialize từ serde vào struct ToDoItems.<br />
-Tiếp theo chúng ta impl hàm khởi tạo cho struct ToDoItems</p>
-<pre><code class="language-html">impl ToDoItems {
+}</code></pre><p>Chúng ta khai báo struct ToDoItems với macro là #[derive(Serialize)] từ crate serde, macro này implement cái trail Serialize từ serde vào struct ToDoItems.<br /> Tiếp theo chúng ta impl hàm khởi tạo cho struct ToDoItems</p><pre><code class="language-html">impl ToDoItems {
     pub fn new(input_items: Vec&lt;ItemTypes&gt;) -&gt; ToDoItems {
         let mut pending_array_buffer = Vec::new();
         let mut done_array_buffer = Vec::new();
@@ -444,10 +174,7 @@ Tiếp theo chúng ta impl hàm khởi tạo cho struct ToDoItems</p>
             pending_item_count: pending_count, done_items: done_array_buffer
         }
     }
-}</code></pre>
-<p>Đầu vào input_items là 1 danh sách các ItemTypes ,ta dùng express match để phân loại Pending và Done , sau đó đếm số lượng các Pending và Done có trong danh sách.<br />
-Trong file views/to_do/get.rs </p>
-<pre><code class="language-html">use actix_web::{web, Responder};
+}</code></pre><p>Đầu vào input_items là 1 danh sách các ItemTypes ,ta dùng express match để phân loại Pending và Done , sau đó đếm số lượng các Pending và Done có trong danh sách.<br /> Trong file views/to_do/get.rs</p><pre><code class="language-html">use actix_web::{web, Responder};
 use serde_json::value::Value;
 use serde_json::Map;
 use crate::state::read_file;
@@ -463,18 +190,12 @@ pub async fn get() -&gt; impl Responder {
     }
     let return_package: ToDoItems =  ToDoItems::new(array_buffer);
     return web::Json(return_package)
-}</code></pre>
-<p>Code trên ta đọc file state.json đưa item và danh sách (Vec) sau đó trả lại kết quả dạng json.<br />
-À, thêm nữa chúng ta phải khai báo macro Serialize cho src/to_do/structs/base.rs</p>
-<pre><code class="language-html">use serde::Serialize;
+}</code></pre><p>Code trên ta đọc file state.json đưa item và danh sách (Vec) sau đó trả lại kết quả dạng json.<br /> À, thêm nữa chúng ta phải khai báo macro Serialize cho src/to_do/structs/base.rs</p><pre><code class="language-html">use serde::Serialize;
 #[derive(Serialize)]
 pub struct Base {
     pub title: String,
     pub status: String
-}</code></pre>
-<p>Và thêm mod json_serialization; ở main.rs<br />
-Ok , bây giờ chạy server và chúng ta thu được kết quả :</p>
-<pre><code class="language-html">{
+}</code></pre><p>Và thêm mod json_serialization; ở main.rs<br /> Ok , bây giờ chạy server và chúng ta thu được kết quả :</p><pre><code class="language-html">{
     &quot;pending_items&quot;: [
         {
             &quot;title&quot;: &quot;code in rust&quot;,
@@ -488,9 +209,7 @@ Ok , bây giờ chạy server và chúng ta thu được kết quả :</p>
     &quot;done_items&quot;: [],
     &quot;pending_item_count&quot;: 2,
     &quot;done_item_count&quot;: 0
-}</code></pre>
-<p>Như chúng ta thấy đó là struct ToDoItems in ra dạng json.Mọi thứ đã ổn nhưng tôi sẽ thêm 1 chút, trong src/json_serialization/to_do_items.rs chúng ta impl thêm trail Responder cho ToDoItems để mặc định luôn khi trả về khi có request tới nó sẽ là json</p>
-<pre><code class="language-html">impl Responder for ToDoItems {
+}</code></pre><p>Như chúng ta thấy đó là struct ToDoItems in ra dạng json.Mọi thứ đã ổn nhưng tôi sẽ thêm 1 chút, trong src/json_serialization/to_do_items.rs chúng ta impl thêm trail Responder cho ToDoItems để mặc định luôn khi trả về khi có request tới nó sẽ là json</p><pre><code class="language-html">impl Responder for ToDoItems {
     type Error = Error;
     type Future = Ready&lt;Result&lt;HttpResponse, Error&gt;&gt;;
     fn respond_to(self, _req: &amp;HttpRequest) -&gt; Self::Future {
@@ -499,15 +218,7 @@ Ok , bây giờ chạy server và chúng ta thu được kết quả :</p>
             .content_type(&quot;application/json&quot;)
             .body(body)))
     }
-}</code></pre>
-<p>Vậy thì trong file views/to_do/get.rs ta sửa code lúc trả kết quả lai 1 chút, ko cần web::Json(return_package) nữa:</p>
-<blockquote>
-<p>let return_package: ToDoItems = ToDoItems::new(array_buffer);<br />
-return return_package</p>
-</blockquote>
-<p>Chạy lại kết quả vẫn như cũ nhé!<br />
-Bây giờ chúng ta tiếp tục tái cấu trúc code nhé, chúng ta tạo file views/to_do/utils.rs là nơi chứa các hàm tiện ích hỗ trợ cho view to_do chúng ta cắt đoạn xử lí trong get.rs chuyển qua utils.rs</p>
-<pre><code class="language-html">use std::vec::Vec; 
+}</code></pre><p>Vậy thì trong file views/to_do/get.rs ta sửa code lúc trả kết quả lai 1 chút, ko cần web::Json(return_package) nữa:</p><blockquote><p>let return_package: ToDoItems = ToDoItems::new(array_buffer);<br /> return return_package</p></blockquote><p>Chạy lại kết quả vẫn như cũ nhé!<br /> Bây giờ chúng ta tiếp tục tái cấu trúc code nhé, chúng ta tạo file views/to_do/utils.rs là nơi chứa các hàm tiện ích hỗ trợ cho view to_do chúng ta cắt đoạn xử lí trong get.rs chuyển qua utils.rs</p><pre><code class="language-html">use std::vec::Vec; 
 use serde_json::value::Value;
 use serde_json::Map;
 use crate::state::read_file;
@@ -522,37 +233,26 @@ pub fn return_state() -&gt; ToDoItems{
         array_buffer.push(item);
     }
     return ToDoItems::new(array_buffer);
-}</code></pre>
-<p>get.rs sẽ đơn giản như vầy</p>
-<pre><code class="language-html">use actix_web::Responder;
+}</code></pre><p>get.rs sẽ đơn giản như vầy</p><pre><code class="language-html">use actix_web::Responder;
 use super::utils::return_state;
 pub async fn get() -&gt; impl Responder {
     return return_state()
-}</code></pre>
-<h3>Extract dữ liệu (Deserialize)</h3>
-<p>Extract dữ liệu thì tương đối đơn giản, trong json_serialization/to_do_item.rs</p>
-<pre><code class="language-html">use serde::Deserialize;
+}</code></pre><h3>Extract dữ liệu (Deserialize)</h3><p>Extract dữ liệu thì tương đối đơn giản, trong json_serialization/to_do_item.rs</p><pre><code class="language-html">use serde::Deserialize;
 #[derive(Deserialize)]
 pub struct ToDoItem {
     pub title: String,
     pub status: String
-}</code></pre>
-<p>lúc này ta dùng macro Deserialize cho ToDoItem. Sau đó ta tạo view cho edit views/to_do/edit.rs, đoạn này hơi dài chút nên chúng ta tách ra cho dễ hiểu, trước hết là import các crates</p>
-<pre><code class="language-html">use actix_web::{web, HttpResponse};
+}</code></pre><p>lúc này ta dùng macro Deserialize cho ToDoItem. Sau đó ta tạo view cho edit views/to_do/edit.rs, đoạn này hơi dài chút nên chúng ta tách ra cho dễ hiểu, trước hết là import các crates</p><pre><code class="language-html">use actix_web::{web, HttpResponse};
 use serde_json::value::Value;
 use serde_json::Map;
 use super::utils::return_state;
 use crate::state::read_file;
 use crate::to_do::to_do_factory;
 use crate::json_serialization::to_do_item::ToDoItem;
-use crate::processes::process_input;</code></pre>
-<p>Đoạn trên chúng ta đã import HttpResponse struct để trả dữ liệu cho client.</p>
-<pre><code class="language-html">pub async fn edit(to_do_item: web::Json&lt;ToDoItem&gt;) -&gt;        HttpResponse {
+use crate::processes::process_input;</code></pre><p>Đoạn trên chúng ta đã import HttpResponse struct để trả dữ liệu cho client.</p><pre><code class="language-html">pub async fn edit(to_do_item: web::Json&lt;ToDoItem&gt;) -&gt;        HttpResponse {
     let state: Map&lt;String, Value&gt; = read_file(String::from(&quot;./state.json&quot;));
     let title_reference: &amp;String = &amp;to_do_item.title.clone();
-    let title: String = to_do_item.title.clone();</code></pre>
-<p>Như đã thấy to_do_item: web::Json<ToDoItem>  chúng ta đã wrap ToDoItem ở dạng json, biến đầu vào to_do_item là 1 struct ToDoItem đã serialize json</p>
-<pre><code class="language-html">let status: String;
+    let title: String = to_do_item.title.clone();</code></pre><p>Như đã thấy to_do_item: web::Json<ToDoItem> chúng ta đã wrap ToDoItem ở dạng json, biến đầu vào to_do_item là 1 struct ToDoItem đã serialize json</p><pre><code class="language-html">let status: String;
 match &amp;state.get(title_reference) {
     Some(result) =&gt; {
         status = result.to_string().replace(&#039;\&quot;&#039;, &quot;&quot;);
@@ -561,32 +261,17 @@ match &amp;state.get(title_reference) {
         return HttpResponse::NotFound().json(
             format!(&quot;{} not in state&quot;, title_reference))
     }
-}</code></pre>
-<p>Nhớ là hàm get trả về một <strong>Option</strong> nên ta kiểm tra bằng match.<br />
-Bây giờ mình có pass cái JSON structs vào hàm json và nó sẽ serialized , trả về response.</p>
-<pre><code class="language-html">match to_do_factory(&amp;status, title) {
+}</code></pre><p>Nhớ là hàm get trả về một <strong>Option</strong> nên ta kiểm tra bằng match.<br /> Bây giờ mình có pass cái JSON structs vào hàm json và nó sẽ serialized , trả về response.</p><pre><code class="language-html">match to_do_factory(&amp;status, title) {
     Err(_item) =&gt; return HttpResponse::BadRequest().json(
         format!(&quot;{} not accepted&quot;, status)),
     Ok(item) =&gt; process_input(item, String::from(&quot;edit&quot;),        &amp;state)
 }
-return HttpResponse::Ok().json(return_state())</code></pre>
-<p>Tiếp theo chúng ta sẽ làm sơ sơ ở phần quản lí user , trong file <strong>views/token.rs</strong>, chúng ta gọi crate ServiceRequest</p>
-<blockquote>
-<p>use actix_web::dev::ServiceRequest;</p>
-</blockquote>
-<p>Trong Cargo.toml ta thêm</p>
-<blockquote>
-<p>actix-service = &quot;1.0.6&quot;</p>
-</blockquote>
-<p>Bên dưới là 1 hàm đơn giản kiểm tra password </p>
-<pre><code class="language-html">fn check_password(password: String) -&gt; Result&lt;String, &amp;&#039;static str&gt; {
+return HttpResponse::Ok().json(return_state())</code></pre><p>Tiếp theo chúng ta sẽ làm sơ sơ ở phần quản lí user , trong file <strong>views/token.rs</strong>, chúng ta gọi crate ServiceRequest</p><blockquote><p>use actix_web::dev::ServiceRequest;</p></blockquote><p>Trong Cargo.toml ta thêm</p><blockquote><p>actix-service = &quot;1.0.6&quot;</p></blockquote><p>Bên dưới là 1 hàm đơn giản kiểm tra password</p><pre><code class="language-html">fn check_password(password: String) -&gt; Result&lt;String, &amp;&#039;static str&gt; {
     if password == &quot;token&quot; {
         return Ok(password)
     }
     return Err(&quot;token not authorised&quot;)
-}</code></pre>
-<p>Hàm này sẽ kiểm tra password của người dùng khi họ truy cập, chúng ta sẽ lấy data password này từ header của request </p>
-<pre><code class="language-html">fn extract_header_token(request: &amp;ServiceRequest) -&gt;        Result&lt;String, &amp;&#039;static str&gt; {
+}</code></pre><p>Hàm này sẽ kiểm tra password của người dùng khi họ truy cập, chúng ta sẽ lấy data password này từ header của request</p><pre><code class="language-html">fn extract_header_token(request: &amp;ServiceRequest) -&gt;        Result&lt;String, &amp;&#039;static str&gt; {
     match request.headers().get(&quot;user-token&quot;) {
         Some(token) =&gt; {
             match token.to_str() {
@@ -596,18 +281,12 @@ return HttpResponse::Ok().json(return_state())</code></pre>
         },
         None =&gt; Err(&quot;there is no token&quot;)
     }
-}</code></pre>
-<p>Mình lấy biến tại dòng code này <strong>request.headers().get(&quot;user-token&quot;)</strong><br />
-Bây giờ chúng ta dùng hàm <strong>extract_header_token</strong> và <strong>check_password</strong></p>
-<pre><code class="language-html">pub fn process_token(request: &amp;ServiceRequest) -&gt; Result&lt;        String, &amp;&#039;static str&gt; {
+}</code></pre><p>Mình lấy biến tại dòng code này <strong>request.headers().get(&quot;user-token&quot;)</strong><br /> Bây giờ chúng ta dùng hàm <strong>extract_header_token</strong> và <strong>check_password</strong></p><pre><code class="language-html">pub fn process_token(request: &amp;ServiceRequest) -&gt; Result&lt;        String, &amp;&#039;static str&gt; {
     match extract_header_token(request) {
         Ok(token) =&gt; check_password(token),
         Err(message) =&gt; Err(message)
     }
-}</code></pre>
-<p>Trong file <strong>views/mod.rs</strong> ta nhớ thêm  <strong>pub mod token;</strong><br />
-Trong <strong>main.rs</strong> ta thêm hàm <strong>wrap_fn</strong> , chúng ta configures middle ware wrap_fn này bằng 1 closure:</p>
-<pre><code class="language-html">#[actix_rt::main]
+}</code></pre><p>Trong file <strong>views/mod.rs</strong> ta nhớ thêm <strong>pub mod token;</strong><br /> Trong <strong>main.rs</strong> ta thêm hàm <strong>wrap_fn</strong> , chúng ta configures middle ware wrap_fn này bằng 1 closure:</p><pre><code class="language-html">#[actix_rt::main]
 async fn main() -&gt; std::io::Result&lt;()&gt; {
     HttpServer::new(|| {
         let app = App::new()
@@ -627,34 +306,7 @@ async fn main() -&gt; std::io::Result&lt;()&gt; {
     }).bind(&quot;127.0.0.1:8000&quot;)?
         .run()
         .await
-}</code></pre>
-<p>Chúng ta kiểm tra path có /item/ thì mình kiểm tra <strong>process_token</strong>.Nếu không có biến <strong>user-token</strong> ở header thì sẽ in ra : <em>token error: there is no token</em> , nếu có mà giá trị không phải là &quot;token&quot; thì sẽ in ra: <em>token not authorised</em>. Nếu đúng thì thông báo : <em>the token is passable</em><br />
-Ok , tạm thời là vậy đi!!</p>
-             <hr/>
-                <div class="powr-comments" id="e67d472b_26"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<footer class="footer has-cards">
-    <div class="container">
-
-        <hr>
-        <div class="row align-items-center justify-content-md-between">
-            <div class="col-md-6">
-                <div class="copyright">
-                    © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</footer>
-<style>
-    .single-content img{
+}</code></pre><p>Chúng ta kiểm tra path có /item/ thì mình kiểm tra <strong>process_token</strong>.Nếu không có biến <strong>user-token</strong> ở header thì sẽ in ra : <em>token error: there is no token</em> , nếu có mà giá trị không phải là &quot;token&quot; thì sẽ in ra: <em>token not authorised</em>. Nếu đúng thì thông báo : <em>the token is passable</em><br /> Ok , tạm thời là vậy đi!!</p><hr/><div class="powr-comments" id="e67d472b_26"></div><script src="https://www.powr.io/powr.js?platform=html"></script> </div></div></div></section><footer class="footer has-cards"><div class="container"><hr><div class="row align-items-center justify-content-md-between"><div class="col-md-6"><div class="copyright"> © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.</div></div></div></div></footer><style>.single-content img{
         max-width: 100%;
         height: auto;
     }
@@ -665,7 +317,4 @@ Ok , tạm thời là vậy đi!!</p>
         color: #f3a4b5;
         word-break: break-word;
         font-family: system-ui;
-    }
-</style>
-</body>
-</html>
+    }</style></body></html>

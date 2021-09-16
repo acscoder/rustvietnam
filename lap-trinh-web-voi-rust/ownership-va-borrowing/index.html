@@ -1,47 +1,4 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ownership và Borrowing - RustVietnam</title>
-    <meta charset="UTF-8"/>
-	<link rel="profile" href="http://gmpg.org/xfn/11"/>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
-    <meta http-equiv="Cache-control" content="public"/>
-    <meta http-equiv="Cache-control" content="max-age=604800"/>
-    <meta http-equiv="Cache-control" content="Content-Encoding=gzip"/>
-
-    <link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' />
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script>
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
-
-	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-
-	<!-- This site is optimized with the Yoast SEO plugin v17.1 - https://yoast.com/wordpress/plugins/seo/ -->
-	<link rel="canonical" href="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/" />
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Ownership và Borrowing - RustVietnam" />
-	<meta property="og:description" content="Ownership và Borrowing là sự khác biệt giữa Rust và phần còn lại của thế giới" />
-	<meta property="og:url" content="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/" />
-	<meta property="og:site_name" content="RustVietnam" />
-	<meta property="article:published_time" content="2021-09-11T04:37:49+00:00" />
-	<meta property="article:modified_time" content="2021-09-15T09:20:34+00:00" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:label1" content="Written by" />
-	<meta name="twitter:data1" content="admin" />
-	<meta name="twitter:label2" content="Est. reading time" />
-	<meta name="twitter:data2" content="7 minutes" />
-	<script type="application/ld+json" class="yoast-schema-graph">{
+<!DOCTYPE html><html><head><title>Ownership và Borrowing - RustVietnam</title><meta charset="UTF-8"/><link rel="profile" href="http://gmpg.org/xfn/11"/><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta http-equiv="Cache-control" content="public"/><meta http-equiv="Cache-control" content="max-age=604800"/><meta http-equiv="Cache-control" content="Content-Encoding=gzip"/><link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' /><link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script> <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" /><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' /><link rel="canonical" href="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/" /><meta property="og:locale" content="en_US" /><meta property="og:type" content="article" /><meta property="og:title" content="Ownership và Borrowing - RustVietnam" /><meta property="og:description" content="Ownership và Borrowing là sự khác biệt giữa Rust và phần còn lại của thế giới" /><meta property="og:url" content="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/" /><meta property="og:site_name" content="RustVietnam" /><meta property="article:published_time" content="2021-09-11T04:37:49+00:00" /><meta property="article:modified_time" content="2021-09-15T09:20:34+00:00" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:label1" content="Written by" /><meta name="twitter:data1" content="admin" /><meta name="twitter:label2" content="Est. reading time" /><meta name="twitter:data2" content="7 minutes" /> <script type="application/ld+json" class="yoast-schema-graph">{
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
@@ -123,246 +80,38 @@
 	            "url": "https://rustvietnam.com/author/admin/"
 	        }
 	    ]
-	}</script>
-	<!-- / Yoast SEO plugin. -->
-
-
-<link rel='dns-prefetch' href='//s.w.org' />
-<link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Ownership và Borrowing Comments Feed" href="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/feed/" />
-<link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/194" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" />
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /> 
-<meta name="generator" content="WordPress 5.8.1" />
-<link rel='shortlink' href='https://rustvietnam.com/?p=194' />
-<link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-co-ban-rust%2Fownership-va-borrowing%2F" />
-<link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-co-ban-rust%2Fownership-va-borrowing%2F&#038;format=xml" />
-<link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>
-</head>
-
-<body>
-<!-- Navbar -->
-<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
-    <div class="container">
-        <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com">
-            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
-            <span>RustVietnam</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse" id="navbar_global">
-            <div class="navbar-collapse-header">
-                <div class="row">
-                    <div class="col-6 collapse-brand">
-                        <a href="https://rustvietnam.com">
-                            <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/>
-                        </a>
-                    </div>
-                    <div class="col-6 collapse-close">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-ui-04 d-lg-none"></i>
-                        <span class="nav-link-inner--text">Nền tảng</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-xl">
-                        <div class="dropdown-menu-inner">
-                            <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center">
-                                <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
-                                    <i class="ni ni-spaceship"></i>
-                                </div>
-                                <div class="media-body ml-3">
-                                    <h6 class="heading text-primary mb-md-1">Bắt đầu</h6>
-                                    <p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p>
-                                </div>
-                            </a>
-                            <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center">
-                                <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
-                                    <i class="ni ni-palette"></i>
-                                </div>
-                                <div class="media-body ml-3">
-                                    <h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6>
-                                    <p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p>
-                                </div>
-                            </a>
-                            <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center">
-                                <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
-                                    <i class="ni ni-ui-04"></i>
-                                </div>
-                                <div class="media-body ml-3">
-                                    <h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5>
-                                    <p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p>
-                                </div>
-
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-collection d-lg-none"></i>
-                        <span class="nav-link-inner--text">Nâng cao</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a>
-                        <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a>
-                        <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a>
-                        <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a>
-                    </div>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" role="button">
-                        <i class="ni ni-collection d-lg-none"></i>
-                        <span class="nav-link-inner--text">Network</span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a>
-                        <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a>
-                    </div>
-                </li>
-                <li> <a target="_blank" rel="nofollow" href="https://docs.rust-embedded.org/book/#:~:text=Embedded%20Rust%20is%20for%20everyone%20who%20wants%20to,language%20provides.%20%28See%20also%20Who%20Rust%20Is%20For%29" class="nav-link" >
-                        Lập trình nhúng
-                    </a></li>
-                <li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" >
-                        BlockChain
-                    </a></li>
-            </ul>
-
-            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-
-                <li class="nav-item d-none d-lg-block">
-                    <a href="mailto:hocrust@gmail.com" target="_blank" rel="nofollow" class="btn btn-primary btn-icon">
-                        <span class="nav-link-inner--text">Liên hệ</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<!-- End Navbar -->
-    <div class="section section-hero section-shaped">
-        <div class="shape shape-style-1 shape-primary">
-            <span class="span-150"></span>
-            <span class="span-50"></span>
-            <span class="span-50"></span>
-            <span class="span-75"></span>
-            <span class="span-100"></span>
-            <span class="span-75"></span>
-            <span class="span-50"></span>
-            <span class="span-100"></span>
-            <span class="span-50"></span>
-            <span class="span-100"></span>
-        </div>
-        <div class="page-header">
-            <div class="container shape-container d-flex align-items-center py-lg">
-                <div class="col px-0">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-lg-8 text-center text-white">
-                            <h1 class="display-2 text-white">Ownership và Borrowing</h1>
-                            <p class="lead">
-                                <p>Ownership và Borrowing là sự khác biệt giữa Rust và phần còn lại của thế giới</p>
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="separator separator-bottom separator-skew zindex-100">
-            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-            </svg>
-        </div>
-    </div>
-
-<section class="section">
-    <div class="container">
-        <div class="row justify-content-center flex-row-reverse">
-            <div class="col-lg-4 single-sidebar">
-
-                <h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/">Lâp trình cơ bản Rust</a></h2> <ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/">Bài 1 - Cài Đặt Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/hello-world-voi-rust/">Bài 2 - Hello World với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/hello-cargo/">Bài 3 - Hello, Cargo!</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/game-doan-so/">Bài 4 - Game đoán số</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/">Bài 5 - Khai báo biến</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-dang-du-lieu-co-ban-cua-bien/">Bài 6 - Khai báo dạng dữ liệu cơ bản của biến</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-ham-closure/">Bài 7 - Khai báo hàm & closure</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/comments-trong-code/">Bài 8 - Comments trong code</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/dieu-kien-va-vong-lap/">Bài 9 - Điều kiện và vòng lặp</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/modules/">Bài 10 - Modules</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/struct-enum-traits/">Bài 11 - Enum - Struct  - Traits</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/">Bài 12 - Ownership và Borrowing</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/">Bài 13 - Macros và Attributes</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/generics/">Bài 14 - Generics</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cargo-crates-io/">Bài 15 - Tìm hiểu thêm về Cargo và Crates.io</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/lam-viec-voi-command-line/">Bài 16 - Làm việc với Command Line</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/threads/">Bài 17 - Đa luồng (Threads)</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/rust-lifetime/">Bài 18 - Rust lifetime</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/lam-viec-voi-files/">Bài 19 - Làm việc với files</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/testing/">Bài 20 - Testing</a></li></ul>
-            </div>
-
-            <div class="col-lg-8 single-content">
-            <p>Ownership - sỡ hữu biến là khái niệm chỉ có trong Rust để đảm bảo an toàn bộ nhớ.<br />
-Chúng ta sẽ lướt qua 1 số qui định :<br />
-1- Biến sẽ được giải phóng bộ nhớ sau khi rời khỏi vùng hoạt đông ( trong dấu {} )</p>
-<pre><code class="language-html">fn main() {
+	}</script> <link rel='dns-prefetch' href='//s.w.org' /><link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Ownership và Borrowing Comments Feed" href="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/feed/" /><link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/194" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 5.8.1" /><link rel='shortlink' href='https://rustvietnam.com/?p=194' /><link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-co-ban-rust%2Fownership-va-borrowing%2F" /><link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Flap-trinh-co-ban-rust%2Fownership-va-borrowing%2F&#038;format=xml" /><link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script> </head><body><nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2"><div class="container"> <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> <span>RustVietnam</span> </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button><div class="navbar-collapse collapse" id="navbar_global"><div class="navbar-collapse-header"><div class="row"><div class="col-6 collapse-brand"> <a href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> </a></div><div class="col-6 collapse-close"> <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span></span> <span></span> </button></div></div></div><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-ui-04 d-lg-none"></i> <span class="nav-link-inner--text">Nền tảng</span> </a><div class="dropdown-menu dropdown-menu-xl"><div class="dropdown-menu-inner"> <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-primary rounded-circle text-white"> <i class="ni ni-spaceship"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Bắt đầu</h6><p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-success rounded-circle text-white"> <i class="ni ni-palette"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6><p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-warning rounded-circle text-white"> <i class="ni ni-ui-04"></i></div><div class="media-body ml-3"><h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5><p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p></div></a></div></div></li><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Nâng cao</span> </a><div class="dropdown-menu"> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a> <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a> <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a> <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a></div></li></ul><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Network</span> </a><div class="dropdown-menu"> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a> <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a></div></li><li> <a target="_blank" rel="nofollow" href="https://docs.rust-embedded.org/book/#:~:text=Embedded%20Rust%20is%20for%20everyone%20who%20wants%20to,language%20provides.%20%28See%20also%20Who%20Rust%20Is%20For%29" class="nav-link" > Lập trình nhúng </a></li><li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" > BlockChain </a></li></ul><ul class="navbar-nav align-items-lg-center ml-lg-auto"><li class="nav-item d-none d-lg-block"> <a href="mailto:hocrust@gmail.com" target="_blank" rel="nofollow" class="btn btn-primary btn-icon"> <span class="nav-link-inner--text">Liên hệ</span> </a></li></ul></div></div></nav><div class="section section-hero section-shaped"><div class="shape shape-style-1 shape-primary"> <span class="span-150"></span> <span class="span-50"></span> <span class="span-50"></span> <span class="span-75"></span> <span class="span-100"></span> <span class="span-75"></span> <span class="span-50"></span> <span class="span-100"></span> <span class="span-50"></span> <span class="span-100"></span></div><div class="page-header"><div class="container shape-container d-flex align-items-center py-lg"><div class="col px-0"><div class="row align-items-center justify-content-center"><div class="col-lg-8 text-center text-white"><h1 class="display-2 text-white">Ownership và Borrowing</h1><p class="lead"><p>Ownership và Borrowing là sự khác biệt giữa Rust và phần còn lại của thế giới</p></p></div></div></div></div></div><div class="separator separator-bottom separator-skew zindex-100"> <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg"> <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon> </svg></div></div><section class="section"><div class="container"><div class="row justify-content-center flex-row-reverse"><div class="col-lg-4 single-sidebar"><h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/">Lâp trình cơ bản Rust</a></h2><ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/">Bài 1 - Cài Đặt Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/hello-world-voi-rust/">Bài 2 - Hello World với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/hello-cargo/">Bài 3 - Hello, Cargo!</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/game-doan-so/">Bài 4 - Game đoán số</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-bien/">Bài 5 - Khai báo biến</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-dang-du-lieu-co-ban-cua-bien/">Bài 6 - Khai báo dạng dữ liệu cơ bản của biến</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/khai-bao-ham-closure/">Bài 7 - Khai báo hàm & closure</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/comments-trong-code/">Bài 8 - Comments trong code</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/dieu-kien-va-vong-lap/">Bài 9 - Điều kiện và vòng lặp</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/modules/">Bài 10 - Modules</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/struct-enum-traits/">Bài 11 - Enum - Struct  - Traits</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/ownership-va-borrowing/">Bài 12 - Ownership và Borrowing</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/">Bài 13 - Macros và Attributes</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/generics/">Bài 14 - Generics</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cargo-crates-io/">Bài 15 - Tìm hiểu thêm về Cargo và Crates.io</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/lam-viec-voi-command-line/">Bài 16 - Làm việc với Command Line</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/threads/">Bài 17 - Đa luồng (Threads)</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/rust-lifetime/">Bài 18 - Rust lifetime</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/lam-viec-voi-files/">Bài 19 - Làm việc với files</a></li><li><a href="https://rustvietnam.com/lap-trinh-co-ban-rust/testing/">Bài 20 - Testing</a></li></ul></div><div class="col-lg-8 single-content"><p>Ownership - sỡ hữu biến là khái niệm chỉ có trong Rust để đảm bảo an toàn bộ nhớ.<br /> Chúng ta sẽ lướt qua 1 số qui định :<br /> 1- Biến sẽ được giải phóng bộ nhớ sau khi rời khỏi vùng hoạt đông ( trong dấu {} )</p><pre><code class="language-html">fn main() {
     {
         let x = 42;
         println!(&quot;x: {}&quot;, x);
     }
     println!(&quot;x: {}&quot;, x); // ERROR: x not in scope
-}</code></pre>
-<p>Một trường hợp khác</p>
-<pre><code class="language-html">fn main() {
+}</code></pre><p>Một trường hợp khác</p><pre><code class="language-html">fn main() {
     let v = &quot;hello&quot;.to_string();
     show_message(v);
     println!(&quot;{}&quot;,v);
 }
 fn show_message(x:String){
     println!(&quot;message: {}&quot;, x);
-}</code></pre>
-<p>Chúng ta nhận lỗi khi compile</p>
-<blockquote>
-<p>error[E0382]: borrow of moved value: <code>v</code></p>
-</blockquote>
-<p>Biến v sau khi khai báo được đưa vào hàm <strong>show_message</strong> , sau khi thực thi in ra <strong>println!</strong> thì kết thúc --&gt; biến được giải phóng nên ở <strong>main</strong> lệnh in tiếp theo sau <strong>show_message(v);</strong> không thể thực hiện được<br />
-lưu ý <strong>println!</strong> là 1 macro nhé ,có dấu <strong>!</strong> là macro ko phải hàm.</p>
-<p>2- Tại một thời điểm thì chỉ có duy nhất một biến được quyền sở hữu một vùng bộ nhớ </p>
-<pre><code class="language-html">fn main() {
+}</code></pre><p>Chúng ta nhận lỗi khi compile</p><blockquote><p>error[E0382]: borrow of moved value: <code>v</code></p></blockquote><p>Biến v sau khi khai báo được đưa vào hàm <strong>show_message</strong> , sau khi thực thi in ra <strong>println!</strong> thì kết thúc --&gt; biến được giải phóng nên ở <strong>main</strong> lệnh in tiếp theo sau <strong>show_message(v);</strong> không thể thực hiện được<br /> lưu ý <strong>println!</strong> là 1 macro nhé ,có dấu <strong>!</strong> là macro ko phải hàm.</p><p>2- Tại một thời điểm thì chỉ có duy nhất một biến được quyền sở hữu một vùng bộ nhớ</p><pre><code class="language-html">fn main() {
     let v = &quot;hello&quot;.to_string();
     let r = v;
     println!(&quot;{}&quot;,v);
-}</code></pre>
-<p>Đoạn code này đơn giản, chạy trên mọi ngôn ngữ lập trình trừ Rust ra<br />
-Biến <strong>v</strong> sau khi khai báo thì gán cho biến <strong>r</strong> bằng <strong>let r = v;</strong> vậy quyền sở hữu biến đã gán qua <strong>r</strong> rồi <strong>v</strong> không còn nữa , dẫn đến lệnh <strong>println!(&quot;{}&quot;,v);</strong> không xài được.<br />
-Ok , vậy thử code hơi giống như code trên</p>
-<pre><code class="language-html">fn main() {
+}</code></pre><p>Đoạn code này đơn giản, chạy trên mọi ngôn ngữ lập trình trừ Rust ra<br /> Biến <strong>v</strong> sau khi khai báo thì gán cho biến <strong>r</strong> bằng <strong>let r = v;</strong> vậy quyền sở hữu biến đã gán qua <strong>r</strong> rồi <strong>v</strong> không còn nữa , dẫn đến lệnh <strong>println!(&quot;{}&quot;,v);</strong> không xài được.<br /> Ok , vậy thử code hơi giống như code trên</p><pre><code class="language-html">fn main() {
     let v = &quot;hello&quot;;
     //hoặc let v = 1;
     let r = v;
     println!(&quot;{}&quot;,v);
-}</code></pre>
-<p>Code vẫn chạy, code này khác chỉ là dạng dữ liệu của <strong>v</strong> là <strong>&amp;str</strong> (hoặc <strong>interger</strong>) chứ không phải là <strong>String</strong> như lúc nãy, vậy cái ownership mình nói lúc nãy là sao ta.<br />
-Để hiểu rõ vấn đề, chúng ta đi qua 2 dạng bộ nhớ dữ liệu của Rust.</p>
-<ol>
-<li>
-<p><strong>Stack</strong> ( ngăn xếp) , các bạn tưởng tượng đó là tập hồ sơ xếp chông lên nhau, lấy ra xếp vào theo thứ tự.Stack truy xuất dữ liệu nhanh, ít tốn bộ nhớ<br />
-Tất cả dữ liệu lưu trên stack phải có kích thước cố định được biết trước.<br />
-Các dạng dữ liệu như &amp;str, interger (số nguyên) ,  array (mảng)... là dạng stack</p>
-</li>
-<li>
-<p><strong>Heap</strong> (nhánh,dạng cây) , bạn tưởng tượng như việc tìm chỗ ngồi ở một nhà hàng. Khi bạn vào nhà hàng, bạn nói số người trong nhóm của bạn, nhân viên sẽ tìm một bàn trống đủ chỗ cho mọi và dẫn bạn tới đó. Nếu ai đó trong nhóm đến muộn, họ có thể hỏi chỗ ngồi của bạn ở đâu để tìm bạn.Truy cập dữ liệu trên heap chậm hơn với trên stack bởi vì bạn phải theo con trỏ để đến được đó ,  các dữ liệu lưu trên heap kích thước không cố định, như dạng dữ liệu String, vector, struct ...</p>
-</li>
-</ol>
-<p>Trong ví dụ dưới vì &amp;str, interger ( dữ liệu stack ) có kích thước cố định, nhẹ xử lí nhanh nên khi thực hiên <strong>let r = v;</strong> chương trình tự động clone biến <strong>v</strong> và đưa vào <strong>r</strong> ,quyền của biến <strong>v</strong> vẫn giữ lại còn <strong>r</strong> là 1 clone của <strong>v</strong>.Đó là lí do code dưới vẫn chạy. </p>
-<pre><code class="language-html">fn main() {
+}</code></pre><p>Code vẫn chạy, code này khác chỉ là dạng dữ liệu của <strong>v</strong> là <strong>&amp;str</strong> (hoặc <strong>interger</strong>) chứ không phải là <strong>String</strong> như lúc nãy, vậy cái ownership mình nói lúc nãy là sao ta.<br /> Để hiểu rõ vấn đề, chúng ta đi qua 2 dạng bộ nhớ dữ liệu của Rust.</p><ol><li><p><strong>Stack</strong> ( ngăn xếp) , các bạn tưởng tượng đó là tập hồ sơ xếp chông lên nhau, lấy ra xếp vào theo thứ tự.Stack truy xuất dữ liệu nhanh, ít tốn bộ nhớ<br /> Tất cả dữ liệu lưu trên stack phải có kích thước cố định được biết trước.<br /> Các dạng dữ liệu như &amp;str, interger (số nguyên) ,  array (mảng)... là dạng stack</p></li><li><p><strong>Heap</strong> (nhánh,dạng cây) , bạn tưởng tượng như việc tìm chỗ ngồi ở một nhà hàng. Khi bạn vào nhà hàng, bạn nói số người trong nhóm của bạn, nhân viên sẽ tìm một bàn trống đủ chỗ cho mọi và dẫn bạn tới đó. Nếu ai đó trong nhóm đến muộn, họ có thể hỏi chỗ ngồi của bạn ở đâu để tìm bạn.Truy cập dữ liệu trên heap chậm hơn với trên stack bởi vì bạn phải theo con trỏ để đến được đó ,  các dữ liệu lưu trên heap kích thước không cố định, như dạng dữ liệu String, vector, struct ...</p></li></ol><p>Trong ví dụ dưới vì &amp;str, interger ( dữ liệu stack ) có kích thước cố định, nhẹ xử lí nhanh nên khi thực hiên <strong>let r = v;</strong> chương trình tự động clone biến <strong>v</strong> và đưa vào <strong>r</strong> ,quyền của biến <strong>v</strong> vẫn giữ lại còn <strong>r</strong> là 1 clone của <strong>v</strong>.Đó là lí do code dưới vẫn chạy.</p><pre><code class="language-html">fn main() {
     let v = &quot;hello&quot;;
     //hoặc let v = 1;
     let r = v;
     println!(&quot;{}&quot;,v);
-}</code></pre>
-<p>Dữ liệu dạng <strong>Heap</strong> thì ko tự clone nên ko work.Vậy chúng ta thử clone String nhé </p>
-<pre><code class="language-html">fn main() {
+}</code></pre><p>Dữ liệu dạng <strong>Heap</strong> thì ko tự clone nên ko work.Vậy chúng ta thử clone String nhé</p><pre><code class="language-html">fn main() {
     let v = &quot;hello&quot;.to_string();
     let r = v.clone();
     println!(&quot;{}&quot;,v);
-}</code></pre>
-<p>--&gt; Work<br />
-Nhưng với  <strong>Heap</strong> clone() là giải pháp chẳng đặng đừng thôi, vì clone chiếm bộ nhớ,gây chậm chương trình nhất là với những biến có dữ liệu lớn, giải pháp tham chiếu biến dùng thường xuyên hơn</p>
-<pre><code class="language-html">fn main() {
+}</code></pre><p>--&gt; Work<br /> Nhưng với <strong>Heap</strong> clone() là giải pháp chẳng đặng đừng thôi, vì clone chiếm bộ nhớ,gây chậm chương trình nhất là với những biến có dữ liệu lớn, giải pháp tham chiếu biến dùng thường xuyên hơn</p><pre><code class="language-html">fn main() {
     let v = &quot;hello&quot;.to_string();
     let r = &amp;v;
     show_message(r);
@@ -370,10 +119,7 @@ Nhưng với  <strong>Heap</strong> clone() là giải pháp chẳng đặng đ�
 }
 fn show_message(x:&amp;String){
     println!(&quot;message: {}&quot;, x);
-}</code></pre>
-<p>Chúng ta tham chiếu biến <strong>v</strong> vào <strong>r</strong> bằng <strong>let r = &v;</strong> , biến <strong>v</strong> vẫn giữ quyền sở hữu biến.<br />
-Một lưu ý là khi đã tham chiếu cho biến khác ,mà biến đó vẫn còn tồn tại thì mình không được thay đổi giá trị biến</p>
-<pre><code class="language-html">fn main() {
+}</code></pre><p>Chúng ta tham chiếu biến <strong>v</strong> vào <strong>r</strong> bằng <strong>let r = &v;</strong> , biến <strong>v</strong> vẫn giữ quyền sở hữu biến.<br /> Một lưu ý là khi đã tham chiếu cho biến khác ,mà biến đó vẫn còn tồn tại thì mình không được thay đổi giá trị biến</p><pre><code class="language-html">fn main() {
     let mut v = &quot;hello&quot;.to_string();
     let r = &amp;v;
     v.push_str(&quot; world&quot;);
@@ -382,9 +128,7 @@ Một lưu ý là khi đã tham chiếu cho biến khác ,mà biến đó vẫn 
 }
 fn show_message(x:&amp;String){
     println!(&quot;message: {}&quot;, x);
-}</code></pre>
-<p>chúng ta thêm vào biến <strong>v</strong> bằng <strong>v.push_str(&quot; world&quot;);</strong> --&gt; lỗi , nhưng lưu ý nếu chúng ta thêm vào bên dưới <strong>show_message(r);</strong> mọi chuyện vẫn ổn </p>
-<pre><code class="language-html">fn main() {
+}</code></pre><p>chúng ta thêm vào biến <strong>v</strong> bằng <strong>v.push_str(&quot; world&quot;);</strong> --&gt; lỗi , nhưng lưu ý nếu chúng ta thêm vào bên dưới <strong>show_message(r);</strong> mọi chuyện vẫn ổn</p><pre><code class="language-html">fn main() {
     let mut v = &quot;hello&quot;.to_string();
     let r = &amp;v;
     show_message(r);
@@ -393,10 +137,7 @@ fn show_message(x:&amp;String){
 }
 fn show_message(x:&amp;String){
     println!(&quot;message: {}&quot;, x);
-}</code></pre>
-<p>Biến <strong>r</strong> đã được đưa vào hàm <strong>show_message(r);</strong> và ko còn tồn tại nữa nên việc thay đổi của biến <strong>v</strong> là hợp lệ.<br />
-Còn 1 vấn đề nữa , biến <strong>r</strong> nhận tham chiếu từ <strong>v</strong> vậy <strong>r</strong> có thay đổi được không, có 2 câu trả lời , 1 là <strong>không</strong> , <strong>r</strong> không sở hữu biến. </p>
-<pre><code class="language-html">fn main() {
+}</code></pre><p>Biến <strong>r</strong> đã được đưa vào hàm <strong>show_message(r);</strong> và ko còn tồn tại nữa nên việc thay đổi của biến <strong>v</strong> là hợp lệ.<br /> Còn 1 vấn đề nữa , biến <strong>r</strong> nhận tham chiếu từ <strong>v</strong> vậy <strong>r</strong> có thay đổi được không, có 2 câu trả lời , 1 là <strong>không</strong> , <strong>r</strong> không sở hữu biến.</p><pre><code class="language-html">fn main() {
     let mut v = &quot;hello&quot;.to_string();
     let mut r = &amp;v;
     r.push_str(&quot; world&quot;);
@@ -405,12 +146,7 @@ Còn 1 vấn đề nữa , biến <strong>r</strong> nhận tham chiếu từ <s
 }
 fn show_message(x:&amp;String){
     println!(&quot;message: {}&quot;, x);
-}</code></pre>
-<blockquote>
-<p>error[E0596]: cannot borrow <code>*r</code> as mutable, as it is behind a <code>&amp;</code> reference</p>
-</blockquote>
-<p>2 là <strong>được</strong>,chúng ta khai báo <strong>&amp;mut</strong> cho phép đổi giá trị biến tham chiếu. </p>
-<pre><code class="language-html">fn main() {
+}</code></pre><blockquote><p>error[E0596]: cannot borrow <code>*r</code> as mutable, as it is behind a <code>&amp;</code> reference</p></blockquote><p>2 là <strong>được</strong>,chúng ta khai báo <strong>&amp;mut</strong> cho phép đổi giá trị biến tham chiếu.</p><pre><code class="language-html">fn main() {
     let mut v = &quot;hello&quot;.to_string();
     let r = &amp;mut v;
     r.push_str(&quot; world&quot;);
@@ -419,33 +155,7 @@ fn show_message(x:&amp;String){
 }
 fn show_message(x:&amp;String){
     println!(&quot;message: {}&quot;, x);
-}</code></pre>
-<p>Ok , DONE!</p>
-             <hr/>
-                <div class="powr-comments" id="e67d472b_194"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<footer class="footer has-cards">
-    <div class="container">
-
-        <hr>
-        <div class="row align-items-center justify-content-md-between">
-            <div class="col-md-6">
-                <div class="copyright">
-                    © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</footer>
-<style>
-    .single-content img{
+}</code></pre><p>Ok , DONE!</p><hr/><div class="powr-comments" id="e67d472b_194"></div><script src="https://www.powr.io/powr.js?platform=html"></script> </div></div></div></section><footer class="footer has-cards"><div class="container"><hr><div class="row align-items-center justify-content-md-between"><div class="col-md-6"><div class="copyright"> © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.</div></div></div></div></footer><style>.single-content img{
         max-width: 100%;
         height: auto;
     }
@@ -456,7 +166,4 @@ fn show_message(x:&amp;String){
         color: #f3a4b5;
         word-break: break-word;
         font-family: system-ui;
-    }
-</style>
-</body>
-</html>
+    }</style></body></html>
