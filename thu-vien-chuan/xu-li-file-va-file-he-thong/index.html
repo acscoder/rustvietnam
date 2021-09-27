@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="vi"><head><title>Xử lí file và file hệ thống - RustVietnam</title><meta charset="UTF-8"/><link rel="profile" href="http://gmpg.org/xfn/11"/><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta http-equiv="Cache-control" content="public"/><meta http-equiv="Cache-control" content="max-age=604800"/><meta http-equiv="Cache-control" content="Content-Encoding=gzip"/><link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' /><link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script> <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" /><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' /><link rel="canonical" href="https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/" /><meta property="og:locale" content="en_US" /><meta property="og:type" content="article" /><meta property="og:title" content="Xử lí file và file hệ thống - RustVietnam" /><meta property="og:description" content="làm việc với file text, xử lí bytes, làm việc với file binary, nén và giải nén dữ liệu, file hệ thống , tìm kiếm file với glob patterns" /><meta property="og:url" content="https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/" /><meta property="og:site_name" content="RustVietnam" /><meta property="article:published_time" content="2021-09-27T12:10:44+00:00" /><meta property="article:modified_time" content="2021-09-27T15:08:14+00:00" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:label1" content="Written by" /><meta name="twitter:data1" content="admin" /><meta name="twitter:label2" content="Est. reading time" /><meta name="twitter:data2" content="5 minutes" /> <script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "https://rustvietnam.com/#website",
+	            "url": "https://rustvietnam.com/",
+	            "name": "RustVietnam",
+	            "description": "Trang Web d\u00e0nh cho nh\u1eefng ng\u01b0\u1eddi b\u1ea1n y\u00eau th\u00edch l\u1eadp tr\u00ecnh ng\u00f4n ng\u1eef Rust. Ch\u00fang t\u00f4i kh\u00f4ng \u0111\u1ea1i di\u1ec7n hay c\u00f3 li\u00ean h\u1ec7 g\u00ec v\u1edbi team ch\u00ednh th\u1ee9c c\u1ee7a Rust ( rust-lang.org )",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "https://rustvietnam.com/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "en-US"
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/#webpage",
+	            "url": "https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/",
+	            "name": "X\u1eed l\u00ed file v\u00e0 file h\u1ec7 th\u1ed1ng - RustVietnam",
+	            "isPartOf": {
+	                "@id": "https://rustvietnam.com/#website"
+	            },
+	            "datePublished": "2021-09-27T12:10:44+00:00",
+	            "dateModified": "2021-09-27T15:08:14+00:00",
+	            "author": {
+	                "@id": "https://rustvietnam.com/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
+	            },
+	            "breadcrumb": {
+	                "@id": "https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/#breadcrumb"
+	            },
+	            "inLanguage": "en-US",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "Home",
+	                    "item": "https://rustvietnam.com/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "X\u1eed l\u00ed file v\u00e0 file h\u1ec7 th\u1ed1ng"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "https://rustvietnam.com/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655",
+	            "name": "admin",
+	            "image": {
+	                "@type": "ImageObject",
+	                "@id": "https://rustvietnam.com/#personlogo",
+	                "inLanguage": "en-US",
+	                "url": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "contentUrl": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "caption": "admin"
+	            },
+	            "sameAs": [
+	                "https://rustvietnam.com"
+	            ],
+	            "url": "https://rustvietnam.com/author/admin/"
+	        }
+	    ]
+	}</script> <link rel='dns-prefetch' href='//s.w.org' /><link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Xử lí file và file hệ thống Comments Feed" href="https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/feed/" /><link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/410" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 5.8.1" /><link rel='shortlink' href='https://rustvietnam.com/?p=410' /><link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Fthu-vien-chuan%2Fxu-li-file-va-file-he-thong%2F" /><link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Frustvietnam%2Fthu-vien-chuan%2Fxu-li-file-va-file-he-thong%2F&#038;format=xml" /><link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script> </head><body><nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2"><div class="container"> <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> <span>RustVietnam</span> </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button><div class="navbar-collapse collapse" id="navbar_global"><div class="navbar-collapse-header"><div class="row"><div class="col-6 collapse-brand"> <a href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> </a></div><div class="col-6 collapse-close"> <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span></span> <span></span> </button></div></div></div><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-ui-04 d-lg-none"></i> <span class="nav-link-inner--text">Nền tảng</span> </a><div class="dropdown-menu dropdown-menu-xl"><div class="dropdown-menu-inner"> <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-primary rounded-circle text-white"> <i class="ni ni-spaceship"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Bắt đầu</h6><p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-success rounded-circle text-white"> <i class="ni ni-palette"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6><p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-warning rounded-circle text-white"> <i class="ni ni-ui-04"></i></div><div class="media-body ml-3"><h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5><p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p></div></a></div></div></li><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Nâng cao</span> </a><div class="dropdown-menu"> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a> <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a> <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a> <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a></div></li></ul><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Network</span> </a><div class="dropdown-menu"> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a> <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a></div></li><li> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-nhung" class="nav-link" > Lập trình nhúng </a></li><li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" > BlockChain </a></li></ul><ul class="navbar-nav align-items-lg-center ml-lg-auto"><li class="nav-item d-none d-lg-block"> <a href="https://rustvietnam.com/gioi-thieu/" class="btn btn-primary btn-icon"> <span class="nav-link-inner--text">Giới thiệu</span> </a></li></ul></div></div></nav><div class="section section-hero section-shaped"><div class="shape shape-style-1 shape-primary"> <span class="span-150"></span> <span class="span-50"></span> <span class="span-50"></span> <span class="span-75"></span> <span class="span-100"></span> <span class="span-75"></span> <span class="span-50"></span> <span class="span-100"></span> <span class="span-50"></span> <span class="span-100"></span></div><div class="page-header"><div class="container shape-container d-flex align-items-center py-lg"><div class="col px-0"><div class="row align-items-center justify-content-center"><div class="col-lg-8 text-center text-white"><h1 class="display-2 text-white">Xử lí file và file hệ thống</h1><p class="lead"><p>làm việc với file text, xử lí bytes, làm việc với file binary, nén và giải nén dữ liệu, file hệ thống , tìm kiếm file với glob patterns</p></p></div></div></div></div></div><div class="separator separator-bottom separator-skew zindex-100"> <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg"> <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon> </svg></div></div><section class="section"><div class="container"><div class="row justify-content-center flex-row-reverse"><div class="col-lg-4 single-sidebar"><h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/">Thư viện chuẩn</a></h2><ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/thu-vien-chuan/chuong-1-phan-co-ban/">Chương 1 - Phần cơ bản</a></li><li><a href="https://rustvietnam.com/thu-vien-chuan/chuong-2-lam-viec-voi-collections/">Chương 2  - Làm việc với Collections</a></li><li><a href="https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/">Chương 3 - Xử lí file và file hệ thống</a></li></ul></div><div class="col-lg-8 single-content"><p>Chương này chúng ta sẽ cover 1 số vấn đề sau.</p><ol><li>Làm việc với file text</li><li>Xử lí bytes</li><li>Làm việc với file binary</li><li>Nén và giải nén dữ liệu</li><li>File hệ thống</li><li>Tìm kiếm file với glob patterns</li></ol><h2>Làm việc với file text</h2><p>Chúng ta sẽ read, write, create, truncate, và append text file.<br /> Chúng ta tạo project mới cho chương này</p><blockquote><p>cargo new chapter-three</p></blockquote><p>Trong folder <strong>src</strong>, tạo folder <strong>bin</strong>.tạo file <strong>text_files.rs</strong> bên trong folder <strong>bin</strong> .</p><pre><code class="language-html">use std::fs::{File, OpenOptions};
+use std::io::{self, BufReader, BufWriter, Lines, SeekFrom, Write};
+use std::io::prelude::*;
+fn main() {
+    let path = &quot;./foo.txt&quot;;
+    println!(&quot;Writing some data to &#039;{}&#039;&quot;, path);
+    write_file(path, &quot;Hello World!\n&quot;).expect(&quot;Failed to write to file&quot;);
+}
+
+fn write_file(path: &amp;str, content: &amp;str) -&gt; io::Result&lt;()&gt; {
+// tạo file nếu nó không tồn tại
+         let file = File::create(path)?;     
+         let mut buf_writer = BufWriter::new(file);
+         buf_writer.write_all(content.as_bytes())?;
+         Ok(())
+       }     </code></pre><p>Code trên là ghi nội dung vào file, tạo file nếu nó không tồn tại, công việc chủ yếu ở hàm <strong>write_file</strong> .<br /> Tiếp theo là hàm read_file</p><pre><code class="language-html">  fn read_file(path: &amp;str) -&gt; io::Result&lt;String&gt; {
+     // Mở file bằng hàm open
+     let file = File::open(path)?;
+     // Wrap file với BufReader
+     // đọc file và đưa vào biến content
+     let mut buf_reader = BufReader::new(file);
+     let mut content = String::new();
+     buf_reader.read_to_string(&amp;mut content)?;
+     Ok(content)
+   }</code></pre><p>Trong hàm <strong>main</strong> thêm vào</p><pre><code class="language-html">let content = read_file(path).expect(&quot;Failed to read file&quot;);
+     println!(&quot;{}&quot;, content);</code></pre><p>Tiếp theo là hàm <strong>read_file_iterator</strong> , đọc file theo từng dòng, tương tự như <strong>read_file</strong> nhưng đoạn trả về <strong>Ok(buf_reader.lines())</strong> chứ không đưa vô biến content.</p><pre><code class="language-html">fn read_file_iterator(path: &amp;str) -&gt;
+       io::Result&lt;Lines&lt;BufReader&lt;File&gt;&gt;&gt; {
+     let file = File::open(path)?;
+     let buf_reader = BufReader::new(file);
+     // lines() returns an iterator over lines
+     Ok(buf_reader.lines())
+   }</code></pre><p>Trong hàm <strong>main</strong> thêm vào code</p><pre><code class="language-html">let lines = read_file_iterator(path).expect(&quot;Failed to read file&quot;);
+     for line in lines {
+       println!(&quot;{}&quot;, line.expect(&quot;Failed to read line&quot;));
+     }</code></pre><p>Tiếp theo là hàm nối content</p><pre><code class="language-html">fn append_file(path: &amp;str, content: &amp;str) -&gt; io::Result&lt;()&gt; {     
+     let file = OpenOptions::new().append(true).open(path)?;
+     let mut buf_writer = BufWriter::new(file);
+   buf_writer.write_all(content.as_bytes())?;
+     Ok(())
+   }</code></pre><p>Cách làm giống như hàm <strong>write_file</strong> chỉ khác là dùng <strong>OpenOptions</strong>.Đọc file với <strong>OpenOptions</strong> giúp chúng ta set tất cả các options mình cần.<br /> Cuối cùng là <strong>append_and_read</strong> , đọc file và nối content vào.</p><pre><code class="language-html">fn append_and_read(path: &amp;str, content: &amp;str) -&gt; io::Result&lt;()&gt; {
+    let file = OpenOptions::new().read(true).append(true).open(path)?;
+    // Passing a reference of the file will not move it
+    // allowing you to create both a reader and a writer
+    let mut buf_reader = BufReader::new(&amp;file);
+    let mut buf_writer = BufWriter::new(&amp;file);
+
+    let mut file_content = String::new();
+    buf_reader.read_to_string(&amp;mut file_content)?;
+    println!(&quot;File before appending:\n{}&quot;, file_content);
+
+    // Appending will shift your positional pointer
+    // so you have to save and restore it
+    let pos = buf_reader.seek(SeekFrom::Current(0))?;
+    buf_writer.write_all(content.as_bytes())?;
+    // Flushing forces the write to happen right now
+    buf_writer.flush()?;
+    buf_reader.seek(SeekFrom::Start(pos))?;
+
+    buf_reader.read_to_string(&amp;mut file_content)?;
+    println!(&quot;File after appending:\n{}&quot;, file_content);
+
+    Ok(())
+}</code></pre><p>File cuối cùng<br /> <a href="https://github.com/PacktPublishing/Rust-Standard-Library-Cookbook/blob/master/Chapter03/src/bin/text_files.rs">https://github.com/PacktPublishing/Rust-Standard-Library-Cookbook/blob/master/Chapter03/src/bin/text_files.rs</a></p><h2>Xử lí bytes</h2><p>Trong Cargo.toml thêm crate byteorder, để đọc,ghi byte big-endian và little-endian</p><blockquote><p>byteorder = &quot;1.4.0&quot;</p></blockquote><p>Little endian và big endian, đây là hai phương thức khác nhau để lưu trữ dữ liệu dạng nhị phân (binary)<br /> Little endian thì byte cuối cùng trong biểu diễn nhị phân trên sẽ được ghi trước<br /> Ngược lại big endian byte là cơ chế ghi dữ liệu theo thứ tự bình thường mà chúng ta vẫn dùng<br /> Tạo file mới <strong>src/bin/bytes.rs</strong></p><pre><code class="language-html">extern crate byteorder;
+use std::io::{Cursor, Seek, SeekFrom};
+use byteorder::{BigEndian, LittleEndian, ReadBytesExt, WriteBytesExt};
+
+fn main() {
+  let binary_nums = vec![2, 3, 12, 8, 5, 0];
+  // Wrap a binary collection in a cursor
+  // to provide seek functionality
+  let mut buff = Cursor::new(binary_nums);
+  let first_byte = buff.read_u8().expect(&quot;Failed to read byte&quot;);
+  println!(&quot;first byte in binary: {:b}&quot;, first_byte);
+}</code></pre><p>Đoạn code ngắn cho dễ hiểu, ta chuyển <strong>vec!</strong> thành binary</p><hr/><div class="powr-comments" id="e67d472b_410"></div><script src="https://www.powr.io/powr.js?platform=html"></script> </div></div></div></section><footer class="footer has-cards"><div class="container"><hr><div class="row align-items-center justify-content-md-between"><div class="col-md-6"><div class="copyright"> © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.</div></div><div class="col-md-6 text-right"> <a style="font-size: 14px;" class="text-teal" href="https://rustvietnam.com/privacy-policy">Điều khoản</a></div></div></div></footer><style>.single-content img{
+        max-width: 100%;
+        height: auto;
+    }
+    .single-content blockquote{
+        padding-left: 20px;
+        border-left: 5px solid;
+        font-size: 87.5%;
+        color: #f3a4b5;
+        word-break: break-word;
+        font-family: system-ui;
+    }</style></body></html>
