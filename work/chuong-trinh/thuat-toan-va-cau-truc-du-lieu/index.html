@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="vi"><head><title>Thuật toán và cấu trúc dữ liệu - RustVietnam</title><meta charset="UTF-8"/><link rel="profile" href="http://gmpg.org/xfn/11"/><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta http-equiv="Cache-control" content="public"/><meta http-equiv="Cache-control" content="max-age=604800"/><meta http-equiv="Cache-control" content="Content-Encoding=gzip"/><link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' /><link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script> <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" /><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' /><link rel="canonical" href="http://localhost/rustvietnam/chuong-trinh/thuat-toan-va-cau-truc-du-lieu/" /><meta property="og:locale" content="en_US" /><meta property="og:type" content="article" /><meta property="og:title" content="Thuật toán và cấu trúc dữ liệu - RustVietnam" /><meta property="og:description" content="Cấu trúc dữ liệu(Data Structure) là cách lập trình để lưu trữ dữ liệu để dữ liệu có thể được sử dụng một cách hiệu quả. Thuật toán(Algorithms) là một thủ tục từng bước, xác định một tập hợp các lệnh được thực hiện theo một thứ tự nhất định để có được đầu ra mong muốn." /><meta property="og:url" content="http://localhost/rustvietnam/chuong-trinh/thuat-toan-va-cau-truc-du-lieu/" /><meta property="og:site_name" content="RustVietnam" /><meta name="twitter:card" content="summary_large_image" /> <script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "https://localhost/rustvietnam/#website",
+	            "url": "https://localhost/rustvietnam/",
+	            "name": "RustVietnam",
+	            "description": "Trang Web d\u00e0nh cho nh\u1eefng ng\u01b0\u1eddi b\u1ea1n y\u00eau th\u00edch ng\u00f4n ng\u1eef l\u1eadp tr\u00ecnh Rust. Ch\u00fang t\u00f4i kh\u00f4ng \u0111\u1ea1i di\u1ec7n hay c\u00f3 li\u00ean h\u1ec7 g\u00ec v\u1edbi team ch\u00ednh th\u1ee9c c\u1ee7a Rust ( rust-lang.org )",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "https://localhost/rustvietnam/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "en-US"
+	        },
+	        {
+	            "@type": "CollectionPage",
+	            "@id": "http://localhost/rustvietnam/chuong-trinh/thuat-toan-va-cau-truc-du-lieu/#webpage",
+	            "url": "http://localhost/rustvietnam/chuong-trinh/thuat-toan-va-cau-truc-du-lieu/",
+	            "name": "Thu\u1eadt to\u00e1n v\u00e0 c\u1ea5u tr\u00fac d\u1eef li\u1ec7u - RustVietnam",
+	            "isPartOf": {
+	                "@id": "https://localhost/rustvietnam/#website"
+	            },
+	            "breadcrumb": {
+	                "@id": "http://localhost/rustvietnam/chuong-trinh/thuat-toan-va-cau-truc-du-lieu/#breadcrumb"
+	            },
+	            "inLanguage": "en-US",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "http://localhost/rustvietnam/chuong-trinh/thuat-toan-va-cau-truc-du-lieu/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "http://localhost/rustvietnam/chuong-trinh/thuat-toan-va-cau-truc-du-lieu/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "Home",
+	                    "item": "https://localhost/rustvietnam/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Thu\u1eadt to\u00e1n v\u00e0 c\u1ea5u tr\u00fac d\u1eef li\u1ec7u"
+	                }
+	            ]
+	        }
+	    ]
+	}</script> <link rel='dns-prefetch' href='//s.w.org' /><link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Thuật toán và cấu trúc dữ liệu Category Feed" href="https://rustvietnam.com/chuong-trinh/thuat-toan-va-cau-truc-du-lieu/feed/" /><style id='md-style-inline-css' type='text/css'></style><link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/categories/7" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 5.8.2" /><link theme media="all" href="http://localhost/rustvietnam/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="http://localhost/rustvietnam/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZCKSNE480"></script> <script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-RZCKSNE480');</script> </head><body><div id="site_init_loading" style="position: fixed;
+width: 100%;
+height: 100%;
+background-color: #ffffff;
+z-index: 999;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/loading.gif"/></div><nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2"><div class="container"> <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> <span>RustVietnam</span> </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button><div class="navbar-collapse collapse" id="navbar_global"><div class="navbar-collapse-header"><div class="row"><div class="col-6 collapse-brand"> <a href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> </a></div><div class="col-6 collapse-close"> <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span></span> <span></span> </button></div></div></div><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-ui-04 d-lg-none"></i> <span class="nav-link-inner--text">Nền tảng</span> </a><div class="dropdown-menu dropdown-menu-xl"><div class="dropdown-menu-inner"> <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-primary rounded-circle text-white"> <i class="ni ni-spaceship"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Bắt đầu</h6><p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-success rounded-circle text-white"> <i class="ni ni-palette"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6><p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-warning rounded-circle text-white"> <i class="ni ni-ui-04"></i></div><div class="media-body ml-3"><h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5><p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p></div></a></div></div></li><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Nâng cao</span> </a><div class="dropdown-menu"> <a href="http://localhost/rustvietnam/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a> <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a> <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a> <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a></div></li></ul><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Network</span> </a><div class="dropdown-menu"> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a> <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a></div></li><li> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-nhung" class="nav-link" > Lập trình nhúng </a></li><li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" > BlockChain </a></li></ul><ul class="navbar-nav align-items-lg-center ml-lg-auto"><li class="nav-item d-none d-lg-block"> <a href="https://rustvietnam.com/gioi-thieu/" class="btn btn-primary btn-icon"> <span class="nav-link-inner--text">Giới thiệu</span> </a></li></ul></div></div></nav><div class="section section-hero section-shaped"><div class="shape shape-style-1 shape-default"> <span class="span-150"></span> <span class="span-50"></span> <span class="span-50"></span> <span class="span-75"></span> <span class="span-100"></span> <span class="span-75"></span> <span class="span-50"></span> <span class="span-100"></span> <span class="span-50"></span> <span class="span-100"></span></div><div class="page-header"><div class="container shape-container d-flex align-items-center py-lg"><div class="col px-0"><div class="row align-items-center justify-content-center"><div class="col-lg-8 text-center text-white"><h1 class="display-2 text-white"> Thuật toán và cấu trúc dữ liệu</h1><p class="lead"> Cấu trúc dữ liệu(Data Structure) là cách lập trình để lưu trữ dữ liệu để dữ liệu có thể được sử dụng một cách hiệu quả.
+Thuật toán(Algorithms) là một thủ tục từng bước, xác định một tập hợp các lệnh được thực hiện theo một thứ tự nhất định để có được đầu ra mong muốn.</p></div></div></div></div></div><div class="separator separator-bottom separator-skew zindex-100"> <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg"> <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon> </svg></div></div><section class="mt-5 mb-5"><div class="container"><div class="row justify-content-center"><div class="col-xl-10 col-lg-11 text-center"><h2 class="display-3 mb-5">Nội Dung Chương Trình</h2><div class="card text-left mb-3"><div class="card-header"> Bài 1</div><div class="card-body"> <a href="https://rustvietnam.com/thuat-toan-va-cau-truc-du-lieu/gioi-thieu-chung-ve-thuat-toan/"><h5 class="card-title">Giới thiệu chung về thuật toán</h5></a><p class="card-text"><p>Thuật toán là tập hợp các bước để giải quyết 1 vấn đề trong lập trình.</p></p> <a href="https://rustvietnam.com/thuat-toan-va-cau-truc-du-lieu/gioi-thieu-chung-ve-thuat-toan/" class="btn btn-default">Nội dung</a></div></div></div></div></div></section><div class="container mt-5"><div class="row justify-content-center"><div class="col-xl-10 col-lg-11 text-center"><h2 class="text-center mb-4">Video khóa học tương tự bằng tiếng Anh</h2><div class="alert alert-warning alert-dismissible fade show" role="alert"><h5 class="mb-3 text-white">Video khóa học "Hands-On Data Structures and Algorithms with Rust" của Packtpub</h5><div class="btn-wrapper"> <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0" target="_blank" rel="nofollow"> <span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span> <span class="btn-inner--text">Download khóa học</span> </a> <a href="https://github.com/packtpublishing/hands-on-data-structures-and-algorithms-in-rust" class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank" rel="nofollow"> <span class="btn-inner--icon"><i class="fa fa-github"></i></span> <span class="btn-inner--text"><span class="text-warning">Download</span> code mẫu</span> </a> <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button></div></div></div></div></div><footer class="footer has-cards"><div class="container"><hr><div class="row align-items-center justify-content-md-between"><div class="col-md-6"><div class="copyright"> © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.</div></div><div class="col-md-6 text-right"> <a style="font-size: 14px;" class="text-teal" href="https://rustvietnam.com/privacy-policy">Điều khoản</a></div></div></div></footer></body></html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="vi"><head><title>Cơ sở dữ liệu PostgreSQL - RustVietnam</title><meta charset="UTF-8"/><link rel="profile" href="http://gmpg.org/xfn/11"/><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta http-equiv="Cache-control" content="public"/><meta http-equiv="Cache-control" content="max-age=604800"/><meta http-equiv="Cache-control" content="Content-Encoding=gzip"/><link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' /><link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script> <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" /><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' /><link rel="canonical" href="http://localhost/rustvietnam/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/" /><meta property="og:locale" content="en_US" /><meta property="og:type" content="article" /><meta property="og:title" content="Cơ sở dữ liệu PostgreSQL - RustVietnam" /><meta property="og:description" content="PostgreSQL là một hệ thống quản trị cơ sở dữ liệu quan hệ-đối tượng (object-relational database management system) có mục đích chung, hệ thống cơ sở dữ liệu mã nguồn mở tiên tiến nhất hiện nay." /><meta property="og:url" content="http://localhost/rustvietnam/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/" /><meta property="og:site_name" content="RustVietnam" /><meta property="article:published_time" content="2021-09-08T13:36:22+00:00" /><meta property="article:modified_time" content="2021-09-27T07:30:52+00:00" /><meta property="og:image" content="http://localhost/rustvietnam/wp-content/uploads/2021/09/Screenshot_1-1.png" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:label1" content="Written by" /><meta name="twitter:data1" content="admin" /><meta name="twitter:label2" content="Est. reading time" /><meta name="twitter:data2" content="10 minutes" /> <script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "https://localhost/rustvietnam/#website",
+	            "url": "https://localhost/rustvietnam/",
+	            "name": "RustVietnam",
+	            "description": "Trang Web d\u00e0nh cho nh\u1eefng ng\u01b0\u1eddi b\u1ea1n y\u00eau th\u00edch ng\u00f4n ng\u1eef l\u1eadp tr\u00ecnh Rust. Ch\u00fang t\u00f4i kh\u00f4ng \u0111\u1ea1i di\u1ec7n hay c\u00f3 li\u00ean h\u1ec7 g\u00ec v\u1edbi team ch\u00ednh th\u1ee9c c\u1ee7a Rust ( rust-lang.org )",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "https://localhost/rustvietnam/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "en-US"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "@id": "http://localhost/rustvietnam/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/#primaryimage",
+	            "inLanguage": "en-US",
+	            "url": "https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_1-1.png",
+	            "contentUrl": "https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_1-1.png",
+	            "width": 654,
+	            "height": 556
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "http://localhost/rustvietnam/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/#webpage",
+	            "url": "http://localhost/rustvietnam/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/",
+	            "name": "C\u01a1 s\u1edf d\u1eef li\u1ec7u PostgreSQL - RustVietnam",
+	            "isPartOf": {
+	                "@id": "https://localhost/rustvietnam/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "http://localhost/rustvietnam/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/#primaryimage"
+	            },
+	            "datePublished": "2021-09-08T13:36:22+00:00",
+	            "dateModified": "2021-09-27T07:30:52+00:00",
+	            "author": {
+	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
+	            },
+	            "breadcrumb": {
+	                "@id": "http://localhost/rustvietnam/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/#breadcrumb"
+	            },
+	            "inLanguage": "en-US",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "http://localhost/rustvietnam/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "http://localhost/rustvietnam/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "Home",
+	                    "item": "https://localhost/rustvietnam/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "C\u01a1 s\u1edf d\u1eef li\u1ec7u PostgreSQL"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655",
+	            "name": "admin",
+	            "image": {
+	                "@type": "ImageObject",
+	                "@id": "https://localhost/rustvietnam/#personlogo",
+	                "inLanguage": "en-US",
+	                "url": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "contentUrl": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "caption": "admin"
+	            },
+	            "sameAs": [
+	                "http://localhost/rustvietnam"
+	            ],
+	            "url": "https://rustvietnam.com/author/admin/"
+	        }
+	    ]
+	}</script> <link rel='dns-prefetch' href='//s.w.org' /><link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Cơ sở dữ liệu PostgreSQL Comments Feed" href="https://rustvietnam.com/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/feed/" /><style id='md-style-inline-css' type='text/css'></style><link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/143" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 5.8.2" /><link rel='shortlink' href='https://rustvietnam.com/?p=143' /><link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Fwork%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fco-so-du-lieu-postgresql%2F" /><link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Fwork%2Frustvietnam%2Flap-trinh-web-voi-rust%2Fco-so-du-lieu-postgresql%2F&#038;format=xml" /><link theme media="all" href="http://localhost/rustvietnam/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="http://localhost/rustvietnam/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZCKSNE480"></script> <script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-RZCKSNE480');</script> </head><body><div id="site_init_loading" style="position: fixed;
+width: 100%;
+height: 100%;
+background-color: #ffffff;
+z-index: 999;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/loading.gif"/></div><nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2"><div class="container"> <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> <span>RustVietnam</span> </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button><div class="navbar-collapse collapse" id="navbar_global"><div class="navbar-collapse-header"><div class="row"><div class="col-6 collapse-brand"> <a href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> </a></div><div class="col-6 collapse-close"> <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span></span> <span></span> </button></div></div></div><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-ui-04 d-lg-none"></i> <span class="nav-link-inner--text">Nền tảng</span> </a><div class="dropdown-menu dropdown-menu-xl"><div class="dropdown-menu-inner"> <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-primary rounded-circle text-white"> <i class="ni ni-spaceship"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Bắt đầu</h6><p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-success rounded-circle text-white"> <i class="ni ni-palette"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6><p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-warning rounded-circle text-white"> <i class="ni ni-ui-04"></i></div><div class="media-body ml-3"><h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5><p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p></div></a></div></div></li><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Nâng cao</span> </a><div class="dropdown-menu"> <a href="http://localhost/rustvietnam/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a> <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a> <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a> <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a></div></li></ul><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Network</span> </a><div class="dropdown-menu"> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a> <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a></div></li><li> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-nhung" class="nav-link" > Lập trình nhúng </a></li><li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" > BlockChain </a></li></ul><ul class="navbar-nav align-items-lg-center ml-lg-auto"><li class="nav-item d-none d-lg-block"> <a href="https://rustvietnam.com/gioi-thieu/" class="btn btn-primary btn-icon"> <span class="nav-link-inner--text">Giới thiệu</span> </a></li></ul></div></div></nav><div class="section section-hero section-shaped"><div class="shape shape-style-1 shape-primary"> <span class="span-150"></span> <span class="span-50"></span> <span class="span-50"></span> <span class="span-75"></span> <span class="span-100"></span> <span class="span-75"></span> <span class="span-50"></span> <span class="span-100"></span> <span class="span-50"></span> <span class="span-100"></span></div><div class="page-header"><div class="container shape-container d-flex align-items-center py-lg"><div class="col px-0"><div class="row align-items-center justify-content-center"><div class="col-lg-8 text-center text-white"><h1 class="display-2 text-white">Cơ sở dữ liệu PostgreSQL</h1><p class="lead"><p>PostgreSQL là một hệ thống quản trị cơ sở dữ liệu quan hệ-đối tượng (object-relational database management system) có mục đích chung, hệ thống cơ sở dữ liệu mã nguồn mở tiên tiến nhất hiện nay.</p></p></div></div></div></div></div><div class="separator separator-bottom separator-skew zindex-100"> <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg"> <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon> </svg></div></div><section class="section"><div class="container"><div class="row justify-content-center flex-row-reverse"><div class="col-lg-4 single-sidebar"><h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/">Lập trình Web với Rust</a></h2><ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-1-huong-dan-co-ban-ve-lap-trinh-voi-rust/">Chương 1 - Hướng dẫn cơ bản về lập trình với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-2-thiet-ke-mot-web-app-voi-rust/">Chương 2 - Thiết kế một Web App với Rust</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-3-xu-li-http-requests-voi-actix-web-framework/">Chương 3 - Xử lí HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/chuong-4-xu-li-du-lieu-http-requests-voi-actix-web-framework/">Chương 4  - Xử lí Dữ liệu HTTP Requests với Actix Web framework</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/hien-thi-trang-web-tren-trinh-duyet/">Chương 5 - Hiển thị trang Web trên trình duyệt</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/co-so-du-lieu-postgresql/">Chương 6 - Cơ sở dữ liệu PostgreSQL</a></li><li><a href="https://rustvietnam.com/lap-trinh-web-voi-rust/quan-li-sessions/">Chương 7 - Quản lý Sessions</a></li></ul></div><div class="col-lg-8 single-content"><p>Phần frontend đã xong, tiếp theo ta cần cơ sở dữ liệu, việc lưu trong file json như lúc trước là tạm thời, để có 1 website xịn sò ta cần 1 cơ sở dữ liệu tốt,PostgreSQL là một hệ thống cơ sở dữ liệu(database) mã nguồn mở tiên tiến nhất hiện nay.<br /> Công việc của chúng ta như sau :</p><ul><li>Xây dựng một PostgreSQL database</li><li>Kết nối với PostgreSQL bằng thư viện Diesel</li><li>Tạo Data models cho web của mình</li><li>Truy xuất dữ liệu từ database</li><li>Đưa dữ liệu vào database</li><li>Chỉnh sửa/xóa dữ liệu đã có trong database</li></ul><h2>Yêu cầu kĩ thuật</h2><p><a href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads">https://www.enterprisedb.com/downloads/postgres-postgresql-downloads</a> tùy vào hệ điều hành của bạn chọn file download và cài đặt<br /> Các bạn có thể tham khảo cách cài với Docker, hiện tại mình chưa biết Docker là cái quái gì, trông khá rắc rối.<br /> <a href="https://dev.to/shree_j/how-to-install-and-run-psql-using-docker-41j2">https://dev.to/shree_j/how-to-install-and-run-psql-using-docker-41j2</a><br /> Mở database admin trong window<br /> <img src="https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_1-1.png" alt="" /><br /> <img src="https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_2-1.png" alt="" /></p><h2>Config cho project</h2><p>Ok, tiếp theo chúng ta sẽ kết nối code với Postgresql bằng crate <strong>diesel</strong><br /> Ta thêm vào Cargo.toml</p><blockquote><p>diesel = { version = &quot;1.4.4&quot;, features = [&quot;postgres&quot;] }<br /> dotenv = &quot;0.15.0&quot;</p></blockquote><p>Cái crate dotenv dùng để đọc file config biến môi trường .env<br /> Tiếp theo là chạy lệnh cài diesel client</p><blockquote><p>cargo install diesel_cli --no-default-features --features postgres</p></blockquote><p>Tạo File .env với nội dung</p><blockquote><p>DATABASE_URL=postgres://username:password@localhost/to_do</p></blockquote><p>Thông số database ta khai báo là<br /> Username : username<br /> Password : password<br /> Database name : to_do<br /> Dĩ nhiên ta có thể đặt tên tùy thích.<br /> Cổng mặc định của postgress là <strong>5432</strong></p><p><strong>Tạo 1 database mới</strong></p><p><img src="https://rustvietnam.com/wp-content/uploads/2021/09/add-database.png" alt="" /></p><p><strong>Tạo User mới. </strong></p><p><img src="https://rustvietnam.com/wp-content/uploads/2021/09/create_username.jpg" alt="" /></p><p><strong>Update password cho user</strong></p><p><img src="https://rustvietnam.com/wp-content/uploads/2021/09/pass.jpg" alt="" /></p><h2>kết nối với database bằng code Rust</h2><p>Sau khi có file <strong>.env</strong> và database xong , ta thực hiện đoạn code Rust đầu tiên kết nối với database , tạo <strong>src/database.rs</strong></p><pre><code class="language-html">use diesel::prelude::*;
+use diesel::pg::PgConnection;
+use dotenv::dotenv;
+use std::env;
+pub fn establish_connection() -&gt; PgConnection {
+    dotenv().ok();
+    let database_url = env::var(&quot;DATABASE_URL&quot;)
+        .expect(&quot;DATABASE_URL must be set&quot;);
+        println!(&quot;{}&quot;,database_url);
+    PgConnection::establish(&amp;database_url)
+        .unwrap_or_else(|_| panic!(&quot;Error connecting to {}&quot;, database_url))
+}</code></pre><p>Chúng ta lấy giá trị từ file <strong>.env</strong> bằng <strong>env::var(&quot;DATABASE_URL&quot;)</strong> , sau đo dùng <strong>PgConnection</strong> để kết nối, nếu kết nối sai sẽ báo lỗi. Trong <strong>main.rs</strong></p><pre><code class="language-html">mod database;
+use database::establish_connection;
+fn main() {
+    let _db = establish_connection();
+}</code></pre><p>Mình chạy <strong>cargo run</strong> và ăn 1 lỗi bảo ko thấy <strong>gcc.exe</strong>, chả hiểu sao nữa<br /> Mình dùng rust bản <strong>stable-x86_64-pc-windows-msvc</strong> , mình phải cài biên dịch C++ tại <a href="http://win-builds.org/doku.php">http://win-builds.org/doku.php</a> , cài xong mình thêm <strong>PATH</strong> đường dẫn tới thư mục bin, để nó nhận ra <strong>gcc.exe</strong>.<br /> <img src="https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_1.jpg" alt="" /></p><p>Tưởng mọi thứ đã êm , lại dính thêm</p><blockquote><p>note: LINK : fatal error LNK1181: cannot open input file 'libpq.lib'</p></blockquote><p>Mở PowerShell , dẫn đến lib của PostgreSQL , thay bằng đường dẫn của bạn.</p><blockquote><p>setx PQ_LIB_DIR &quot;C:\Program Files\PostgreSQL\13\lib&quot;</p></blockquote><p>Xong chạy</p><blockquote><p>cargo install diesel_cli --no-default-features --features postgres</p></blockquote><p>Nếu mọi việc ổn hết ta chạy</p><blockquote><p>cargo run</p></blockquote><p>Code chạy mà ko có thông báo lỗi nào, vậy là ổn.<br /> <strong>Compile với Rust luôn gặp những vấn đề kiểu này, đừng buồn my friend!!</strong></p><h2>Khai báo table trong datatabse</h2><p>Trước hết chạy</p><blockquote><p>diesel setup</p></blockquote><p>Ta nhận được folder migrations và file diesel.toml, tiếp theo setup table <strong>to_do</strong></p><blockquote><p>diesel migration generate create_to_do_items</p></blockquote><p>Câu lệnh tạo ra folder migrations và 2 files sql đại loại như sau</p><blockquote><p>Creating migrations\2021-09-24-110409_create_to_do_items\up.sql<br /> Creating migrations\2021-09-24-110409_create_to_do_items\down.sql</p></blockquote><p>File <strong>up.sql</strong> và <strong>down.sql</strong><br /> Trong file <strong>up.sql</strong> ta khai báo table <strong>to_do</strong></p><pre><code class="language-html">CREATE TABLE to_do (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR NOT NULL,
+  status VARCHAR NOT NULL
+)</code></pre><p>Đây là query SQL để tạo 1 table<br /> Trong file <strong>down.sql</strong> ta xóa table.</p><pre><code class="language-html">DROP TABLE to_do</code></pre><p>Sau khi migration đã xong thì ta chạy nó</p><blockquote><p>diesel migration run</p></blockquote><p>Kiểm tra ta sẽ thấy <strong>src/schema.rs</strong> được tạo ra</p><pre><code class="language-html">table! {
+    to_do (id) {
+        id -&gt; Int4,
+        title -&gt; Varchar,
+        status -&gt; Varchar,
+    }
+}</code></pre><p>macro <strong>table!</strong> này sẽ được dùng bởi thư viện <strong>diesel</strong></p><p>Ta tạo folder <strong>models</strong></p><pre><code class="language-html">├── models
+│   ├── item
+│   │   ├── item.rs
+│   │   ├── mod.rs
+│   │   └── new_item.rs
+│   └── mod.rs</code></pre><p>Tất cả các data model mình bỏ vô thư mục models , mỗi model là 1 thư mục . <strong>new_item.rs</strong> tạo 1 item trong database</p><pre><code class="language-html">use crate::schema::to_do;
+#[derive(Insertable)]
+#[table_name=&quot;to_do&quot;]
+pub struct NewItem {
+    pub title: String,
+    pub status: String,
+}
+impl NewItem {
+    pub fn new(title: String) -&gt; NewItem {
+        return NewItem{title, status:
+            String::from(&quot;pending&quot;)}
+    }
+}</code></pre><p>Mình khai báo macro <strong>Insertable</strong> : có thể chèn dữ liệu vào <strong>table_name=&quot;to_do&quot;</strong>.<br /> File <strong>item.rs</strong></p><pre><code class="language-html">use crate::schema::to_do;
+#[derive(Queryable, Identifiable)]
+#[table_name=&quot;to_do&quot;]
+pub struct Item {
+    pub id: i32,
+    pub title: String,
+    pub status: String,
+}</code></pre><p>vẫn <strong>table_name=&quot;to_do&quot;</strong> và <strong>derive(Queryable, Identifiable)</strong><br /> 1 item của mình gồm id,title và status<br /> Khai báo module trong <strong>models/item/mod.rs</strong></p><pre><code class="language-html">pub mod new_item;
+pub mod item;</code></pre><p>Khai báo module trong <strong>models/mod.rs</strong></p><pre><code class="language-html">pub mod item;</code></pre><p>Quay trở lại <strong>main.rs</strong></p><pre><code class="language-html">#[macro_use] extern crate diesel;
+
+use diesel::prelude::*;
+
+mod database;
+use database::establish_connection;
+
+mod models;
+mod schema;
+
+use crate::schema::to_do;
+use crate::models::item::item::Item;
+use crate::models::item::new_item::NewItem;
+
+fn main() {
+    let db = establish_connection();
+    let new_post = NewItem::new(&quot;the first task&quot;.to_string());
+        let _ = diesel::insert_into(
+            to_do::table).values(&amp;new_post)
+            .execute(&amp;db);
+}</code></pre><p>Đoạn code thêm vào 1 task với title &quot;the first task&quot; . Chạy <strong>cargo run</strong><br /> Như mình dùng Window mình mở table ra kiểm tra dữ liệu<br /> <img src="https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_1-1.jpg" alt="" /></p><p>Nếu không ta sửa đoạn code tại main lại để truy vấn table <strong>to_do</strong></p><pre><code class="language-html">#[macro_use] extern crate diesel;
+
+use diesel::prelude::*;
+
+mod database;
+use database::establish_connection;
+
+mod models;
+mod schema;
+
+use crate::schema::to_do;
+use crate::models::item::item::Item;
+
+fn main() {
+
+    let db = establish_connection();
+    let items = to_do::table
+        .filter(to_do::columns::title.eq(&quot;the first task&quot;))
+        .order(to_do::columns::id.asc())
+        .load::&lt;Item&gt;(&amp;db)
+        .unwrap();
+    println!(&quot;{:?}&quot;,items);    
+}</code></pre><p>Lưu ý do mình in ra console biến items bằng <strong>println!(&quot;{:?}&quot;,items);</strong> nên trong file<br /> <strong>models/item/item.rs</strong> mình thêm derive Debug vô nhé.</p><pre><code class="language-html">// Ban đầu
+#[derive(Queryable, Identifiable)]
+// Thêm vô
+#[derive(Queryable, Identifiable,Debug)]</code></pre><p>Kết quả truy vấn in ra trên console nhé<br /> <img src="https://rustvietnam.com/wp-content/uploads/2021/09/Screenshot_2.jpg" alt="" /></p><p>Ok, vậy là bước đầu tiên chúng ta đã nắm cách setup database , config và thực hiện 1 vài truy vấn đơn giản từ code Rust . Tiếp theo chúng ta sẽ nâng cấp app <strong>to_do</strong> ở chương trước , loại bỏ việc lưu trữ dữ liệu tại file <strong>state.json</strong> , chuyển qua dùng <strong>Postgre</strong></p><h2>Tiếp tục nâng cấp app to_do list</h2><p>Nếu hiện tại là 1 project mới thì ta chuyển code từ chương trước qua bên này. css,javascript,to_do,view..<br /> File main.rs</p><pre><code class="language-html">#[macro_use] extern crate diesel;
+extern crate dotenv;
+
+use actix_web::{App, HttpServer};
+use actix_service::Service;
+
+mod schema;
+mod database;
+mod processes;
+mod models;
+mod state;
+mod to_do;
+mod views;
+
+#[actix_rt::main]
+async fn main() -&gt; std::io::Result&lt;()&gt; {
+    HttpServer::new(|| {
+        let app = App::new()
+            .wrap_fn(|req, srv| {
+                // srv =&gt; routing
+                // req =&gt; service request
+                if *&amp;req.path().contains(&quot;/item/&quot;) {
+                    match views::token::process_token(&amp;req) {
+                        Ok(_token) =&gt; println!(&quot;the token is passable&quot;),
+                        Err(message) =&gt; println!(&quot;token error: {}&quot;, message)
+                    }
+                }
+                let fut = srv.call(req);
+                async {
+                    let result = fut.await?;
+                    Ok(result)
+                }
+            }).configure(views::views_factory);
+        return app
+    })
+        .bind(&quot;127.0.0.1:8000&quot;)?
+        .run()
+        .await
+}</code></pre><p>File view/to_do/utils.rs chúng ta có hàm <strong>return_state</strong> trả lại tất cả các item chúng ta đang có, cả 3 thao tác create,edit,delete đều gọi tới hàm này<br /> <img src="https://rustvietnam.com/wp-content/uploads/2021/09/state.jpg" alt="" /></p><pre><code class="language-html">use crate::diesel;
+use diesel::prelude::*;
+use crate::to_do::to_do_factory;
+use crate::json_serialization::to_do_items::ToDoItems;
+use crate::database::establish_connection;
+use crate::models::item::item::Item;
+use crate::schema::to_do;
+pub fn return_state() -&gt; ToDoItems {
+    let connection = establish_connection();
+    let items = to_do::table
+        .order(to_do::columns::id.asc())
+        .load::&lt;Item&gt;(&amp;connection)
+        .unwrap();
+    let mut array_buffer = Vec::new();
+    for item in items {
+        let item = to_do_factory(&amp;item.status,item.title).unwrap();
+        array_buffer.push(item);
+    }
+    return ToDoItems::new(array_buffer);
+}</code></pre><p>Hàm <strong>return_state</strong> load table <strong>to_do</strong> order với id tăng dần , sau đó vòng lặp for qua các <strong>items</strong> để định dạng lại với <strong>to_do_factory</strong>.<br /> File <strong>views/to_do/create.rs</strong></p><pre><code class="language-html">use crate::diesel;
+use diesel::prelude::*;
+
+use actix_web::HttpRequest;
+use actix_web::Responder;
+
+use crate::database::establish_connection;
+use crate::models::item::new_item::NewItem;
+use crate::models::item::item::Item;
+use crate::schema::to_do;
+use super::utils::return_state;
+
+/// This view creates a to do item and saves it in the state.json file.
+///
+/// # Arguments
+/// * req (HttpRequest): the HTTP request passed into the view
+///
+/// # Returns
+/// * (impl Responder): message to be sent back to the user
+pub async fn create(req: HttpRequest) -&gt; impl Responder {
+    let title: String = req.match_info().get(&quot;title&quot;
+    ).unwrap().to_string();
+    let title_ref: String = req.match_info().get(&quot;title&quot;
+    ).unwrap().to_string();
+
+    let connection = establish_connection();
+    let items = to_do::table
+        .filter(to_do::columns::title.eq(title_ref.as_str()))
+        .order(to_do::columns::id.asc())
+        .load::&lt;Item&gt;(&amp;connection)
+        .unwrap();
+
+    if items.len() == 0 {
+        let new_post = NewItem::new(title);
+        let _ = diesel::insert_into(to_do::table).values(&amp;new_post)
+            .execute(&amp;connection);
+    }
+
+    return return_state()
+}</code></pre><p>Chúng ta kiểm tra task với title xem nó có tồn tại không, nếu không thì thêm vào database<br /> tương tự chúng ta cũng chỉnh sửa code ở <strong>views/to_do/edit.rs</strong></p><pre><code class="language-html">diesel::update(results).set(to_do::columns::status.eq(&quot;done&quot;))
+       .execute(&amp;connection);</code></pre><p><strong>views/to_do/delete.rs</strong></p><pre><code class="language-html">diesel::delete(&amp;items[0]).execute(&amp;connection);</code></pre><p>Tham khảo code nếu bạn thấy khó nhé.<br /> <a href="https://github.com/PacktPublishing/Rust-Web-Programming/tree/master/Chapter06/data_models/src/views">https://github.com/PacktPublishing/Rust-Web-Programming/tree/master/Chapter06/data_models/src/views</a></p><hr/><div class="powr-comments" id="e67d472b_143"></div><script src="https://www.powr.io/powr.js?platform=html"></script> </div></div></div></section><footer class="footer has-cards"><div class="container"><hr><div class="row align-items-center justify-content-md-between"><div class="col-md-6"><div class="copyright"> © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.</div></div><div class="col-md-6 text-right"> <a style="font-size: 14px;" class="text-teal" href="https://rustvietnam.com/privacy-policy">Điều khoản</a></div></div></div></footer></body></html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html><html lang="vi"><head><title>Phần cơ bản - RustVietnam</title><meta charset="UTF-8"/><link rel="profile" href="http://gmpg.org/xfn/11"/><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta http-equiv="Cache-control" content="public"/><meta http-equiv="Cache-control" content="max-age=604800"/><meta http-equiv="Cache-control" content="Content-Encoding=gzip"/><link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' /><link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script> <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" /><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' /><link rel="canonical" href="http://localhost/rustvietnam/thu-vien-chuan/chuong-1-phan-co-ban/" /><meta property="og:locale" content="en_US" /><meta property="og:type" content="article" /><meta property="og:title" content="Phần cơ bản - RustVietnam" /><meta property="og:description" content="Có 1 vài đoạn code và kiểu mẫu tư duy gần như là nền tảng lặp đi lặp lại trong một ngôn ngữ lập trình.Chúng ta sẽ tìm hiểu những kiểu mẫu đó trong Rust.Bạn sẽ thường xuyên xài những đoạn code xịn sò đó trong những dự án tới của mình." /><meta property="og:url" content="http://localhost/rustvietnam/thu-vien-chuan/chuong-1-phan-co-ban/" /><meta property="og:site_name" content="RustVietnam" /><meta property="article:published_time" content="2021-08-27T11:38:45+00:00" /><meta property="article:modified_time" content="2021-09-15T09:00:02+00:00" /><meta property="og:image" content="http://localhost/rustvietnam/wp-content/uploads/2021/08/Screenshot_1.png" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:label1" content="Written by" /><meta name="twitter:data1" content="admin" /><meta name="twitter:label2" content="Est. reading time" /><meta name="twitter:data2" content="23 minutes" /> <script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "https://localhost/rustvietnam/#website",
+	            "url": "https://localhost/rustvietnam/",
+	            "name": "RustVietnam",
+	            "description": "Trang Web d\u00e0nh cho nh\u1eefng ng\u01b0\u1eddi b\u1ea1n y\u00eau th\u00edch ng\u00f4n ng\u1eef l\u1eadp tr\u00ecnh Rust. Ch\u00fang t\u00f4i kh\u00f4ng \u0111\u1ea1i di\u1ec7n hay c\u00f3 li\u00ean h\u1ec7 g\u00ec v\u1edbi team ch\u00ednh th\u1ee9c c\u1ee7a Rust ( rust-lang.org )",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "https://localhost/rustvietnam/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "en-US"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "@id": "http://localhost/rustvietnam/thu-vien-chuan/chuong-1-phan-co-ban/#primaryimage",
+	            "inLanguage": "en-US",
+	            "url": "https://rustvietnam.com/wp-content/uploads/2021/08/Screenshot_1.png",
+	            "contentUrl": "https://rustvietnam.com/wp-content/uploads/2021/08/Screenshot_1.png",
+	            "width": 638,
+	            "height": 200
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "http://localhost/rustvietnam/thu-vien-chuan/chuong-1-phan-co-ban/#webpage",
+	            "url": "http://localhost/rustvietnam/thu-vien-chuan/chuong-1-phan-co-ban/",
+	            "name": "Ph\u1ea7n c\u01a1 b\u1ea3n - RustVietnam",
+	            "isPartOf": {
+	                "@id": "https://localhost/rustvietnam/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "http://localhost/rustvietnam/thu-vien-chuan/chuong-1-phan-co-ban/#primaryimage"
+	            },
+	            "datePublished": "2021-08-27T11:38:45+00:00",
+	            "dateModified": "2021-09-15T09:00:02+00:00",
+	            "author": {
+	                "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655"
+	            },
+	            "breadcrumb": {
+	                "@id": "http://localhost/rustvietnam/thu-vien-chuan/chuong-1-phan-co-ban/#breadcrumb"
+	            },
+	            "inLanguage": "en-US",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "http://localhost/rustvietnam/thu-vien-chuan/chuong-1-phan-co-ban/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "http://localhost/rustvietnam/thu-vien-chuan/chuong-1-phan-co-ban/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "Home",
+	                    "item": "https://localhost/rustvietnam/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Ph\u1ea7n c\u01a1 b\u1ea3n"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "https://localhost/rustvietnam/#/schema/person/e0d03b8f89a39fe8d8a990c7d2d9c655",
+	            "name": "admin",
+	            "image": {
+	                "@type": "ImageObject",
+	                "@id": "https://localhost/rustvietnam/#personlogo",
+	                "inLanguage": "en-US",
+	                "url": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "contentUrl": "http://0.gravatar.com/avatar/f85eb7eaabe6640d9c988c04988fbaf0?s=96&d=mm&r=g",
+	                "caption": "admin"
+	            },
+	            "sameAs": [
+	                "http://localhost/rustvietnam"
+	            ],
+	            "url": "https://rustvietnam.com/author/admin/"
+	        }
+	    ]
+	}</script> <link rel='dns-prefetch' href='//s.w.org' /><link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Phần cơ bản Comments Feed" href="https://rustvietnam.com/thu-vien-chuan/chuong-1-phan-co-ban/feed/" /><style id='md-style-inline-css' type='text/css'></style><link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/posts/30" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 5.8.2" /><link rel='shortlink' href='https://rustvietnam.com/?p=30' /><link rel="alternate" type="application/json+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Fwork%2Frustvietnam%2Fthu-vien-chuan%2Fchuong-1-phan-co-ban%2F" /><link rel="alternate" type="text/xml+oembed" href="https://rustvietnam.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%2Fwork%2Frustvietnam%2Fthu-vien-chuan%2Fchuong-1-phan-co-ban%2F&#038;format=xml" /><link theme media="all" href="http://localhost/rustvietnam/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="http://localhost/rustvietnam/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZCKSNE480"></script> <script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-RZCKSNE480');</script> </head><body><div id="site_init_loading" style="position: fixed;
+width: 100%;
+height: 100%;
+background-color: #ffffff;
+z-index: 999;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/loading.gif"/></div><nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2"><div class="container"> <a class="navbar-brand mr-lg-5" href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> <span>RustVietnam</span> </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button><div class="navbar-collapse collapse" id="navbar_global"><div class="navbar-collapse-header"><div class="row"><div class="col-6 collapse-brand"> <a href="https://rustvietnam.com"> <img src="https://rustvietnam.com/wp-content/themes/onda/images/logo.svg" width="60"/> </a></div><div class="col-6 collapse-close"> <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation"> <span></span> <span></span> </button></div></div></div><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-ui-04 d-lg-none"></i> <span class="nav-link-inner--text">Nền tảng</span> </a><div class="dropdown-menu dropdown-menu-xl"><div class="dropdown-menu-inner"> <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/cai-dat-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-primary rounded-circle text-white"> <i class="ni ni-spaceship"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Bắt đầu</h6><p class="description d-none d-md-inline-block mb-0">Cài đặt Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-success rounded-circle text-white"> <i class="ni ni-palette"></i></div><div class="media-body ml-3"><h6 class="heading text-primary mb-md-1">Lập trình cơ bản</h6><p class="description d-none d-md-inline-block mb-0">Các hướng dẫn cơ bản/cốt lõi nhất để có thể bắt đầu với Rust</p></div> </a> <a href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/" class="media d-flex align-items-center"><div class="icon icon-shape bg-gradient-warning rounded-circle text-white"> <i class="ni ni-ui-04"></i></div><div class="media-body ml-3"><h5 class="heading text-warning mb-md-1">Thư viện chuẩn</h5><p class="description d-none d-md-inline-block mb-0">Các thư viện có sẵn vô cùng mạnh mẽ, phù hợp với tất cả các yêu cầu</p></div></a></div></div></li><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Nâng cao</span> </a><div class="dropdown-menu"> <a href="http://localhost/rustvietnam/chuong-trinh/lap-trinh-ham/" class="dropdown-item">Lâp trình hàm</a> <a href="https://rust-unofficial.github.io/patterns/" target="_blank" class="dropdown-item">Lập trình hướng đối tượng</a> <a target="_blank" href="https://drive.google.com/file/d/1pz15PPdWCVk1JI-1xfhK6CjPWR7NWj_I/view?usp=sharing" class="dropdown-item">Lập trình hệ thống</a> <a href="https://drive.google.com/file/d/1g6ZLNWUqBU1tBICRmLlr-rXqaUBRcDgB/view?usp=sharing" target="_blank" class="dropdown-item">Cấu trúc dữ liệu/thuật toán</a></div></li></ul><ul class="navbar-nav navbar-nav-hover align-items-lg-center"><li class="nav-item dropdown"> <a class="nav-link" data-toggle="dropdown" role="button"> <i class="ni ni-collection d-lg-none"></i> <span class="nav-link-inner--text">Network</span> </a><div class="dropdown-menu"> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-web-voi-rust/" class="dropdown-item">Lập trình Web</a> <a href="https://rustvietnam.com/chuong-trinh/webassembly/" class="dropdown-item">WebAssembly</a></div></li><li> <a href="https://rustvietnam.com/chuong-trinh/lap-trinh-nhung" class="nav-link" > Lập trình nhúng </a></li><li> <a target="_blank" rel="nofollow" href="https://substrate.dev/en/tutorials" class="nav-link" > BlockChain </a></li></ul><ul class="navbar-nav align-items-lg-center ml-lg-auto"><li class="nav-item d-none d-lg-block"> <a href="https://rustvietnam.com/gioi-thieu/" class="btn btn-primary btn-icon"> <span class="nav-link-inner--text">Giới thiệu</span> </a></li></ul></div></div></nav><div class="section section-hero section-shaped"><div class="shape shape-style-1 shape-primary"> <span class="span-150"></span> <span class="span-50"></span> <span class="span-50"></span> <span class="span-75"></span> <span class="span-100"></span> <span class="span-75"></span> <span class="span-50"></span> <span class="span-100"></span> <span class="span-50"></span> <span class="span-100"></span></div><div class="page-header"><div class="container shape-container d-flex align-items-center py-lg"><div class="col px-0"><div class="row align-items-center justify-content-center"><div class="col-lg-8 text-center text-white"><h1 class="display-2 text-white">Phần cơ bản</h1><p class="lead"><p>Có 1 vài đoạn code và kiểu mẫu tư duy gần như là nền tảng lặp đi lặp lại trong một ngôn ngữ lập trình.Chúng ta sẽ tìm hiểu những kiểu mẫu đó trong Rust.Bạn sẽ thường xuyên xài những đoạn code xịn sò đó trong những dự án tới của mình.</p></p></div></div></div></div></div><div class="separator separator-bottom separator-skew zindex-100"> <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg"> <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon> </svg></div></div><section class="section"><div class="container"><div class="row justify-content-center flex-row-reverse"><div class="col-lg-4 single-sidebar"><h2><a class="text-danger" href="https://rustvietnam.com/chuong-trinh/thu-vien-chuan/">Thư viện chuẩn</a></h2><ul class="catlist" style="padding-left: 17px;"><li><a href="https://rustvietnam.com/thu-vien-chuan/chuong-1-phan-co-ban/">Chương 1 - Phần cơ bản</a></li><li><a href="https://rustvietnam.com/thu-vien-chuan/chuong-2-lam-viec-voi-collections/">Chương 2  - Làm việc với Collections</a></li><li><a href="https://rustvietnam.com/thu-vien-chuan/xu-li-file-va-file-he-thong/">Chương 3 - Xử lí file và file hệ thống</a></li></ul></div><div class="col-lg-8 single-content"><p>Trong chương này, chúng ta sẽ cover vài thứ sau:</p><ul><li>Nối chuỗi</li><li>Sử dụng macro format!</li><li>default implementation</li><li>Sử dụng constructor pattern</li><li>Sử dụng builder pattern</li><li>Lập trình song song cơ bản với threads</li><li>Tạo số ngẫu nhiên</li><li>Sử dụng Regular expression</li><li>Truy cập command line</li><li>Tương tác với biến môi trường</li><li>Đọc giá trị từ stdin</li><li>Chấp nhận số lượng biến đầu vào ko xác định</li></ul><h2>Giới thiệu</h2><p>Có 1 vài đoạn code và kiểu mẫu tư duy gần như là nền tảng lặp đi lặp lại trong một ngôn ngữ lập trình.Chúng ta sẽ tìm hiểu những kiểu mẫu đó trong Rust.Bạn sẽ thường xuyên xài những đoạn code xịn sò đó trong những dự án tới của mình.</p><p>Những chương tiếp theo sẽ được xây dựng trên những nền tảng này cùng với <em>&quot;zero cost abstractions&quot;</em> ( sử dụng abstractions thứ chỉ có ở ngôn ngữ bậc cao nhưng lại ko ảnh hưởng tới tốc độ thực thi code) .Chúng ta cũng xem xét  1 số phần phức tạp trong thư viện chuẩn, sử dụng các cấu trúc của mình để làm việc với lập trình song song, unsafe block (cho phép làm việc ở cấp độ ngôn ngữ bậc thấp như C)</p><h2>Nối chuỗi</h2><p>Xử lí chuỗi trong ngôn ngữ lập trình hệ thống(Rust,C++,Java...) nó ko đơn giản như ở ngôn ngữ scripting (Js,Python,php...)<br /> Ok,mở play ground (<a href="https://play.rust-lang.org/">https://play.rust-lang.org/</a>) cho nhanh, đoạn code đầu tiên</p><pre><code class="language-html">fn main() {
+    by_moving();
+    by_cloning();
+    by_mutating();
+}
+fn by_moving() {
+    let hello = &quot;hello &quot;.to_string();
+    let world = &quot;world!&quot;;
+    let hello_world = hello + world;
+    println!(&quot;{}&quot;, hello_world);
+}
+fn by_cloning() {
+    let hello = &quot;hello &quot;.to_string();
+    let world = &quot;world!&quot;;
+    // Creating a copy of hello and moving it into a new variable
+    let hello_world = hello.clone() + world;
+    // Hello can still be used
+    println!(&quot;{}&quot;, hello_world); // Prints &quot;hello world!&quot;
+}
+fn by_mutating() {
+    let mut hello = &quot;hello &quot;.to_string();
+    let world = &quot;world!&quot;;
+    // hello gets modified in place
+    hello.push_str(world);
+    // hello is both usable and modifiable
+    println!(&quot;{}&quot;, hello); // Prints &quot;hello world!&quot;
+}
+``
+Kết quả là &quot;hello world!&quot; 3 lần.
+Chúng ta có hàm main, hàm này thực thi 3 hàm
+> by_moving();
+by_cloning();
+by_mutating();
+
+cả 3 hàm đều bắt đầu với :
+> &quot;hello &quot;.to_string();
+
+&quot;hello &quot; là kiểu dữ liệu string slice (&amp;str), to_string() chuyển dữ liệu thành String để thao tác tiếp.
+Hàm by_moving biến string slice **world** được thêm vào biến **hello** sau đó tất cả được chuyển vào biến **hello_world**
+Các bạn sẽ thử đổi 
+let hello_world =  hello + world;
+thành let hello_world =  world + hello;
+kết quả sẽ là lỗi 
+> cannot add `String` to `&amp;str`
+
+Vậy là các bạn thấy `&amp;str` thêm vào `String` là được nhưng ngược lại thì không nhé.Cũng trong hàm by_moving bạn thử thêm code 
+> println!(&quot;{}&quot;, hello);
+
+Sẽ nhận được thông báo 
+> error[E0382]: borrow of moved value: `hello`
+
+Vậy là biến **hello** dịch chuyển vô **hello_world** nên sẽ không còn được dùng lại nữa, nên ở hàm by_cloning , chúng ta thấy hello.clone(), với hàm by_cloning bạn thử thêm code  println!(&quot;{}&quot;, hello); vào cuối sẽ thấy nó hoạt động được
+Cuối cùng là by_mutating, ở Rust biến muốn thay đổi giá trị sau khi khai báo thì phải thêm *mut*
+> let mut hello = &quot;hello &quot;.to_string();
+
+Sau đó dùng push_str để thêm **world** vào bên trong **hello**, sau đó in **hello** ra mà ko cần thêm biến thứ 3
+
+## Sử dụng macro format! 
+Một chuyện thường gặp là chúng ta cần thêm kiểu dữ liệu khác và chuỗi, như số chẵn hạng, đó là lúc dùng format! 
+```html
+fn main() {
+    let colour = "red";
+    let favourite = format!("My favourite colour is {}", colour);
+    println!("{}", favourite);
+    let hello = "hello ";
+    let world = "world!";
+    let hello_world = format!("{}{}", hello, world);
+    println!("{}", hello_world); // Prints "hello world!"
+    let favourite_num = format!("My favourite number is {}", 42);
+    println!("{}", favourite_num);
+    let duck_duck_goose = format!("{0}, {0}, {0}, {1}!", "duck","goose");
+    println!("{}", duck_duck_goose); 
+    let introduction = format!("My name is {surname}, {forename} {surname}",
+    surname="Bond",
+    forename="James"
+    );
+     println!("{}", introduction) ;
+}</code></pre><p>format đây :</p><blockquote><p>let hello_world = format!(&quot;{}{}&quot;, hello, world);<br /> &quot;{}{}&quot; chấp nhận 2 biến</p></blockquote><p>format chấp nhận biến là số vào chuỗi</p><blockquote><p>let favourite_num = format!(&quot;My favourite number is {}&quot;, 42);</p><p>let duck_duck_goose = format!(&quot;{0}, {0}, {0}, {1}!&quot;, &quot;duck&quot;,&quot;goose&quot;);</p></blockquote><p>{0} là biến thứ nhất, lặp lại 3 lần rồi tới biến thứ 2 {1}</p><p>một cách viết khác</p><blockquote><p>format!(&quot;{message} {}&quot;, &quot;friendo&quot;, message=&quot;Hello there,&quot;)<br /> // Returns &quot;hello there, friendo&quot;</p></blockquote><p>Chúng ta đặt tên biến đầu vào cụ thể luôn là {message}</p><p>Một kiểu hay dùng cho debug {:?} , dùng để in ra object</p><blockquote><p>println!(&quot;{:?}&quot;,object)</p></blockquote><h2>default implementation</h2><pre><code class="language-html">fn main() {
+    // There's a default value for nearly every primitive type
+    let foo: i32 = Default::default();
+    println!("foo: {}", foo); // Prints "foo: 0"
+    let pizza: PizzaConfig = Default::default();
+    // Prints "wants_cheese: false
+   println!("wants_cheese: {}", pizza.wants_cheese);
+   // Prints "number_of_olives: 0"
+   println!("number_of_olives: {}", pizza.number_of_olives);
+   // Prints "special_message: "
+   println!("special message: {}", pizza.special_message);
+   let crust_type = match pizza.crust_type {
+     CrustType::Thin => "Nice and thin",
+     CrustType::Thick => "Extra thick and extra filling",
+   };
+   // Prints "crust_type: Nice and thin"
+   println!("crust_type: {}", crust_type);
+   // You can also configure only certain values
+   let custom_pizza = PizzaConfig {
+    number_of_olives: 12, ..Default::default()
+   };
+   let deluxe_custom_pizza = PizzaConfig {
+    number_of_olives: 12, wants_cheese: true,
+ special_message: "Will you marry me?".to_string(),
+  ..Default::default()
+ };
+ }
+#[derive(Default)]
+struct PizzaConfig {
+    wants_cheese: bool,
+    number_of_olives: i32,
+    special_message: String,
+    crust_type: CrustType,
+}
+enum CrustType {
+     Thin,
+     Thick,
+}
+impl Default for CrustType {
+    fn default() -> CrustType {
+        CrustType::Thin
+    }
+}</code></pre><p>Chúng ta xét đoạn đầu tiên</p><blockquote><p>let foo: i32 = Default::default();<br /> println!(&quot;foo: {}&quot;, foo);</p></blockquote><p>Chúng ta lấy giá trị của biến foo từ struct Default hàm default(), vậy hàm default có gì</p><pre><code class="language-html">enum CrustType {
+ Thin,
+ Thick,
+}
+impl Default for CrustType {
+fn default() -> CrustType {
+    CrustType::Thin
+}
+}</code></pre><p>Hàm default trả về enum CrustType::Thin, code trả về 0, ủa vậy 0 ở đâu ra.Nếu bạn đổi CrustType::Thin thành CrustType::Thick thì kết quả vẫn 0 như vậy<br /> Rust đã quy định sẵn giá trị mặc định cho hầu hết các struct, như ở trên là 0 hoặc false tùy dạng biến.<br /> Các giá trị mặc định khác thì cũng tương tự,các bạn chú ý đến đoạn này</p><pre><code class="language-html">let deluxe_custom_pizza = PizzaConfig {
+number_of_olives: 12, wants_cheese: true,
+ special_message: "Will you marry me?".to_string(),
+  ..Default::default()
+ };</code></pre><p>Khi điền các giá trị cho PizzaConfig, chúng ta điền ..Default::default() ý nghĩa là phần còn lại thì ta lấy giá trị từ Default::default()</p><h2>Sử dụng mẫu (pattern) khởi tạo (constructor)</h2><p>Mặc định thì structs trong rust không có hàm khởi tạo (constructor), dĩ nhiên chuyện đó ko vấn đề gì, ví dụ bên dưới ta tạo struct NameLength gồm tên người dùng và độ dài của tên</p><pre><code class="language-html">fn main() {
+    // We don't need to care about
+    // the internal structure of NameLength
+    // Instead, we can just call it's constructor
+    let name_length = NameLength::new("John".to_string());
+    // Prints "The name 'John' is '4' characters long"
+    name_length.print();
+  }
+  struct NameLength {
+    name: String,
+    length: usize,
+  }
+  impl NameLength {
+    // The user doesn't need to setup length
+    // We do it for him!
+    fn new(name: String) -> Self {
+      NameLength {
+        length: name.len(),
+        name,
+      }
+    }
+    fn print(&self) {
+      println!(
+        "The name '{}' is '{}' characters long",
+          self.name,
+            self.length
+        );
+    }
+}</code></pre><p>Các bạn chú ý đoạn code</p><pre><code class="language-html">fn new(name: String) -> Self {
+      NameLength {
+        length: name.len(),
+        name,
+      }
+    }</code></pre><p>Hàm new là hàm khởi tạo,chúng ta đặt sẵn giá trị khởi tạo cho NameLength, dĩ nhiên nếu ko thích chữ new() thì mình đặt tên khác cũng được.<br /> Một kiểu struct khác phức tạp hơn với vector(mảng) bên trong</p><pre><code class="language-html">use std::borrow::Cow;
+struct NameLength<'a> {
+    name: Cow<'a, str>,
+    length: usize,
+}
+impl<'a> NameLength<'a> {
+    // The user doesn't need to setup length
+    // We do it for him!
+    fn new < S > (name: S) -> Self
+    where
+        S: Into<Cow<'a, str>>,
+    {
+        let name: Cow<'a, str> = name.into();
+        NameLength {
+            length: name.len(),
+            name,
+        }
+    }
+    fn print(&self) {
+        println!(
+            "The name '{}' is '{}' characters long",
+            self.name, self.length
+        );
+    }
+}</code></pre><p>Mấy dòng code bên trên khá khó hiểu<br /> Lưu ý thứ nhất là code sử dụng lifetime, nếu chưa hiểu lifetime thì tham khảo ở đây.<br /> Thứ 2 là Cow, giải thích về Cow ở đây<br /> <a href="https://jwilm.io/blog/from-str-to-cow/">https://jwilm.io/blog/from-str-to-cow/</a><br /> Code trên sử dụng trait Into và Cow để biến khởi tạo name chấp nhận cả 2 dạng dữ liệu là &amp;str hoặc String<br /> Chi tiết về Into và Cow sẽ được làm rõ hơn trong chương 5 &quot;Cấu trúc dữ liệu nâng cao&quot;.</p><h2>Sử dụng builder pattern</h2><p>Builder pattern là 1 mẫu khởi tạo được tạo ra để xây dựng một đố tượng phức tạp bằng cách sử dụng các đối tượng đơn giản và sử dụng tiếp cận từng bước.<br /> Ví dụ : sản phẩm là 1 bánh burger, khi khởi tạo đầu tiên ta có 1 cái burger mặc định, cơ bản , bây giờ ta muốn có burger với phô mai thì ta tiếp tục config thêm phô mai vô, ko bỏ salad --&gt; có burger phô mai, tương tự để có một bánh veggie bigmac<br /> Đó là tất cả những gì diễn ra ở code bên dưới</p><pre><code class="language-html">fn main() {
+    // We can easily create different configurations
+    let normal_burger = BurgerBuilder::new().build();
+    let cheese_burger = BurgerBuilder::new()
+       .cheese(true)
+       .salad(false)
+       .build();
+    let veggie_bigmac = BurgerBuilder::new()
+       .vegetarian(true)
+       .patty_count(2)
+       .build();
+    if let Ok(normal_burger) = normal_burger {
+      normal_burger.print();
+    }
+   if let Ok(cheese_burger) = cheese_burger {
+     cheese_burger.print();
+   }
+   if let Ok(veggie_bigmac) = veggie_bigmac {
+     veggie_bigmac.print();
+   }
+   // Our builder can perform a check for
+   // invalid configurations
+   let invalid_burger = BurgerBuilder::new()
+       .vegetarian(true)
+       .bacon(true)
+       .build();
+   if let Err(error) = invalid_burger {
+     println!("Failed to print burger: {}", error);
+   }
+   // If we omit the last step, we can reuse our builder
+   let cheese_burger_builder = BurgerBuilder::new().cheese(true);
+   for i in 1..10 {
+     let cheese_burger = cheese_burger_builder.build();
+     if let Ok(cheese_burger) = cheese_burger {
+       println!("cheese burger number {} is ready!", i);
+       cheese_burger.print();
+     }
+   }
+}
+struct Burger {
+    patty_count: i32,
+    vegetarian: bool,
+    cheese: bool,
+    bacon: bool,
+    salad: bool,
+ }
+ impl Burger {
+    // This method is just here for illustrative purposes
+    fn print(&self) {
+        let pretty_patties = if self.patty_count == 1 {
+            "patty"
+        } else {
+            "patties"
+        };
+        let pretty_bool = |val| if val { "" } else { "no " };
+        let pretty_vegetarian = if self.vegetarian { "vegetarian " 
+           }
+          else { "" };
+        println!(
+            "This is a {}burger with {} {}, {}cheese, {}bacon and
+              {}salad",
+            pretty_vegetarian,
+            self.patty_count,
+            pretty_patties,
+            pretty_bool(self.cheese),
+            pretty_bool(self.bacon),
+            pretty_bool(self.salad)
+        )
+    }
+ }
+  struct BurgerBuilder {
+    patty_count: i32,
+    vegetarian: bool,
+    cheese: bool,
+    bacon: bool,
+    salad: bool,
+  }
+  impl BurgerBuilder {
+    // in the constructor, we can specify
+    // the standard values
+    fn new() -> Self {
+      BurgerBuilder {
+        patty_count: 1,
+        vegetarian: false,
+        cheese: false,
+        bacon: false,
+        salad: true,
+      }
+    }
+    // Now we have to define a method for every
+    // configurable value
+    fn patty_count(mut self, val: i32) -> Self {
+      self.patty_count = val;
+      self
+    }
+    fn vegetarian(mut self, val: bool) -> Self {
+      self.vegetarian = val;
+      self
+    }
+    fn cheese(mut self, val: bool) -> Self {
+      self.cheese = val;
+      self
+    }
+    fn bacon(mut self, val: bool) -> Self {
+     self.bacon = val;
+     self
+   }
+   fn salad(mut self, val: bool) -> Self {
+     self.salad = val;
+     self
+   }
+   // The final method actually constructs our object
+   fn build(&self) -> Result<Burger, String> {
+     let burger = Burger {
+       patty_count: self.patty_count,
+       vegetarian: self.vegetarian,
+       cheese: self.cheese,
+       bacon: self.bacon,
+       salad: self.salad,
+   };
+   // Check for invalid configuration
+   if burger.vegetarian && burger.bacon {
+     Err("Sorry, but we don't server vegetarian bacon
+             yet".to_string())
+     } else {
+       Ok(burger)
+     }
+   }
+ }</code></pre><p>Code hơi dài, để dễ hiểu thì chúng ta biết cái Builder pattern này có 3 phần<br /> Product : ở đây là struct Burger</p><blockquote><p>struct Burger {<br /> patty_count: i32,<br /> vegetarian: bool,<br /> ....</p></blockquote><p>Builder : ở đây là struct BurgerBuilder</p><blockquote><p>struct BurgerBuilder {<br /> patty_count: i32,<br /> ...</p></blockquote><p>Director : là code ở main dùng để tạo ra các loại Burger khác nhau</p><blockquote><p>let normal_burger = BurgerBuilder::new().build();<br /> let cheese_burger = BurgerBuilder::new()<br /> .cheese(true)<br /> .salad(false)<br /> .build();<br /> let veggie_bigmac = BurgerBuilder::new()<br /> .vegetarian(true)<br /> .patty_count(2)<br /> .build();</p></blockquote><h2>Lập trình song song với thread</h2><p>Máy tính ngày càng có nhiều core, lập trình đa luồng ngày càng quan trọng.Trong hầu hết các ngôn ngữ lập trình đây là phần khó nhằn, rất khó nhằn.Tin vui là chuyện này không sẽ xảy ra với Rust</p><pre><code class="language-html">use std::thread;
+   fn main() {
+     // Spawning a thread lets it execute a lambda
+     let child = thread::spawn(|| println!("Hello from a new
+      thread!"));
+     println!("Hello from the main thread!");
+     // Joining a child thread with the main thread means
+     // that the main thread waits until the child has
+     // finished it's work
+    child.join().expect("Failed to join the child thread");
+    let sum = parallel_sum(&[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    println!("The sum of the numbers 1 to 10 is {}", sum);
+  }
+  // We are going to write a function that
+  // sums the numbers in a slice in parallel
+  fn parallel_sum(range: &[i32]) -> i32 {
+    // We are going to use exactly 4 threads to sum the numbers
+    const NUM_THREADS: usize = 4;
+    // If we have less numbers than threads,
+    // there's no point in multithreading them
+    if range.len() < NUM_THREADS {
+      sum_bucket(range)
+    } else {
+        // We define "bucket" as the amount of numbers
+        // we sum in a single thread
+        let bucket_size = range.len() / NUM_THREADS;
+        let mut count = 0;
+        // This vector will keep track of our threads
+        let mut threads = Vec::new();
+        // We try to sum as much as possible in other threads
+        while count + bucket_size < range.len() {
+          let bucket = range[count..count +
+                     bucket_size].to_vec();
+          let thread = thread::Builder::new()
+            .name("calculation".to_string())
+            .spawn(move || sum_bucket(&bucket))
+            .expect("Failed to create the thread");
+          threads.push(thread);
+          count += bucket_size
+    }
+    // We are going to sum the rest in the main thread
+    let mut sum = sum_bucket(&range[count..]);
+    // Time to add the results up
+    for thread in threads {
+      sum += thread.join().expect("Failed to join thread");
+    }
+    sum
+  }
+ }
+  // This is the function that will be executed in the threads
+  fn sum_bucket(range: &[i32]) -> i32 {
+    let mut sum = 0;
+    for num in range {
+      sum += *num;
+    }
+     sum
+  }</code></pre><p>Đoạn code trên ta cần nắm ở vài chỗ sau:</p><blockquote><p>let child = thread::spawn(|| println!(&quot;Hello from a new thread!&quot;));</p></blockquote><p>hàm thread::spawn đăng kí luồng,thông số đầu vào spawn không phải là 1 hàm mà là 1 closures , chúng ta chạy thread bằng hàm join().<br /> Tiếp theo chúng ta xem hàm parallel_sum, chúng ta khai báo 1 mảng các threads mà chúng ta dùng <strong>let mut threads = Vec::new();</strong> , sử dụng vòng lặp <strong>while</strong> để duyệt mảng <strong>range</strong> đầu vào, mỗi số chúng ta đăng kí 1 thread</p><blockquote><p>spawn(move || sum_bucket(&amp;bucket))<br /> //// mỗi kết quả trả về từ thread cộng gộp vô biến sum<br /> sum += thread.join().expect(&quot;Failed to join thread&quot;);</p></blockquote><h2>Tạo số ngẫu nhiên</h2><p>Tạo 1 project với cargo , trong file cargo.toml ta thêm vào crate tạo số random</p><blockquote><p>rand = &quot;0.8&quot;</p></blockquote><p>Trong thư mục src ta tạo thư mục bin,trong bin ta tạo file rand.rs</p><pre><code class="language-html">use rand::prelude::*;
+fn main() {
+if rand::random() { 
+    println!("char: {}", rand::random::<char>());
+}
+let mut rng = rand::thread_rng();
+let y: f64 = rng.gen(); 
+let mut nums: Vec<i32> = (1..100).collect();
+nums.shuffle(&mut rng);
+println!("{}",  y);
+println!("{:?}",  nums);
+}</code></pre><p>để chạy file, ta dùng lệnh</p><blockquote><p>cargo run --bin rand</p></blockquote><p>Dòng in ra đầu tiên là 1 kí tự ngẫu nhiên <strong>rand::random::&lt;char&gt;()</strong>,  sau đó in ra biến y là 1 số thực ngẫu nhiên trong khoảng 0 đến 1 -&gt; <strong>let y: f64 = rng.gen();</strong><br /> Tiếp theo là biến nums là 1 vector từ 1 đến 100 -&gt; <strong>let mut nums: Vec&lt;i32&gt; = (1..100).collect();</strong> sau đó dùng hàm <strong>nums.shuffle</strong> xáo trộn ngẫu nhiên vector</p><h2>Sử dụng regex</h2><p>Regular express (gọi tắt là regex) là 1 câu chuyện dài và phức tạp, regex dùng để phân tích, xử lí chuỗi, ta thêm vào crate regex</p><blockquote><p>regex = &quot;1.5&quot;</p></blockquote><pre><code class="language-html">let re = Regex::new(r"(?x)
+(?P<year>\d{4})  # the year
+-
+(?P<month>\d{2}) # the month
+-
+(?P<day>\d{2})   # the day
+").unwrap();
+    let caps = re.captures("2010-03-14").unwrap();
+  println!("{:?}",  caps);</code></pre><p>Kết quả :</p><blockquote><p>Captures({0: Some(&quot;2010-03-14&quot;), &quot;year&quot;: Some(&quot;2010&quot;), &quot;month&quot;: Some(&quot;03&quot;), &quot;day&quot;: Some(&quot;14&quot;)})</p></blockquote><p>Chúng ta <strong>Regex::new</strong> để khai báo regex, khai báo mẫu bên trong r&quot;......&quot;<br /> Để tăng tốc xử lí regex ta có thể dùng crate <strong>lazy_static</strong></p><h2>Truy cập command line</h2><p>1 cách đơn giản để tương tác với người dùng là nhận biến từ command line.Tạo file cli_params.rs trong thư mục bin<br /> ta sẽ chạy file bằng lệnh theo mẫu</p><blockquote><p>cargo run --bin cli_params biến_1 biến_2</p></blockquote><pre><code class="language-html">use std::env;
+   fn main() {
+// env::args returns an iterator over the parameters
+     println!("Got following parameters: ");
+     for arg in env::args() {
+       println!("- {}", arg);
+     }
+// We can access specific parameters using the iterator API
+    let mut args = env::args();
+    if let Some(arg) = args.nth(0) {
+      println!("The path to this program is: {}", arg);
+    }
+    if let Some(arg) = args.nth(1) {
+        println!("The first parameter is: {}", arg);
+    }
+    if let Some(arg) = args.nth(2) {
+        println!("The second parameter is: {}", arg);
+    }
+    let args: Vec<_> = env::args().collect();
+    println!("The path to this program is: {}", args[0]);
+    if args.len() > 1 {
+        println!("The first parameter is: {}", args[1]);
+    }
+    if args.len() > 2 {
+        println!("The second parameter is: {}", args[2]);
+    }
+  }</code></pre><p>Đầu tiên chúng ta dùng vòng lặp for in để xuất ra từng biến đầu vào <strong>for arg in env::args()</strong> --&gt; easy<br /> Chúng ta có 2 cách để lấy biến, cách thứ nhất chúng ta match giá trị</p><blockquote><p>let mut args = env::args();<br /> if let Some(arg) = args.nth(0) {<br /> println!(&quot;The path to this program is: {}&quot;, arg);<br /> }</p></blockquote><p>Cách 2 ta đưa nó vào 1 vector</p><blockquote><p>let args: Vec<_> = env::args().collect();<br /> println!(&quot;The path to this program is: {}&quot;, args[0]);</p></blockquote><p>Cách dùng vector này dễ xài hơn.</p><h2>Tương tác biến môi trường</h2><p>Biến môi trường là config để cài đặt chương trình/ ứng dụng của mình , ví dụ API key,môi trường chạy code là dev hay production ...<br /> Trong thư mục bin ta tạo file env_vars.rs --&gt; chạy file này với lệnh <strong>cargo run --bin env_vars</strong></p><pre><code class="language-html">use std::env;
+ fn main() {
+     println!(&quot;Listing all env vars:&quot;);
+     for (key, val) in env::vars() {
+       println!(&quot;{}: {}&quot;, key, val);
+     }
+    let key = &quot;PORT&quot;;
+    println!(&quot;Setting env var {}&quot;, key);
+// Setting an env var for the current process
+    env::set_var(key, &quot;8080&quot;);
+print_env_var(key);
+// Removing an env var for the current process
+    println!(&quot;Removing env var {}&quot;, key);
+    env::remove_var(key);
+    print_env_var(key);
+  }
+  fn print_env_var(key: &amp;str) {
+    // Accessing an env var
+    match env::var(key) {
+      Ok(val) =&gt; println!(&quot;{}: {}&quot;, key, val),
+      Err(e) =&gt; println!(&quot;Couldn&#039;t print env var {}: {}&quot;, key, e),
+    }
+  }</code></pre><p>Các bạn chỉ cần lưu ý, set biến :</p><blockquote><p>env::set_var(key, &quot;8080&quot;);</p></blockquote><p>Sau đó khi cần dùng,ở 1 file nào đó ta get biến :</p><blockquote><p>ten_bien = env::var(&quot;TÊN_BIẾN&quot;)</p></blockquote><h2>Nhận biến từ stdin</h2><p>stdin là lấy biến từ người dùng nhập vào CLI<br /> Kiểu như vầy<br /> <img src="https://rustvietnam.com/wp-content/uploads/2021/08/Screenshot_1.png" alt="" /></p><p><img src="https://rustvietnam.com/wp-content/uploads/2021/08/Screenshot_4-300x57.png" alt="" /></p><pre><code class="language-html">use std::io;
+use std::io::prelude::*;
+fn main() {
+     print_single_line(&quot;Please enter your forename: &quot;);
+     let forename = read_line_iter();
+     print_single_line(&quot;Please enter your surname: &quot;);
+     let surname = read_line_buffer();
+    print_single_line(&quot;Please enter your age: &quot;);
+    let age = read_number();
+    println!(
+      &quot;Hello, {} year old human named {} {}!&quot;,
+      age, forename, surname
+    );
+}
+fn print_single_line(text: &amp;str) {
+    // We can print lines without adding a newline
+    print!(&quot;{}&quot;, text);
+    // However, we need to flush stdout afterwards
+    // in order to guarantee that the data actually displays
+    io::stdout().flush().expect(&quot;Failed to flush stdout&quot;);
+}
+fn read_line_iter() -&gt; String {
+    let stdin = io::stdin();
+    // Read one line of input iterator-style
+    let input = stdin.lock().lines().next();
+    input
+      .expect(&quot;No lines in buffer&quot;)
+      .expect(&quot;Failed to read line&quot;)
+      .trim()
+      .to_string()
+}
+fn read_line_buffer() -&gt; String {
+    // Read one line of input buffer-style
+    let mut input = String::new();
+    io::stdin()
+      .read_line(&amp;mut input)
+      .expect(&quot;Failed to read line&quot;);
+    input.trim().to_string()
+}
+fn read_number() -&gt; i32 {
+    let stdin = io::stdin();
+    loop {
+      // Iterate over all lines that will be inputted
+      for line in stdin.lock().lines() {
+        let input = line.expect(&quot;Failed to read line&quot;);
+        // Try to convert a string into a number
+        match input.trim().parse::&lt;i32&gt;() {
+          Ok(num) =&gt; return num,
+            Err(e) =&gt; println!(&quot;Failed to read number: {}&quot;, e),
+        }
+      }
+    }
+}</code></pre><p>Chúng ta xem hàm <strong>print_single_line</strong><br /> Trước hết là in ra thông báo ví dụ : <em>Please enter your forename:</em> , sau đó <strong>io::stdout().flush().expect(&quot;Failed to flush stdout&quot;);</strong> chương trình dừng lại chờ thông tin nhập vào , data nhập vào lưu và bộ nhớ tạm buffer , chúng ta dùng hàm <strong>read_line_buffer()</strong> để đọc nội dung buffer và đưa vào biến input để trả về.<br /> Biến cuối đọc số <strong>let age = read_number();</strong> hàm <strong>read_number</strong> hơi phức tạp hơn chút, chúng ta kiểm tra biến đầu vào có thể convert từ string sang dạng số được không, được thì nhận biến, ko thì báo lỗi, khác với đoạn code dễ dãi nhận string như ở <strong>read_line_buffer()</strong> , tinh túy ở đoạn match này</p><blockquote><p>match input.trim().parse::<i32>() {<br /> Ok(num) =&gt; return num,<br /> Err(e) =&gt; println!(&quot;Failed to read number: {}&quot;, e),<br /> }</p></blockquote><h2>Chấp nhận số lượng biến đầu vào ko xác định</h2><p>Ví dụ ở javascript</p><blockquote><p>function my_func(...args) {<br /> console.log(args);<br /> }</p></blockquote><p>Bạn có thể gọi my_func(1,2) hoặc my_func(1,2,3,4) , số lượng biến đầu vào tùy ý, tất cả lưu trong mảng args.<br /> Rust không hỗ trợ kiểu hàm này vì vậy chúng ta dùng kĩ thuật đệ quy macro để làm</p><pre><code class="language-html">macro_rules! multiply {
+    ( $last:expr ) =&gt; { $last };
+    ( $head:expr, $($tail:expr), +) =&gt; {
+    $head * multiply!($($tail),+)
+    };
+}
+fn main() {
+    let val = multiply!(2, 4, 8);
+    println!(&quot;2*4*8 = {}&quot;, val)
+}</code></pre><p>Lưu ý, multiply được khai báo là 1 macro, không phải là hàm.<br /> Giải thích về macro chi tiết <a href="https://rustvietnam.com/lap-trinh-co-ban-rust/macros-attributes/" title="tại đây">tại đây</a><br /> Trong <strong>multiply</strong> ta dùng đệ qui lặp lại hàm với từng đầu vào cho đến hết.<br /> Code trong macro nếu biến vào là cuối cùng <strong>( $last:expr ) =&gt; { $last }</strong> thì trả về kết quả -&gt; xong , nếu chưa thì chạy hàm đệ qui *<em>$head </em> multiply!($($tail),+)**</p><p><strong>Thành thật mà nói thì trò này khá khó, ko hữu dụng chút nào, chán!</strong><br /> <strong>Tuy vậy ở chương 10 với phiên bản Nightly (chưa ổn định) chúng ta sẽ có cách hay hơn.</strong></p><hr/><div class="powr-comments" id="e67d472b_30"></div><script src="https://www.powr.io/powr.js?platform=html"></script> </div></div></div></section><footer class="footer has-cards"><div class="container"><hr><div class="row align-items-center justify-content-md-between"><div class="col-md-6"><div class="copyright"> © 2021 <a href="" target="_blank">Bản quyền thuộc về RustVietNam</a>.</div></div><div class="col-md-6 text-right"> <a style="font-size: 14px;" class="text-teal" href="https://rustvietnam.com/privacy-policy">Điều khoản</a></div></div></div></footer></body></html>

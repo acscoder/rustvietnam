@@ -1,10 +1,10 @@
-<!DOCTYPE html><html lang="vi"><head><title>Lâp trình cơ bản Rust Archives - RustVietnam</title><meta charset="UTF-8"/><link rel="profile" href="http://gmpg.org/xfn/11"/><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta http-equiv="Cache-control" content="public"/><meta http-equiv="Cache-control" content="max-age=604800"/><meta http-equiv="Cache-control" content="Content-Encoding=gzip"/><link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' /><link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script> <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" /><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' /><link rel="canonical" href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" /><link rel="next" href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/page/2/" /><meta property="og:locale" content="en_US" /><meta property="og:type" content="article" /><meta property="og:title" content="Lâp trình cơ bản Rust Archives - RustVietnam" /><meta property="og:description" content="Rust giúp chúng ta viết code nhanh hơn,hiệu quả hơn, nó tổng hòa sự tiện dụng của ngôn ngữ bậc cao và tốc độ thực thi của ngôn ngữ bậc thấp.Nội dung của &#8220;Lâp trình cơ bản Rust&#8221; được viết lại từ quá trình học cơ bản về Rust từ các tài liệu tổng hợp trên mạng và Packpub" /><meta property="og:url" content="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" /><meta property="og:site_name" content="RustVietnam" /><meta name="twitter:card" content="summary_large_image" /> <script type="application/ld+json" class="yoast-schema-graph">{
+<!DOCTYPE html><html lang="vi"><head><title>Lâp trình cơ bản Rust - RustVietnam</title><meta charset="UTF-8"/><link rel="profile" href="http://gmpg.org/xfn/11"/><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta http-equiv="Cache-control" content="public"/><meta http-equiv="Cache-control" content="max-age=604800"/><meta http-equiv="Cache-control" content="Content-Encoding=gzip"/><link rel='icon' type='image/x-icon' href='https://rustvietnam.com/wp-content/themes/onda/images/favicon.svg' /><link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script> <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" /><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' /><meta name="description" content="Rust giúp chúng ta viết code nhanh hơn,hiệu quả hơn, nó tổng hòa sự tiện dụng của ngôn ngữ bậc cao và tốc độ thực thi của ngôn ngữ bậc thấp." /><link rel="canonical" href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" /><link rel="next" href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/page/2/" /><meta property="og:locale" content="en_US" /><meta property="og:type" content="article" /><meta property="og:title" content="Lâp trình cơ bản Rust - RustVietnam" /><meta property="og:description" content="Rust giúp chúng ta viết code nhanh hơn,hiệu quả hơn, nó tổng hòa sự tiện dụng của ngôn ngữ bậc cao và tốc độ thực thi của ngôn ngữ bậc thấp." /><meta property="og:url" content="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/" /><meta property="og:site_name" content="RustVietnam" /><meta name="twitter:card" content="summary_large_image" /> <script type="application/ld+json" class="yoast-schema-graph">{
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
 	            "@type": "WebSite",
-	            "@id": "https://rustvietnam.com/#website",
-	            "url": "https://rustvietnam.com/",
+	            "@id": "https://localhost/rustvietnam/#website",
+	            "url": "https://localhost/rustvietnam/",
 	            "name": "RustVietnam",
 	            "description": "Trang Web d\u00e0nh cho nh\u1eefng ng\u01b0\u1eddi b\u1ea1n y\u00eau th\u00edch ng\u00f4n ng\u1eef l\u1eadp tr\u00ecnh Rust. Ch\u00fang t\u00f4i kh\u00f4ng \u0111\u1ea1i di\u1ec7n hay c\u00f3 li\u00ean h\u1ec7 g\u00ec v\u1edbi team ch\u00ednh th\u1ee9c c\u1ee7a Rust ( rust-lang.org )",
 	            "potentialAction": [
@@ -12,7 +12,7 @@
 	                    "@type": "SearchAction",
 	                    "target": {
 	                        "@type": "EntryPoint",
-	                        "urlTemplate": "https://rustvietnam.com/?s={search_term_string}"
+	                        "urlTemplate": "https://localhost/rustvietnam/?s={search_term_string}"
 	                    },
 	                    "query-input": "required name=search_term_string"
 	                }
@@ -23,10 +23,11 @@
 	            "@type": "CollectionPage",
 	            "@id": "https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/#webpage",
 	            "url": "https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/",
-	            "name": "L\u00e2p tr\u00ecnh c\u01a1 b\u1ea3n Rust Archives - RustVietnam",
+	            "name": "L\u00e2p tr\u00ecnh c\u01a1 b\u1ea3n Rust - RustVietnam",
 	            "isPartOf": {
-	                "@id": "https://rustvietnam.com/#website"
+	                "@id": "https://localhost/rustvietnam/#website"
 	            },
+	            "description": "Rust gi\u00fap ch\u00fang ta vi\u1ebft code nhanh h\u01a1n,hi\u1ec7u qu\u1ea3 h\u01a1n, n\u00f3 t\u1ed5ng h\u00f2a s\u1ef1 ti\u1ec7n d\u1ee5ng c\u1ee7a ng\u00f4n ng\u1eef b\u1eadc cao v\u00e0 t\u1ed1c \u0111\u1ed9 th\u1ef1c thi c\u1ee7a ng\u00f4n ng\u1eef b\u1eadc th\u1ea5p.",
 	            "breadcrumb": {
 	                "@id": "https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/#breadcrumb"
 	            },
@@ -48,7 +49,7 @@
 	                    "@type": "ListItem",
 	                    "position": 1,
 	                    "name": "Home",
-	                    "item": "https://rustvietnam.com/"
+	                    "item": "https://localhost/rustvietnam/"
 	                },
 	                {
 	                    "@type": "ListItem",
@@ -58,7 +59,7 @@
 	            ]
 	        }
 	    ]
-	}</script> <link rel='dns-prefetch' href='//s.w.org' /><link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Lâp trình cơ bản Rust Category Feed" href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/feed/" /><link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/categories/2" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 5.8.2" /><link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZCKSNE480"></script> <script>window.dataLayer = window.dataLayer || [];
+	}</script> <link rel='dns-prefetch' href='//s.w.org' /><link rel="alternate" type="application/rss+xml" title="RustVietnam &raquo; Lâp trình cơ bản Rust Category Feed" href="https://rustvietnam.com/chuong-trinh/lap-trinh-co-ban-rust/feed/" /><style id='md-style-inline-css' type='text/css'></style><link rel="https://api.w.org/" href="https://rustvietnam.com/wp-json/" /><link rel="alternate" type="application/json" href="https://rustvietnam.com/wp-json/wp/v2/categories/2" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rustvietnam.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rustvietnam.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 5.8.2" /><link theme media="all" href="https://rustvietnam.com/wp-content/themes/onda/media/media_style.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://rustvietnam.com/wp-content/themes/onda/media/media_style.js" type="text/javascript"></script>  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZCKSNE480"></script> <script>window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
